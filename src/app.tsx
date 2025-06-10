@@ -1,5 +1,5 @@
 import './app.css'
 
 export function App() {
-  return <>Labelshop</>
+  return <h1 class="text-3xl font-bold">Labelshop</h1>
 }
