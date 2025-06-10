@@ -24,6 +24,9 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+
+  --app-layout-gap: 0.5rem;
+  --app-layout-border-radius: 0.6rem;
 }
 
 * {
@@ -31,7 +34,7 @@
 }
 
 body {
-  @apply bg-base-50 text-base-800;
+  @apply bg-base-50 text-base-700;
 }
 
 #app {

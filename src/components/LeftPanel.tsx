@@ -1,8 +1,8 @@
 export default function LeftPanel() {
   return (
-    <div class="p-2 flex flex-col items-center justify-between">
+    <div class="p-2 bg-base-100 border border-base-200 rounded-[var(--app-layout-border-radius)] flex flex-col items-center justify-between">
       <div class="relative">
-        <p class="text-4xl">⚡</p>
+        <p class="py-1 text-4xl">⚡</p>
       </div>
       <button class="button">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" class="size-6">
