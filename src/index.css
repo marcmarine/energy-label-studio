@@ -1,11 +1,23 @@
 @import 'tailwindcss';
 
+@theme {
+  --color-base-50: light-dark(#f0f2f5, #0a0c0f);
+  --color-base-100: light-dark(#d1d7e0, #14181f);
+  --color-base-200: light-dark(#b2bdcc, #1f252e);
+  --color-base-300: light-dark(#94a2b8, #333d4c);
+  --color-base-400: light-dark(#7588a3, #47566b);
+  --color-base-500: light-dark(#5c6e8a, #5c6e8a);
+  --color-base-600: light-dark(#47566b, #7588a3);
+  --color-base-700: light-dark(#333d4c, #94a2b8);
+  --color-base-800: light-dark(#1f252e, #b2bdcc);
+  --color-base-850: light-dark(#14181f, #d1d7e0);
+  --color-base-900: light-dark(#0a0c0f, #f0f2f5);
+}
+
 :root {
   font-family: Avenir, Helvetica, Arial, sans-serif;
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -19,9 +31,24 @@
 }
 
 body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 100vw;
-  min-height: 100vh;
+  @apply bg-base-50 text-base-800;
+}
+
+#app {
+  height: 100vh;
+  width: 100vw;
+}
+
+.button {
+  @apply p-2 hover:bg-base-100 active:bg-base-200 rounded cursor-pointer;
+}
+
+.bg-checkered {
+  --square-size: calc(1rem / 2);
+
+  background-color: var(--color-base-50);
+  background-image: linear-gradient(45deg, var(--color-base-100) 25%, transparent 25%), linear-gradient(135deg, var(--color-base-100) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, var(--color-base-100) 75%), linear-gradient(135deg, transparent 75%, var(--color-base-100) 75%);
+  background-size: calc(2 * var(--square-size)) calc(2 * var(--square-size));
+  background-position: 0 0, var(--square-size) 0, var(--square-size) calc(-1 * var(--square-size)), 0 calc(-1 * var(--square-size));
 }

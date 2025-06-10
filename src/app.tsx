@@ -1,5 +1,5 @@
-import './app.css'
+import Layout from './components/Layout'
 
 export function App() {
-  return <h1 class="text-3xl font-bold">Labelshop</h1>
+  return <Layout />
 }
