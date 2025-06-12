@@ -2,7 +2,7 @@ import { withResizableSidebar, type ResizableSidebarProps } from '../lib/resizab
 
 function LeftPanel({ isCollapsed }: ResizableSidebarProps) {
   return (
-    <div class="p-2 w-full bg-base-100 border border-base-200 rounded-[var(--app-layout-border-radius)] flex flex-col items-start justify-between">
+    <div class="p-2 w-full bg-base-100/20 backdrop-blur-sm border border-base-200/40 rounded-[var(--app-layout-border-radius)] flex flex-col items-start justify-between">
       <div class="relative">
         <p class="py-1 text-4xl">⚡</p>
       </div>

@@ -2,7 +2,7 @@ import { withResizableSidebar, type ResizableSidebarProps } from '../lib/resizab
 
 function PropertiesPanel({ isCollapsed }: ResizableSidebarProps) {
   return (
-    <div class="p-2 w-full bg-base-100 border border-base-200 rounded-[var(--app-layout-border-radius)]">
+    <div class="p-2 w-full bg-base-100/20 backdrop-blur-sm border border-base-200/40 rounded-[var(--app-layout-border-radius)]">
       <button class="button text-xs">
         {isCollapsed ? (
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
