@@ -1,21 +1,8 @@
 @import 'tailwindcss';
 
-@theme {
-  --color-base-50: light-dark(#f0f2f5, #0a0c0f);
-  --color-base-100: light-dark(#d1d7e0, #14181f);
-  --color-base-200: light-dark(#b2bdcc, #1f252e);
-  --color-base-300: light-dark(#94a2b8, #333d4c);
-  --color-base-400: light-dark(#7588a3, #47566b);
-  --color-base-500: light-dark(#5c6e8a, #5c6e8a);
-  --color-base-600: light-dark(#47566b, #7588a3);
-  --color-base-700: light-dark(#333d4c, #94a2b8);
-  --color-base-800: light-dark(#1f252e, #b2bdcc);
-  --color-base-850: light-dark(#14181f, #d1d7e0);
-  --color-base-900: light-dark(#0a0c0f, #f0f2f5);
-}
-
 :root {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: Inter, sans-serif;
+  font-size: 14px;
 
   color-scheme: light dark;
 
@@ -34,7 +21,7 @@
 }
 
 body {
-  @apply bg-base-50 text-base-700;
+  @apply bg-neutral-50 dark:bg-neutral-950 text-neutral-800 dark:text-neutral-200;
 }
 
 #app {
@@ -42,16 +29,86 @@ body {
   width: 100vw;
 }
 
+.panel {
+  @apply bg-neutral-50 dark:bg-neutral-900 border border-neutral-200/40 dark:border-neutral-800 rounded-[var(--app-layout-border-radius)];
+}
+
 .button {
-  @apply p-2 hover:bg-base-100 active:bg-base-200 rounded cursor-pointer;
+  @apply px-2 py-1 hover:bg-neutral-100 dark:hover:bg-neutral-800 active:bg-neutral-200/60 dark:active:bg-neutral-800/60 rounded cursor-pointer;
 }
 
 .bg-checkered {
   --square-size: calc(1rem / 2);
+  --color-a: light-dark(var(--color-neutral-50), var(--color-neutral-950));
+  --color-b: light-dark(var(--color-neutral-200), var(--color-neutral-900));
 
-  background-color: var(--color-base-50);
-  background-image: linear-gradient(45deg, var(--color-base-100) 25%, transparent 25%), linear-gradient(135deg, var(--color-base-100) 25%, transparent 25%),
-    linear-gradient(45deg, transparent 75%, var(--color-base-100) 75%), linear-gradient(135deg, transparent 75%, var(--color-base-100) 75%);
+  background-color: var(--color-a);
+  background-image: linear-gradient(45deg, var(--color-b) 25%, transparent 25%), linear-gradient(135deg, var(--color-b) 25%, transparent 25%), linear-gradient(45deg, transparent 75%, var(--color-b) 75%),
+    linear-gradient(135deg, transparent 75%, var(--color-b) 75%);
   background-size: calc(2 * var(--square-size)) calc(2 * var(--square-size));
   background-position: 0 0, var(--square-size) 0, var(--square-size) calc(-1 * var(--square-size)), 0 calc(-1 * var(--square-size));
+  background-attachment: fixed;
+}
+
+select {
+  appearance: base-select;
+}
+
+select {
+  @apply px-2 py-1 relative;
+}
+
+select.collapsible {
+  @apply p-2;
+
+  &.collapsed {
+    @apply p-0 size-10 flex place-content-center;
+
+    &::picker-icon {
+      @apply hidden;
+    }
+  }
+
+  selectedcontent {
+    @apply flex items-center gap-2;
+  }
+
+  &.collapsed selectedcontent .option-label {
+    @apply hidden;
+  }
+
+  .icon {
+    @apply rounded-sm overflow-hidden;
+  }
+}
+
+select::picker-icon {
+  @apply w-4 h-1.5;
+
+  --icon-stroke-width: 1px;
+  --icon-color: var(--color-neutral-600);
+  content: '';
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 0;
+  background-image: linear-gradient(
+    to bottom,
+    var(--icon-color) 0%,
+    var(--icon-color) var(--icon-stroke-width),
+    transparent var(--icon-stroke-width),
+    transparent calc(100% - var(--icon-stroke-width)),
+    var(--icon-color) calc(100% - var(--icon-stroke-width)),
+    var(--icon-color) var(--icon-stroke-width)
+  );
+}
+
+select:open::picker-icon {
+  background-image: linear-gradient(
+    to bottom,
+    transparent calc(50% - var(--icon-stroke-width) / 2),
+    var(--icon-color) calc(50% - var(--icon-stroke-width) / 2),
+    var(--icon-color) calc(50% - var(--icon-stroke-width) / 2 + var(--icon-stroke-width)),
+    transparent calc(50% - var(--icon-stroke-width) / 2 + var(--icon-stroke-width))
+  );
 }

@@ -16,7 +16,7 @@ export default function withResizableSidebar<P extends ResizableSidebarProps>(Wr
 
     return (
       <div class={['flex', resizeOptions?.direction === 'left' ? 'flex-row-reverse' : 'flex-row'].join(' ')}>
-        <div ref={sidebar} class="flex overflow-hidden" style={{ width: isCollapsed ? 58 : resizeOptions?.minWidth }}>
+        <div ref={sidebar} class="flex overflow-hidden" style={{ width: isCollapsed ? 52 : resizeOptions?.minWidth }}>
           {/* Using createElement to avoid TS2786 - Preact ComponentType return type mismatch with JSX */}
           {createElement(WrappedComponent, { ...(props as P), isCollapsed })}
         </div>
