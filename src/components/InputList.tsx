@@ -20,11 +20,11 @@ type DynamicInputListProps = {
 export default function DynamicInputList({ template, values, setValues }: DynamicInputListProps) {
   const { inputs } = REGULATIONS[template]
   const productInformationKeys = ['supplierName', 'modelName', 'eprelRegistrationNumber']
-  const [productInformationData, efficiencyData] = [inputs.filter(({ key }) => productInformationKeys.includes(key)), inputs.filter(({ key }) => !productInformationKeys.includes(key))] as [InputConfig[], InputConfig[]]
+  const [productInformationData, efficiencyData] = [inputs.filter(({ key }) => productInformationKeys.includes(key)), inputs.filter(({ key }) => !productInformationKeys.includes(key))] as InputConfig[][]
 
   return (
     <>
-      {template !== 'arrow' && (
+      {!/arrow/.test(template) && (
         <>
           <h2 class="mb-4 text-sm font-medium">Product information</h2>
           <div class="mb-6 flex gap-2 flex-wrap">
