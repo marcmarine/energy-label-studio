@@ -12,16 +12,12 @@
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
 
-  --app-layout-gap: 0.5rem;
+  --app-layout-gap: 1rem;
   --app-layout-border-radius: 0.6rem;
 }
 
-* {
-  box-sizing: border-box;
-}
-
 body {
-  @apply bg-neutral-50 dark:bg-neutral-950 text-neutral-800 dark:text-neutral-200;
+  @apply bg-neutral-50 dark:bg-neutral-950 text-neutral-800 dark:text-neutral-300;
 }
 
 #app {
@@ -30,11 +26,11 @@ body {
 }
 
 .panel {
-  @apply bg-neutral-50 dark:bg-neutral-900 border border-neutral-200/40 dark:border-neutral-800 rounded-[var(--app-layout-border-radius)];
+  @apply h-[calc(100vh-(var(--app-layout-gap)*2))] bg-neutral-50 dark:bg-neutral-900 border border-neutral-200/40 dark:border-neutral-800 rounded-[var(--app-layout-border-radius)] overflow-auto;
 }
 
 .button {
-  @apply px-2 py-1 hover:bg-neutral-100 dark:hover:bg-neutral-800 active:bg-neutral-200/60 dark:active:bg-neutral-800/60 rounded cursor-pointer;
+  @apply px-2 py-1 hover:bg-neutral-100/50 dark:hover:bg-neutral-800/50 active:bg-neutral-200/60 dark:active:bg-neutral-800/60 rounded cursor-pointer;
 }
 
 .bg-checkered {

@@ -8,7 +8,7 @@ interface SelectOption {
 
 interface ReusableSelectProps {
   label?: string
-  options: SelectOption[]
+  options: SelectOption[] | string[]
   value?: string
   onChange?: (event: React.ChangeEvent<HTMLSelectElement>) => void
   required?: boolean
@@ -31,39 +31,47 @@ export default function Select({
   className = '',
   labelClassName = '',
   selectClassName = '',
-  id = 'select',
+  id,
   disabled = false,
   selectedContent
 }: ReusableSelectProps) {
   return (
     <label className={`flex-1 flex flex-col ${className}`}>
       {label && (
-        <span className={`mb-1 text-sm text-neutral-600 text-nowrap ${labelClassName}`}>
+        <span className={`mb-1 text-xs text-neutral-500 text-nowrap ${labelClassName}`}>
           {label}
           {required && <span className="text-red-500 ml-1">*</span>}
         </span>
       )}
       <select
         id={id}
-        className={cx('w-full rounded-lg border border-neutral-200 dark:border-neutral-800 focus:outline-none open:ring-4 open:ring-blue-500/10 open:border-blue-500/10', isCollapsed && 'collapsed', selectClassName)}
+        className={cx(
+          'w-full rounded-lg border border-neutral-200 dark:border-neutral-800 focus:outline-none open:ring-4 open:ring-blue-400/50 dark:open:ring-blue-900/50 open:border-blue-400 dark:open:border-blue-900/50',
+          isCollapsed && 'collapsed',
+          selectClassName
+        )}
         value={value}
-        onChange={onChange}
+        onInput={onChange}
         disabled={disabled}
         required={required}
       >
         <button>
           <selectedcontent>{selectedContent}</selectedcontent>
         </button>
-        {options.map(option => (
-          <option value={option.value}>
-            {option.icon && (
-              <span className="icon" aria-hidden="true">
-                {option.icon}
-              </span>
-            )}
-            <span className="option-label">{option.label}</span>
-          </option>
-        ))}
+        {options.map(option =>
+          typeof option === 'string' ? (
+            <option value={option}>{option}</option>
+          ) : (
+            <option value={option.value}>
+              {option.icon && (
+                <span className="icon" aria-hidden="true">
+                  {option.icon}
+                </span>
+              )}
+              <span className="option-label">{option.label}</span>
+            </option>
+          )
+        )}
       </select>
     </label>
   )

@@ -1,6 +1,6 @@
 interface InputFieldProps {
   label: string
-  type?: 'text' | 'email' | 'password' | 'tel' | 'number' | 'url' | 'search'
+  type?: string
   placeholder?: string
   value?: string
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
@@ -13,8 +13,8 @@ interface InputFieldProps {
 
 export default function InputField({ label, type = 'text', placeholder = '', value, onChange, required = false, disabled = false, className = '', labelClassName = '', inputClassName = '' }: InputFieldProps) {
   return (
-    <label className={`flex-1 flex flex-col ${className}`}>
-      <span className={`mb-1 text-sm text-neutral-600 ${labelClassName}`}>
+    <label className={`flex-1 flex flex-col w-1/2 ${className}`}>
+      <span className={`mb-1 text-xs text-neutral-500 whitespace-nowrap truncate  ${labelClassName}`}>
         {label}
         {required && <span className="text-red-500 ml-1">*</span>}
       </span>
@@ -22,10 +22,10 @@ export default function InputField({ label, type = 'text', placeholder = '', val
         type={type}
         placeholder={placeholder}
         value={value}
-        onChange={onChange}
+        onInput={onChange}
         required={required}
         disabled={disabled}
-        className={`px-2 py-1 rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-900/50 border border-neutral-200 dark:border-neutral-800 focus:border-blue-500/10 ${inputClassName}`}
+        className={`px-2 py-1 rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-400/50 dark:focus:ring-blue-900/50 border border-neutral-200 dark:border-neutral-800 focus:border-blue-400 dark:focus:border-blue-500/10 ${inputClassName}`}
       />
     </label>
   )

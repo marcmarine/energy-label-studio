@@ -1,3 +1,7 @@
+import { useEnergyLabelStore } from '../lib/useEnergyLabelStore'
+
 export default function Canvas() {
-  return <div class="rounded-[var(--app-layout-border-radius)] bg-checkered"></div>
+  const { renderTo } = useEnergyLabelStore()
+
+  return <div ref={element => element && renderTo(element)} class="flex justify-center items-center overflow-hidden rounded-[var(--app-layout-border-radius)]" />
 }
