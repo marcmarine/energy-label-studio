@@ -38,7 +38,7 @@ export default function Select({
   return (
     <label className={`flex-1 flex flex-col ${className}`}>
       {label && (
-        <span className={`mb-1 text-xs text-neutral-500 text-nowrap ${labelClassName}`}>
+        <span className={`mb-1 text-xs text-neutral-500 dark:text-slate-500  text-nowrap ${labelClassName}`}>
           {label}
           {required && <span className="text-red-500 ml-1">*</span>}
         </span>
@@ -46,7 +46,7 @@ export default function Select({
       <select
         id={id}
         className={cx(
-          'w-full rounded-lg border border-neutral-200 dark:border-neutral-800 focus:outline-none open:ring-4 open:ring-blue-400/50 dark:open:ring-blue-900/50 open:border-blue-400 dark:open:border-blue-900/50',
+          'w-full rounded-lg border border-neutral-200 dark:border-slate-700/40 focus:outline-none open:ring-4 open:ring-blue-400/50 dark:open:ring-blue-900/50 open:border-blue-400 dark:open:border-slate-600',
           isCollapsed && 'collapsed',
           selectClassName
         )}

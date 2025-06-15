@@ -14,7 +14,7 @@ function PropertiesPanel(_: ResizableSidebarProps) {
       <div class="p-1 mb-1 flex gap-2 items-center justify-between">
         <h2 class="px-2 font-semibold truncate">{templateTitle}</h2>
         <div class="p-1 flex gap-0.5 rounded">
-          <button class="button bg-neutral-100 dark:bg-neutral-800/60">
+          <button class="button bg-neutral-100 dark:bg-slate-700/40">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width={1.5} stroke="currentColor" class="size-5">
               <path
                 stroke-linecap="round"
@@ -45,13 +45,13 @@ function PropertiesPanel(_: ResizableSidebarProps) {
           Generate random data
         </button>
       </div>
-      <div class="px-3 pt-2 pb-4 border-t border-neutral-200/40 dark:border-neutral-800 bg-neutral-50/50 dark:bg-neutral-900/50 backdrop-blur-lg sticky bottom-0">
+      <div class="px-3 pt-2 pb-4 border-t border-neutral-200/40 dark:border-slate-700/40 bg-neutral-50/20 dark:bg-slate-800/20 backdrop-blur-lg sticky bottom-0">
         <h2 class="mb-4 text-sm font-medium">Export</h2>
         <button
           onClick={() => download()}
-          class="p-2 w-full bg-blue-500 dark:bg-blue-600 hover:bg-blue-600 hover:dark:bg-blue-700 active:bg-blue-400 active:dark:bg-blue-500 rounded-lg font-semibold text-neutral-50 dark:text-neutral-200 cursor-pointer truncate"
+          class="p-2 w-full bg-blue-500 dark:bg-blue-800 hover:bg-blue-600 hover:dark:bg-blue-900 active:bg-blue-400 active:dark:bg-blue-700 rounded-lg font-semibold text-neutral-50 dark:text-neutral-200 cursor-pointer truncate"
         >
-          Download (SVG)
+          Download the label in SVG
         </button>
       </div>
     </div>

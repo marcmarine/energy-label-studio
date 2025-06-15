@@ -1,5 +1,19 @@
 @import 'tailwindcss';
 
+@theme {
+  --color-slate-50: #eff2f5;
+  --color-slate-100: #e0e4eb;
+  --color-slate-200: #c2c9d6;
+  --color-slate-300: #a3aec2;
+  --color-slate-400: #8594ad;
+  --color-slate-500: #667999;
+  --color-slate-600: #52617a;
+  --color-slate-700: #3d495c;
+  --color-slate-800: #2a303c;
+  --color-slate-900: #15181e;
+  --color-slate-950: #0a0c0f;
+}
+
 :root {
   font-family: Inter, sans-serif;
   font-size: 14px;
@@ -17,7 +31,7 @@
 }
 
 body {
-  @apply bg-neutral-50 dark:bg-neutral-950 text-neutral-800 dark:text-neutral-300;
+  @apply bg-neutral-50 dark:bg-slate-950 text-neutral-800 dark:text-slate-200;
 }
 
 #app {
@@ -26,17 +40,17 @@ body {
 }
 
 .panel {
-  @apply h-[calc(100vh-(var(--app-layout-gap)*2))] bg-neutral-50 dark:bg-neutral-900 border border-neutral-200/40 dark:border-neutral-800 rounded-[var(--app-layout-border-radius)] overflow-auto;
+  @apply h-[calc(100vh-(var(--app-layout-gap)*2))] bg-neutral-50 dark:bg-slate-800 border border-neutral-200/40 dark:border-slate-700/40 rounded-[var(--app-layout-border-radius)] overflow-auto;
 }
 
 .button {
-  @apply px-2 py-1 hover:bg-neutral-100/50 dark:hover:bg-neutral-800/50 active:bg-neutral-200/60 dark:active:bg-neutral-800/60 rounded cursor-pointer;
+  @apply px-2 py-1 hover:bg-neutral-100/50 dark:hover:bg-slate-700/40 active:bg-neutral-200/60 dark:active:bg-slate-600/40 rounded cursor-pointer;
 }
 
 .bg-checkered {
   --square-size: calc(1rem / 2);
-  --color-a: light-dark(var(--color-neutral-50), var(--color-neutral-950));
-  --color-b: light-dark(var(--color-neutral-200), var(--color-neutral-900));
+  --color-a: light-dark(var(--color-neutral-50), color-mix(in srgb, var(--color-slate-500) 20%, transparent));
+  --color-b: light-dark(var(--color-neutral-200), var(--color-slate-800));
 
   background-color: var(--color-a);
   background-image: linear-gradient(45deg, var(--color-b) 25%, transparent 25%), linear-gradient(135deg, var(--color-b) 25%, transparent 25%), linear-gradient(45deg, transparent 75%, var(--color-b) 75%),
@@ -82,7 +96,7 @@ select::picker-icon {
   @apply w-4 h-1.5;
 
   --icon-stroke-width: 1px;
-  --icon-color: var(--color-neutral-600);
+  --icon-color: var(--color-slate-600);
   content: '';
   position: absolute;
   top: 50%;

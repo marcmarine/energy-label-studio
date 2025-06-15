@@ -6,7 +6,7 @@ const ResizeHandle = forwardRef<HTMLDivElement, { isResizing?: boolean }>(({ isR
       <div
         ref={ref}
         class={[
-          'absolute -left-1 w-2 h-full bg-neutral-200/10 dark:bg-neutral-900/10 opacity-0 hover:opacity-100 transition-all duration-300 delay-200 cursor-grab active:cursor-grabbing',
+          'absolute -left-1 w-2 h-full bg-neutral-200/10 dark:bg-slate-900/10 opacity-0 hover:opacity-100 transition-all duration-300 delay-200 cursor-grab active:cursor-grabbing',
           isResizing ? 'opacity-100' : ''
         ].join(' ')}
       >

@@ -66,7 +66,7 @@ function LeftPanel({ isCollapsed }: ResizableSidebarProps) {
   return (
     <div class="panel w-full flex flex-col items-start justify-between">
       <div class="w-full flex flex-col gap-3">
-        <div class="px-2 pt-1 pb-9 border-b border-neutral-200/50 dark:border-neutral-800">
+        <div class="px-2 pt-1 pb-9 border-b border-neutral-200/40 dark:border-slate-700/40">
           <div class="size-10 grid place-content-center">
             <span class="absolute -top-2 -left-3 text-7xl text-purple-500 blur-lg opacity-20">⚡︎</span>
             <span class="text-3xl -rotate-12 ">⚡︎</span>
@@ -76,7 +76,7 @@ function LeftPanel({ isCollapsed }: ResizableSidebarProps) {
             <div class="px-2">
               <h1 class="text-xl font-semibold">Energy Label Studio</h1>
               <small class="p-0.5 mr-2 font-bold text-[9px] bg-purple-200 dark:bg-purple-800 rounded-xs text-purple-500 dark:text-purple-200">BETA</small>
-              <p class="inline-block text-xs text-neutral-500">
+              <p class="inline-block text-xs text-neutral-500 dark:text-slate-600">
                 Powered by{' '}
                 <a href={NPM_BETA_URL} target="_blank">
                   energy-label
@@ -95,13 +95,13 @@ function LeftPanel({ isCollapsed }: ResizableSidebarProps) {
             selectClassName="collapsible"
             options={FLAG_OPTIONS}
             isCollapsed={isCollapsed}
-            className="-mt-8.5 bg-neutral-50 dark:bg-neutral-900"
+            className="-mt-8.5 bg-neutral-50 dark:bg-slate-800"
           />
-          <div class="py-3">
-            <h2 class="mb-1 px-2 text-xs text-neutral-500">Products</h2>
-            <nav class="">
+          <div class="py-4">
+            <h2 class="mb-1 px-2 text-xs text-neutral-500 dark:text-slate-600">Products</h2>
+            <nav class="flex flex-col">
               {TEMPLATES.map(t => (
-                <button onClick={() => setTemplate(t.value)} class={cx('py-1 button w-full text-left font-medium truncate', template === t.value && 'bg-neutral-200/50 dark:bg-neutral-800')}>
+                <button onClick={() => setTemplate(t.value)} class={cx('py-1 button w-full text-left font-medium truncate', template === t.value && 'bg-neutral-200/50 dark:bg-slate-700/20')}>
                   {t.name}
                 </button>
               ))}
