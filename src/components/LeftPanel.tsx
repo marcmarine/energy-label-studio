@@ -69,19 +69,21 @@ function LeftPanel({ isCollapsed }: ResizableSidebarProps) {
         <div class="px-2 pt-1 pb-9 border-b border-neutral-200/40 dark:border-slate-700/40">
           <div class="size-10 grid place-content-center">
             <span class="absolute -top-2 -left-3 text-7xl text-purple-500 blur-lg opacity-20">⚡︎</span>
-            <span class="text-3xl -rotate-12 ">⚡︎</span>
+            <span class="text-3xl -rotate-12">⚡︎</span>
             <span class="absolute -top-2 left-1 text-7xl text-blue-500 blur-2xl opacity-80">⚡︎</span>
           </div>
           {!isCollapsed && (
             <div class="px-2">
-              <h1 class="text-xl font-semibold">Energy Label Studio</h1>
-              <small class="p-0.5 mr-2 font-bold text-[9px] bg-purple-200 dark:bg-purple-800 rounded-xs text-purple-500 dark:text-purple-200">BETA</small>
-              <p class="inline-block text-xs text-neutral-500 dark:text-slate-600">
-                Powered by{' '}
-                <a href={NPM_BETA_URL} target="_blank">
-                  energy-label
-                </a>
-              </p>
+              <h1 class="mb-1 text-xl font-semibold">Energy Label Studio</h1>
+              <div class="flex items-center">
+                <small class="px-0.5 mr-2 font-bold text-[8px] bg-purple-200 dark:bg-purple-800 rounded-xs text-purple-500 dark:text-purple-200">BETA</small>
+                <p class="text-xs text-neutral-500 dark:text-slate-600 truncate">
+                  Powered by{' '}
+                  <a href={NPM_BETA_URL} target="_blank" class="hover:underline">
+                    energy-label v1.0.0-beta.7
+                  </a>
+                </p>
+              </div>
             </div>
           )}
         </div>
@@ -125,4 +127,4 @@ function LeftPanel({ isCollapsed }: ResizableSidebarProps) {
   )
 }
 
-export default withResizableSidebar(LeftPanel, { minWidth: 200, maxWidth: 280, defaultWidth: 250 })
+export default withResizableSidebar(LeftPanel, { minWidth: 200, maxWidth: 280, defaultWidth: 280 })
