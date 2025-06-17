@@ -65,18 +65,21 @@ function LeftPanel({ isCollapsed }: ResizableSidebarProps) {
 
   return (
     <div class="panel w-full flex flex-col items-start justify-between">
-      <div class="w-full flex flex-col gap-3">
-        <div class="px-2 pt-1 pb-9 border-b border-neutral-200/40 dark:border-slate-700/40">
-          <div class="size-10 grid place-content-center">
-            <span class="absolute -top-2 -left-3 text-7xl text-purple-500 blur-lg opacity-20">⚡︎</span>
-            <span class="text-3xl -rotate-12">⚡︎</span>
-            <span class="absolute -top-2 left-1 text-7xl text-blue-500 blur-2xl opacity-80">⚡︎</span>
+      <div class="w-full flex flex-col">
+        <div class="px-2 pt-3 pb-10 border-b border-neutral-200/40 dark:border-slate-700/40">
+          <div class="mb-1 flex justify-center items-center w-9 h-7">
+            <div class="size-8 grid place-content-center">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 29 43" fill="none" class="size-full">
+                <path stroke="currentColor" stroke-width="1.5" d="M14.374 9.961 27.51 17.12 8.725 35.964l5.649-26.003Z" />
+                <path stroke="currentColor" stroke-width="1.5" d="m20.98 3.467-2.653 11.947a6.25 6.25 0 0 1-7.457 4.746l-5.483-1.218L9.394.895 20.98 3.467Z" />
+              </svg>
+            </div>
           </div>
           {!isCollapsed && (
             <div class="px-2">
-              <h1 class="mb-1 text-lg font-semibold">Energy Label Studio</h1>
+              <h1 class="mb-1 text-lg font-semibold">EnergyLabel Studio</h1>
               <div class="flex items-center">
-                <small class="px-0.5 mr-2 font-bold text-[10px] bg-purple-200 dark:bg-purple-800 rounded-xs text-purple-500 dark:text-purple-200">BETA</small>
+                <small class="-ml-0.5 px-0.5 mr-2 font-bold text-[10px] bg-purple-200 dark:bg-purple-800 rounded-xs text-purple-500 dark:text-purple-200">BETA</small>
                 <p class="text-xs text-neutral-500 dark:text-slate-600 truncate">
                   Powered by{' '}
                   <a href={NPM_BETA_URL} target="_blank" class="hover:underline">
@@ -97,7 +100,7 @@ function LeftPanel({ isCollapsed }: ResizableSidebarProps) {
             selectClassName="collapsible"
             options={FLAG_OPTIONS}
             isCollapsed={isCollapsed}
-            className="-mt-8.5 bg-neutral-50 dark:bg-slate-800"
+            className="-mt-5.5 bg-neutral-50 dark:bg-slate-800"
           />
           <div class="py-4">
             <h2 class="mb-1 px-2 text-xs text-neutral-500 dark:text-slate-600">Products</h2>
@@ -127,4 +130,4 @@ function LeftPanel({ isCollapsed }: ResizableSidebarProps) {
   )
 }
 
-export default withResizableSidebar(LeftPanel, { minWidth: 200, maxWidth: 280, defaultWidth: 280 })
+export default withResizableSidebar(LeftPanel, { minWidth: 200, maxWidth: 320, defaultWidth: 280 })
