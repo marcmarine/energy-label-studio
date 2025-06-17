@@ -74,9 +74,9 @@ function LeftPanel({ isCollapsed }: ResizableSidebarProps) {
           </div>
           {!isCollapsed && (
             <div class="px-2">
-              <h1 class="mb-1 text-xl font-semibold">Energy Label Studio</h1>
+              <h1 class="mb-1 text-lg font-semibold">Energy Label Studio</h1>
               <div class="flex items-center">
-                <small class="px-0.5 mr-2 font-bold text-[8px] bg-purple-200 dark:bg-purple-800 rounded-xs text-purple-500 dark:text-purple-200">BETA</small>
+                <small class="px-0.5 mr-2 font-bold text-[10px] bg-purple-200 dark:bg-purple-800 rounded-xs text-purple-500 dark:text-purple-200">BETA</small>
                 <p class="text-xs text-neutral-500 dark:text-slate-600 truncate">
                   Powered by{' '}
                   <a href={NPM_BETA_URL} target="_blank" class="hover:underline">

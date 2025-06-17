@@ -15,10 +15,8 @@
 }
 
 :root {
-  font-family: Inter, sans-serif;
-  font-size: 14px;
-
   color-scheme: light dark;
+  font-family: Inter, sans-serif;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -41,6 +39,14 @@ body {
 
 .panel {
   @apply h-[calc(100vh-(var(--app-layout-gap)*2))] bg-neutral-50 dark:bg-slate-800 border border-neutral-200/40 dark:border-slate-700/40 rounded-[var(--app-layout-border-radius)] overflow-auto;
+}
+
+.canvas {
+  @apply p-8;
+
+  svg {
+    @apply size-full;
+  }
 }
 
 .button {

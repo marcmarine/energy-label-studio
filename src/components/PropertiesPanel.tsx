@@ -11,7 +11,7 @@ function PropertiesPanel(_: ResizableSidebarProps) {
   return (
     <div class="panel relative flex-1 w-full">
       <div class="px-1 pt-1 flex gap-2 items-center justify-between">
-        <h2 class="px-2 font-semibold truncate">{templateTitle}</h2>
+        <h2 class="px-2 text-lg font-semibold truncate">{templateTitle}</h2>
         <div class="p-1 flex gap-0.5 rounded">
           <button class="button bg-neutral-100 dark:bg-slate-700/40">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width={1.5} stroke="currentColor" class="size-5">
@@ -76,4 +76,4 @@ function PropertiesPanel(_: ResizableSidebarProps) {
   )
 }
 
-export default withResizableSidebar(PropertiesPanel, { direction: 'left', minWidth: 200, maxWidth: 400, defaultWidth: 360 })
+export default withResizableSidebar(PropertiesPanel, { direction: 'left', minWidth: 200, maxWidth: 480, defaultWidth: 360 })
