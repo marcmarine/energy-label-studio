@@ -23,7 +23,7 @@ export default function Settings() {
       </div>
       <h2 class="px-3 mb-2 text-2xl font-semibold truncate">Settings</h2>
       <div class="p-3">
-        <h3 class="mb-6 font-medium">Appearance</h3>
+        <h3 class="mb-4 text-sm font-medium">Appearance</h3>
         <div class="flex flex-col gap-2">
           <Select
             label="Theme Mode"

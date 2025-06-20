@@ -78,7 +78,7 @@ function LeftPanel({ isCollapsed }: ResizableSidebarProps) {
           </div>
           {!isCollapsed && (
             <div class="px-2">
-              <h1 class="mb-1 text-lg font-semibold">EnergyLabel Studio</h1>
+              <h1 class="mb-1 font-semibold">EnergyLabel Studio</h1>
               <div class="flex items-center">
                 <small class="-ml-0.5 px-0.5 mr-2 font-bold text-[10px] bg-purple-200 dark:bg-purple-800 rounded-xs text-purple-500 dark:text-purple-200">BETA</small>
                 <p class="text-xs text-neutral-500 dark:text-slate-600 truncate">
@@ -107,7 +107,7 @@ function LeftPanel({ isCollapsed }: ResizableSidebarProps) {
             <h2 class="mb-1 px-2 text-xs text-neutral-500 dark:text-slate-600">Products</h2>
             <nav class="flex flex-col">
               {TEMPLATES.map(t => (
-                <button onClick={() => setTemplate(t.value)} class={cx('py-1 button w-full text-left font-medium truncate', template === t.value && 'bg-neutral-200/50 dark:bg-slate-700/20')}>
+                <button onClick={() => setTemplate(t.value)} class={cx('py-1 button text-sm w-full text-left font-medium truncate', template === t.value && 'bg-neutral-200/50 dark:bg-slate-700/20')}>
                   {t.name}
                 </button>
               ))}
