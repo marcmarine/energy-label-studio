@@ -13,7 +13,7 @@ export default function Settings() {
   ]
 
   return (
-    <div class="panel size-full">
+    <div class="panel !border-0 size-full">
       <div class="px-2 pt-2 flex gap-2 items-center justify-end">
         <a href="/" class="button">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">

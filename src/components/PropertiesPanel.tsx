@@ -62,11 +62,11 @@ function PropertiesPanel(_: ResizableSidebarProps) {
           Generate random data
         </button>
       </div>
-      <div class="px-3 pt-2 pb-4 border-t border-neutral-200/40 dark:border-slate-700/40 bg-neutral-50/20 dark:bg-slate-800/20 backdrop-blur-lg sticky bottom-0">
+      <div class="px-3 pt-2 pb-4 bg-[var(--panel-background-color)] border-t border-[var(--panel-border-color)] backdrop-blur-lg sticky bottom-0">
         <h2 class="mb-4 text-sm font-medium">Export</h2>
         <button
           onClick={() => download()}
-          class="p-2 w-full bg-blue-500 dark:bg-blue-800 hover:bg-blue-600 hover:dark:bg-blue-900 active:bg-blue-400 active:dark:bg-blue-700 rounded-lg font-semibold text-neutral-50 dark:text-neutral-200 cursor-pointer truncate"
+          class="p-2 w-full rounded-[var(--border-radius)] bg-blue-500 dark:bg-blue-800 hover:bg-blue-600 hover:dark:bg-blue-900 active:bg-blue-400 active:dark:bg-blue-700 font-semibold text-neutral-50 dark:text-neutral-200 cursor-pointer truncate"
         >
           Download the label in SVG
         </button>

@@ -19,7 +19,7 @@ export const applySettingsToDOM = (state: SettingsState) => {
   const { theme, gaps, rounded } = state
 
   document.documentElement.setAttribute('data-theme', getTheme(theme))
-  document.documentElement.style.setProperty('--layout-gap', gaps ? '8px' : '0px')
+  document.documentElement.style.setProperty('--layout-gap', gaps ? '10px' : '0px')
   document.documentElement.style.setProperty('--layout-border-radius', rounded ? '10px' : '0px')
 }
 

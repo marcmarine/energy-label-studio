@@ -25,7 +25,7 @@ export default function InputField({ label, type = 'text', placeholder = '', val
         onInput={onChange}
         required={required}
         disabled={disabled}
-        className={`px-2 py-1 rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-400/50 dark:focus:ring-blue-900/50 border border-neutral-200 dark:border-slate-700/40 focus:border-neutral-400 dark:focus:border-slate-600 placeholder:text-neutral-400 dark:placeholder:text-slate-600 ${inputClassName}`}
+        className={`px-2 py-1 rounded-[var(--border-radius)] border border-[var(--panel-border-color)] focus:outline-none focus:ring-4 focus:ring-blue-400/50 dark:focus:ring-blue-900/50 focus:border-neutral-400 dark:focus:border-slate-600 placeholder:text-neutral-400 dark:placeholder:text-slate-600 ${inputClassName}`}
       />
     </label>
   )

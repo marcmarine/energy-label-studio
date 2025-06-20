@@ -67,7 +67,7 @@ function LeftPanel({ isCollapsed }: ResizableSidebarProps) {
   return (
     <div class="panel w-full flex flex-col items-start justify-between">
       <div class="w-full flex flex-col">
-        <div class="px-2 pt-3 pb-10 border-b border-neutral-200/40 dark:border-slate-700/40">
+        <div class="px-2 pt-3 pb-10 border-b border-[var(--panel-border-color)]">
           <div class="flex justify-center items-center w-9 h-7">
             <div class="size-6 grid place-content-center">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 29 43" fill="none" class="size-full">
@@ -101,7 +101,7 @@ function LeftPanel({ isCollapsed }: ResizableSidebarProps) {
             selectClassName="collapsible"
             options={FLAG_OPTIONS}
             isCollapsed={isCollapsed}
-            className="-mt-5.5 bg-neutral-50 dark:bg-slate-800"
+            className="-mt-5.5 bg-[var(--panel-background-color)]"
           />
           <div class="py-4">
             <h2 class="mb-1 px-2 text-xs text-neutral-500 dark:text-slate-500">Products</h2>
