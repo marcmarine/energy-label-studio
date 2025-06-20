@@ -1,6 +1,7 @@
 import { REGULATIONS } from '../lib/constants'
 import { withResizableSidebar, type ResizableSidebarProps } from '../lib/resizable-sidebar'
 import { useEnergyLabelStore } from '../lib/useEnergyLabelStore'
+import { getState } from '../lib/useSettingsStore'
 import DynamicInputList from './InputList'
 
 function PropertiesPanel(_: ResizableSidebarProps) {
@@ -10,7 +11,7 @@ function PropertiesPanel(_: ResizableSidebarProps) {
 
   return (
     <div class="panel relative flex-1 w-full">
-      <div class="px-1 pt-1 flex gap-2 items-center justify-between">
+      <div class="p-1 flex gap-2 items-center justify-between">
         <h2 class="px-2 text-lg font-semibold truncate">{templateTitle}</h2>
         <div class="p-1 flex gap-0.5 rounded">
           <button class="button bg-neutral-100 dark:bg-slate-700/40">
@@ -48,7 +49,7 @@ function PropertiesPanel(_: ResizableSidebarProps) {
           </a>
         </p>
       )}
-      <div class="px-3 py-2">
+      <div class="px-3 py-2 overflow-auto">
         <DynamicInputList template={template!} values={data!} setValues={setData} />
       </div>
       <div class="px-1 py-2 flex justify-end">
@@ -76,4 +77,4 @@ function PropertiesPanel(_: ResizableSidebarProps) {
   )
 }
 
-export default withResizableSidebar(PropertiesPanel, { direction: 'left', minWidth: 200, maxWidth: 480, defaultWidth: 360 })
+export default withResizableSidebar(PropertiesPanel, { direction: 'left', minWidth: 200, maxWidth: 520, defaultWidth: getState().propsPanelWidth })

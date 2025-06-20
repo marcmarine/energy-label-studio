@@ -1,5 +1,6 @@
 import { RefObject } from 'preact'
 import { useCallback, useEffect, useRef, useState } from 'preact/hooks'
+import { updateAndApplySettings } from '../utils'
 
 export type ResizeDirection = 'left' | 'right'
 
@@ -70,7 +71,7 @@ export default function useResizableSidebar({ direction = 'right', minWidth = 48
         resizeSidebar(width)
         panel.style.transition = ''
       } else if (shouldCollapse) {
-        panel.style.transition = 'all 200ms'
+        panel.style.transition = 'all 400ms'
       }
     }
 
@@ -80,6 +81,12 @@ export default function useResizableSidebar({ direction = 'right', minWidth = 48
       document.removeEventListener('mouseup', handleMouseUp)
       document.body.style.cursor = ''
       document.body.style.userSelect = ''
+
+      if (direction === 'right') {
+        updateAndApplySettings({ leftPanelWidth: sidebarRef.current?.getBoundingClientRect().width })
+      } else {
+        updateAndApplySettings({ propsPanelWidth: sidebarRef.current?.getBoundingClientRect().width })
+      }
     }
 
     const handleMouseDown = () => {

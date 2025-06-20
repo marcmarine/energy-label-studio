@@ -2,7 +2,7 @@ import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 import { createEnergyLabel, appendTo, download, type TemplateName, type TemplatesData } from 'energy-label'
 
-type EnergyLabelState<T extends TemplateName = TemplateName> = {
+interface EnergyLabelState<T extends TemplateName = TemplateName> {
   svg: string
   loading: boolean
   error: Error | null

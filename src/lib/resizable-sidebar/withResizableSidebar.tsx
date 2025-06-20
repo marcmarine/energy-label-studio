@@ -1,6 +1,7 @@
 import { ComponentType, JSX, createElement } from 'preact'
 import useResizableSidebar, { type ResizableSidebarOptions } from './useResizableSidebar'
 import ResizeHandle from './ResizeHandle'
+import { useMemo } from 'preact/hooks'
 
 export interface ResizableSidebarProps {
   isCollapsed: boolean
@@ -14,9 +15,11 @@ export default function withResizableSidebar<P extends ResizableSidebarProps>(Wr
       isCollapsed
     } = useResizableSidebar(resizeOptions)
 
+    const isLeftPanel = useMemo(() => resizeOptions?.direction === 'left', [])
+
     return (
-      <div class={['flex', resizeOptions?.direction === 'left' ? 'flex-row-reverse' : 'flex-row'].join(' ')}>
-        <div ref={sidebar} class="flex overflow-hidden" style={{ width: isCollapsed ? 52 : resizeOptions?.minWidth }}>
+      <div style={{ display: 'flex', flexDirection: isLeftPanel ? 'row-reverse' : 'row' }}>
+        <div ref={sidebar} style={{ display: 'flex', width: isCollapsed ? 0 : resizeOptions?.defaultWidth }}>
           {/* Using createElement to avoid TS2786 - Preact ComponentType return type mismatch with JSX */}
           {createElement(WrappedComponent, { ...(props as P), isCollapsed })}
         </div>

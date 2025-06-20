@@ -3,6 +3,7 @@ import { withResizableSidebar, type ResizableSidebarProps } from '../lib/resizab
 import { useEnergyLabelStore } from '../lib/useEnergyLabelStore'
 import Select from './Select'
 import { cx } from '../lib/utils'
+import { getState } from '../lib/useSettingsStore'
 
 const FLAG_OPTIONS = [
   {
@@ -67,11 +68,11 @@ function LeftPanel({ isCollapsed }: ResizableSidebarProps) {
     <div class="panel w-full flex flex-col items-start justify-between">
       <div class="w-full flex flex-col">
         <div class="px-2 pt-3 pb-10 border-b border-neutral-200/40 dark:border-slate-700/40">
-          <div class="mb-1 flex justify-center items-center w-9 h-7">
-            <div class="size-8 grid place-content-center">
+          <div class="flex justify-center items-center w-9 h-7">
+            <div class="size-6 grid place-content-center">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 29 43" fill="none" class="size-full">
-                <path stroke="currentColor" stroke-width="1.5" d="M14.374 9.961 27.51 17.12 8.725 35.964l5.649-26.003Z" />
-                <path stroke="currentColor" stroke-width="1.5" d="m20.98 3.467-2.653 11.947a6.25 6.25 0 0 1-7.457 4.746l-5.483-1.218L9.394.895 20.98 3.467Z" />
+                <path stroke="currentColor" stroke-width="2" d="M14.374 9.961 27.51 17.12 8.725 35.964l5.649-26.003Z" />
+                <path stroke="currentColor" stroke-width="2" d="m20.98 3.467-2.653 11.947a6.25 6.25 0 0 1-7.457 4.746l-5.483-1.218L9.394.895 20.98 3.467Z" />
               </svg>
             </div>
           </div>
@@ -115,7 +116,7 @@ function LeftPanel({ isCollapsed }: ResizableSidebarProps) {
         </div>
       </div>
       <div class="p-2">
-        <button class="button text-xs">
+        <a href="/settings" class="block button text-xs">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
             <path
               stroke-linecap="round"
@@ -124,10 +125,10 @@ function LeftPanel({ isCollapsed }: ResizableSidebarProps) {
             />
             <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
           </svg>
-        </button>
+        </a>
       </div>
     </div>
   )
 }
 
-export default withResizableSidebar(LeftPanel, { minWidth: 200, maxWidth: 320, defaultWidth: 280 })
+export default withResizableSidebar(LeftPanel, { minWidth: 200, maxWidth: 320, defaultWidth: getState().leftPanelWidth })

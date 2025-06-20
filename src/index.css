@@ -1,5 +1,7 @@
 @import 'tailwindcss';
 
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
 @theme {
   --color-slate-50: #eff2f5;
   --color-slate-100: #e0e4eb;
@@ -23,13 +25,18 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+}
 
-  --app-layout-gap: 1rem;
-  --app-layout-border-radius: 0.6rem;
+[data-theme='light'] {
+  color-scheme: light;
+}
+
+[data-theme='dark'] {
+  color-scheme: dark;
 }
 
 body {
-  @apply bg-neutral-50 dark:bg-slate-950 text-neutral-800 dark:text-slate-200;
+  @apply bg-neutral-100 dark:bg-slate-800/60 text-neutral-800 dark:text-slate-200;
 }
 
 #app {
@@ -38,7 +45,7 @@ body {
 }
 
 .panel {
-  @apply h-[calc(100vh-(var(--app-layout-gap)*2))] bg-neutral-50 dark:bg-slate-800 border border-neutral-200/40 dark:border-slate-700/40 rounded-[var(--app-layout-border-radius)] overflow-auto;
+  @apply bg-neutral-50 dark:bg-slate-800 border border-neutral-200/40 dark:border-slate-700/40 rounded-[var(--layout-border-radius)] h-[calc(100vh-(var(--layout-gap)*2))] overflow-auto;
 }
 
 .canvas {
@@ -67,11 +74,12 @@ body {
 }
 
 select {
+  @apply relative;
   appearance: base-select;
 }
 
-select {
-  @apply px-2 py-1 relative;
+select selectedcontent {
+  @apply pr-4.5;
 }
 
 select.collapsible {
@@ -86,7 +94,7 @@ select.collapsible {
   }
 
   selectedcontent {
-    @apply flex items-center gap-2;
+    @apply flex items-center gap-2 whitespace-nowrap;
   }
 
   &.collapsed selectedcontent .option-label {
@@ -106,8 +114,8 @@ select::picker-icon {
   content: '';
   position: absolute;
   top: 50%;
-  transform: translateY(-50%);
   right: 0;
+  transform: translateY(-50%);
   background-image: linear-gradient(
     to bottom,
     var(--icon-color) 0%,

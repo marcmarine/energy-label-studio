@@ -1,6 +1,6 @@
 import { cx } from '../lib/utils'
 
-interface SelectOption {
+export interface SelectOption {
   value: string
   label: string
   icon?: React.ReactNode
@@ -21,24 +21,11 @@ interface ReusableSelectProps {
   selectedContent?: React.ReactNode
 }
 
-export default function Select({
-  label,
-  options,
-  value,
-  onChange,
-  required = false,
-  isCollapsed = false,
-  className = '',
-  labelClassName = '',
-  selectClassName = '',
-  id,
-  disabled = false,
-  selectedContent
-}: ReusableSelectProps) {
+export default function Select({ label, options, value, onChange, required = false, isCollapsed = false, className = '', selectClassName = '', id, disabled = false, selectedContent }: ReusableSelectProps) {
   return (
-    <label className={`flex-1 flex flex-col ${className}`}>
+    <label className={`flex flex-col ${className}`}>
       {label && (
-        <span className={`mb-1 text-xs text-neutral-500 dark:text-slate-500  text-nowrap ${labelClassName}`}>
+        <span className={`text-xs text-neutral-500 dark:text-slate-500 text-nowrap ${className ?? 'mb-1'}`}>
           {label}
           {required && <span className="text-red-500 ml-1">*</span>}
         </span>
@@ -46,7 +33,7 @@ export default function Select({
       <select
         id={id}
         className={cx(
-          'w-full rounded-lg border border-neutral-200 dark:border-slate-700/40 focus:outline-none open:ring-4 open:ring-blue-400/50 dark:open:ring-blue-900/50 open:border-blue-400 dark:open:border-slate-600',
+          'px-2 py-1 rounded-lg border border-neutral-200 dark:border-slate-700/40 focus:outline-none open:ring-4 open:ring-blue-400/50 dark:open:ring-blue-900/50 open:border-blue-400 dark:open:border-slate-600',
           isCollapsed && 'collapsed',
           selectClassName
         )}
