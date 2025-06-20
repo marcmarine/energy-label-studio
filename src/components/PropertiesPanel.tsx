@@ -31,7 +31,7 @@ function PropertiesPanel(_: ResizableSidebarProps) {
         </div>
       </div>
       {regulationNumber && (
-        <a href={`http://data.europa.eu/eli/reg_del/${regulationNumber}/oj`} class="px-3 mb-2 w-fit text-xs text-neutral-500 dark:text-slate-600 hover:underline flex items-center gap-1" target="_blank">
+        <a href={`http://data.europa.eu/eli/reg_del/${regulationNumber}/oj`} class="px-3 mb-2 w-fit text-xs text-neutral-500 dark:text-slate-500 hover:underline flex items-center gap-1" target="_blank">
           Regulation (EU) {regulationNumber}
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="size-3">
             <path

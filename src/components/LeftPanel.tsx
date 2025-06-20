@@ -104,7 +104,7 @@ function LeftPanel({ isCollapsed }: ResizableSidebarProps) {
             className="-mt-5.5 bg-neutral-50 dark:bg-slate-800"
           />
           <div class="py-4">
-            <h2 class="mb-1 px-2 text-xs text-neutral-500 dark:text-slate-600">Products</h2>
+            <h2 class="mb-1 px-2 text-xs text-neutral-500 dark:text-slate-500">Products</h2>
             <nav class="flex flex-col">
               {TEMPLATES.map(t => (
                 <button onClick={() => setTemplate(t.value)} class={cx('py-1 button text-sm w-full text-left font-medium truncate', template === t.value && 'bg-neutral-200/50 dark:bg-slate-700/20')}>

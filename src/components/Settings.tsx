@@ -26,7 +26,7 @@ export default function Settings() {
         <h3 class="mb-4 text-sm font-medium">Appearance</h3>
         <div class="flex flex-col gap-2">
           <Select
-            label="Theme Mode"
+            label="Theme"
             className="flex-1 flex-row items-center"
             labelClassName="flex-1"
             value={theme}
@@ -34,7 +34,7 @@ export default function Settings() {
             options={themeOptions}
           />
           <ToggleSwitch
-            label="View layout gaps"
+            label="Layout spacing"
             checked={gaps}
             onChange={checked => {
               updateAndApplySettings({ gaps: checked })
