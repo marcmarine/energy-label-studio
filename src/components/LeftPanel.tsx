@@ -101,7 +101,7 @@ function LeftPanel({ isCollapsed }: ResizableSidebarProps) {
             selectClassName="collapsible"
             options={FLAG_OPTIONS}
             isCollapsed={isCollapsed}
-            className="-mt-5.5 bg-[var(--panel-background-color)]"
+            className="-mt-5.5 bg-[var(--panel-background-color)] text-sm font-medium"
           />
           <div class="py-4">
             <h2 class="mb-1 px-2 text-xs text-neutral-500 dark:text-slate-500">Products</h2>

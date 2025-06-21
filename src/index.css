@@ -87,7 +87,7 @@ select {
 }
 
 select selectedcontent {
-  @apply pr-4.5 text-sm font-medium;
+  @apply pr-4.5;
 }
 
 select.collapsible {
