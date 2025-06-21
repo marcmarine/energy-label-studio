@@ -1,4 +1,4 @@
-import { NPM_BETA_URL, TEMPLATES } from '../lib/constants'
+import { ENERGY_LABEL_DOCS_URL, TEMPLATES } from '../lib/constants'
 import { withResizableSidebar, type ResizableSidebarProps } from '../lib/resizable-sidebar'
 import { useEnergyLabelStore } from '../lib/useEnergyLabelStore'
 import Select from './Select'
@@ -83,7 +83,7 @@ function LeftPanel({ isCollapsed }: ResizableSidebarProps) {
                 <small class="-ml-0.5 px-0.5 mr-2 font-bold text-[10px] bg-purple-200 dark:bg-purple-800 rounded-xs text-purple-500 dark:text-purple-200">BETA</small>
                 <p class="text-xs text-neutral-500 dark:text-slate-600 truncate">
                   Powered by{' '}
-                  <a href={NPM_BETA_URL} target="_blank" class="hover:underline">
+                  <a href={ENERGY_LABEL_DOCS_URL} target="_blank" class="hover:underline">
                     energy-label v1.0.0-beta.8
                   </a>
                 </p>

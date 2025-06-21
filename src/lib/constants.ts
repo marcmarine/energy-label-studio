@@ -1,6 +1,6 @@
 import { TemplateName } from 'energy-label'
 
-export const NPM_BETA_URL = 'https://www.npmjs.com/package/energy-label/v/beta'
+export const ENERGY_LABEL_DOCS_URL = 'https://docs.label.energy'
 
 export const TEMPLATES: { name: string; value: TemplateName }[] = [
   { name: 'Arrow Label', value: 'arrow' },
