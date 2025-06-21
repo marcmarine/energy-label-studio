@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
-import { createEnergyLabel, appendTo, download, type TemplateName, type TemplatesData } from 'energy-label'
+import { EnergyLabel, appendTo, download, type TemplateName, type TemplatesData } from 'energy-label'
 
 interface EnergyLabelState<T extends TemplateName = TemplateName> {
   svg: string
@@ -23,10 +23,12 @@ export const useEnergyLabelStore = create<EnergyLabelState>()(
 
         set({ loading: true, error: null })
 
-        createEnergyLabel(template, data)
-          .then(svg => set({ svg }))
-          .catch(error => set({ error: error as Error }))
-          .finally(() => set({ loading: false }))
+        try {
+          const svg = await EnergyLabel(template, data).generate()
+          set({ svg, loading: false })
+        } catch (error) {
+          set({ error: error as Error, loading: false })
+        }
       }
 
       return {

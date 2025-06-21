@@ -4,7 +4,7 @@
     "": {
       "name": "labelshop",
       "dependencies": {
-        "energy-label": "^1.0.0-beta.7",
+        "energy-label": "^1.0.0-beta.8",
         "preact": "^10.11.2",
         "preact-iso": "^2.9.2",
         "zustand": "^5.0.5",
@@ -176,7 +176,7 @@
 
     "emoji-regex": ["emoji-regex@8.0.0", "", {}, "sha512-MSjYzcWNOA0ewAHpz0MxpYFvwg6yjy1NG3xteoqz644VCo/RPgnr1/GGt+ic3iJTzQ8Eu3TdM14SawnVUmGE6A=="],
 
-    "energy-label": ["energy-label@1.0.0-beta.7", "", { "dependencies": { "qrcode": "^1.5.4", "svgo": "^4.0.0-rc.1" } }, "sha512-dHYsx2X5ltPPIAFUJ0zGeqskulOXz+V1Wq+nxys8kv+UH2RdRGLLGnx5UT3VSqqyQ6z2tCgOvbfd06xacczgdg=="],
+    "energy-label": ["energy-label@1.0.0-beta.8", "", { "dependencies": { "qrcode": "^1.5.4", "svgo": "^4.0.0-rc.1" } }, "sha512-KpcR48rpM4UU3Ir4488X/qFzCKV6LTk53cty47AeIpdYadG7E9K2G5JkOrBZhcfwLTaXCya5GEAT1vJQMEXDBg=="],
 
     "enhanced-resolve": ["enhanced-resolve@5.18.1", "", { "dependencies": { "graceful-fs": "^4.2.4", "tapable": "^2.2.0" } }, "sha512-ZSW3ma5GkcQBIpwZTSRAI8N71Uuwgs93IezB7mf7R60tC8ZbJideoDNKjHn2O9KIlx6rkGTTEk1xUCK2E1Y2Yg=="],
 

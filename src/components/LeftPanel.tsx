@@ -84,7 +84,7 @@ function LeftPanel({ isCollapsed }: ResizableSidebarProps) {
                 <p class="text-xs text-neutral-500 dark:text-slate-600 truncate">
                   Powered by{' '}
                   <a href={NPM_BETA_URL} target="_blank" class="hover:underline">
-                    energy-label v1.0.0-beta.7
+                    energy-label v1.0.0-beta.8
                   </a>
                 </p>
               </div>

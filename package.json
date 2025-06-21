@@ -9,7 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "energy-label": "^1.0.0-beta.7",
+    "energy-label": "^1.0.0-beta.8",
     "preact": "^10.11.2",
     "preact-iso": "^2.9.2",
     "zustand": "^5.0.5"
