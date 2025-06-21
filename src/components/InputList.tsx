@@ -24,16 +24,12 @@ export default function DynamicInputList({ template, values, setValues }: Dynami
 
   return (
     <>
-      {!/arrow/.test(template) && (
-        <>
-          <h3 class="mb-4 text-sm font-medium">Product information</h3>
-          <div class="mb-6 flex gap-2 flex-wrap">
-            {productInformationData.map(item => (
-              <InputField label={item.label} value={values[item.key]} onChange={e => setValues({ [item.key]: e.currentTarget.value })} placeholder={item.placeholder} />
-            ))}
-          </div>
-        </>
-      )}
+      <h3 class="mb-4 text-sm font-medium">Product information</h3>
+      <div class="mb-6 flex gap-2 flex-wrap">
+        {productInformationData.map(item => (
+          <InputField label={item.label} value={values[item.key]} onChange={e => setValues({ [item.key]: e.currentTarget.value })} placeholder={item.placeholder} />
+        ))}
+      </div>
       <h3 class="mb-4 text-sm font-medium">Efficiency details</h3>
       <div className="mb-2 flex gap-2 flex-wrap">
         {efficiencyData.map(({ label, key, type, options: selectOptions, placeholder }) =>

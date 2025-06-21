@@ -59,7 +59,7 @@ function PropertiesPanel(_: ResizableSidebarProps) {
               clipRule="evenodd"
             />
           </svg>
-          Generate random data
+          Generate test data
         </button>
       </div>
       <div class="px-3 pt-2 pb-4 bg-[var(--panel-background-color)] border-t border-[var(--panel-border-color)] backdrop-blur-lg sticky bottom-0">

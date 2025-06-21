@@ -1,4 +1,4 @@
-import { ENERGY_LABEL_DOCS_URL, TEMPLATES } from '../lib/constants'
+import { ENERGY_LABEL_DOCS_URL, TEMPLATES, TEMPLATES_DISABLED } from '../lib/constants'
 import { withResizableSidebar, type ResizableSidebarProps } from '../lib/resizable-sidebar'
 import { useEnergyLabelStore } from '../lib/useEnergyLabelStore'
 import Select from './Select'
@@ -107,9 +107,24 @@ function LeftPanel({ isCollapsed }: ResizableSidebarProps) {
             <h2 class="mb-1 px-2 text-xs text-neutral-500 dark:text-slate-500">Products</h2>
             <nav class="flex flex-col">
               {TEMPLATES.map(t => (
-                <button onClick={() => setTemplate(t.value)} class={cx('py-1 button text-sm w-full text-left font-medium truncate', template === t.value && 'bg-neutral-200/50 dark:bg-slate-700/20')}>
+                <a href={`/${t.value}`} onClick={() => setTemplate(t.value)} class={cx('py-1 button text-sm w-full text-left font-medium truncate', template === t.value && 'bg-neutral-200/50 dark:bg-slate-700/20')}>
                   {t.name}
-                </button>
+                </a>
+              ))}
+              <div class="mb-1 px-2 py-1">
+                <span class="p-0.5 font-bold text-[10px] bg-neutral-200 dark:bg-slate-700/80 rounded-xs text-neutral-400/80 dark:text-slate-400">Coming soon</span>
+              </div>
+              {TEMPLATES_DISABLED.map(t => (
+                <a
+                  href={`/${t.value}`}
+                  class={cx(
+                    'py-1 button text-sm w-full text-left font-medium truncate',
+                    template === t.value && 'bg-neutral-200/50 dark:bg-slate-700/20',
+                    t.disabled && 'pointer-events-none text-neutral-400 dark:text-slate-600'
+                  )}
+                >
+                  {t.name}
+                </a>
               ))}
             </nav>
           </div>
