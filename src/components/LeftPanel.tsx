@@ -4,6 +4,7 @@ import { useEnergyLabelStore } from '../lib/useEnergyLabelStore'
 import Select from './Select'
 import { cx } from '../lib/utils'
 import { getState } from '../lib/useSettingsStore'
+import { useLocation } from 'preact-iso'
 
 const FLAG_OPTIONS = [
   {
@@ -63,6 +64,7 @@ const FLAG_OPTIONS = [
 
 function LeftPanel({ isCollapsed }: ResizableSidebarProps) {
   const { template, setTemplate, setData, data } = useEnergyLabelStore()
+  const { path } = useLocation()
 
   return (
     <div class="panel w-full flex flex-col items-start justify-between">
@@ -131,7 +133,7 @@ function LeftPanel({ isCollapsed }: ResizableSidebarProps) {
         </div>
       </div>
       <div class="p-2">
-        <a href="/settings" class="block button text-xs">
+        <a href={/settings/.test(path) ? '/' : '/settings'} class="block button text-xs">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
             <path
               stroke-linecap="round"
