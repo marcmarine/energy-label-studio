@@ -1,17 +1,19 @@
+import { useEffect } from 'preact/hooks'
+import { useLocation } from 'preact-iso'
+import { TemplateName } from 'energy-label'
+import { getState } from '../lib/useSettingsStore'
 import { ENERGY_LABEL_DOCS_URL, TEMPLATES, TEMPLATES_DISABLED } from '../lib/constants'
 import { withResizableSidebar, type ResizableSidebarProps } from '../lib/resizable-sidebar'
 import { useEnergyLabelStore } from '../lib/useEnergyLabelStore'
 import Select from './Select'
 import { cx } from '../lib/utils'
-import { getState } from '../lib/useSettingsStore'
-import { useLocation } from 'preact-iso'
 
 const FLAG_OPTIONS = [
   {
     value: 'EU',
     label: 'European Union',
     icon: (
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 56 56" className="size-6" fill="none">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 56 56" class="size-6" fill="none">
         <path fill="#034EA2" d="M0 56h56V0H0v56Z" />
         <path
           fill="#FFF200"
@@ -24,7 +26,7 @@ const FLAG_OPTIONS = [
     value: 'UK',
     label: 'Great Britain',
     icon: (
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 56 56" className="size-6" fill="none">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 56 56" class="size-6" fill="none">
         <g clipPath="url(#a)">
           <path fill="#034EA2" d="M-1.07.02v56h59v-56h-59Z" />
           <path
@@ -64,7 +66,9 @@ const FLAG_OPTIONS = [
 
 function LeftPanel({ isCollapsed }: ResizableSidebarProps) {
   const { template, setTemplate, setData, data } = useEnergyLabelStore()
-  const { path } = useLocation()
+  const { path, query } = useLocation()
+
+  useEffect(() => setTemplate((query.product as TemplateName) || template), [query])
 
   return (
     <div class="panel w-full flex flex-col items-start justify-between">
@@ -109,7 +113,7 @@ function LeftPanel({ isCollapsed }: ResizableSidebarProps) {
             <h2 class="mb-1 px-2 text-xs text-neutral-500 dark:text-slate-500">Products</h2>
             <nav class="flex flex-col">
               {TEMPLATES.map(t => (
-                <a href={`/${t.value}`} onClick={() => setTemplate(t.value)} class={cx('py-1 button text-sm w-full text-left font-medium truncate', template === t.value && 'bg-neutral-200/50 dark:bg-slate-700/20')}>
+                <a href={`?product=${t.value}`} class={cx('py-1 button text-sm w-full text-left font-medium truncate', template === t.value && 'bg-neutral-200/50 dark:bg-slate-700/20')}>
                   {t.name}
                 </a>
               ))}
@@ -118,7 +122,7 @@ function LeftPanel({ isCollapsed }: ResizableSidebarProps) {
               </div>
               {TEMPLATES_DISABLED.map(t => (
                 <a
-                  href={`/${t.value}`}
+                  href={`?product=${t.value}`}
                   class={cx(
                     'py-1 button text-sm w-full text-left font-medium truncate',
                     template === t.value && 'bg-neutral-200/50 dark:bg-slate-700/20',
