@@ -1,4 +1,4 @@
-import { RefObject } from 'preact'
+import type { RefObject } from 'preact'
 import { useCallback, useEffect, useRef, useState } from 'preact/hooks'
 
 export type ResizeDirection = 'left' | 'right'
@@ -27,10 +27,20 @@ interface UseSidebarResizeReturn {
   width: number
 }
 
-export default function useResizableSidebar({ direction = 'right', minWidth = 48, maxWidth = 500, defaultWidth, collapseAt, onResizeEnd, initialState }: ResizableSidebarOptions = {}): UseSidebarResizeReturn {
+export default function useResizableSidebar({
+  direction = 'right',
+  minWidth = 48,
+  maxWidth = 500,
+  defaultWidth,
+  collapseAt,
+  onResizeEnd,
+  initialState
+}: ResizableSidebarOptions = {}): UseSidebarResizeReturn {
   const initialWidth = defaultWidth ?? minWidth
   const [isResizing, setIsResizing] = useState(false)
-  const [isCollapsed, setCollapsed] = useState(initialState?.isCollapsed || false)
+  const [isCollapsed, setCollapsed] = useState(
+    initialState?.isCollapsed || false
+  )
   const [width, setWidth] = useState(initialWidth)
 
   const sidebarRef = useRef<HTMLDivElement>(null)
@@ -51,12 +61,16 @@ export default function useResizableSidebar({ direction = 'right', minWidth = 48
 
     const getNewWidth = (event: MouseEvent) => {
       const rect = sidebar.getBoundingClientRect()
-      return direction === 'right' ? event.clientX - rect.left : rect.right - event.clientX
+      return direction === 'right'
+        ? event.clientX - rect.left
+        : rect.right - event.clientX
     }
 
     const checkCollapse = (event: MouseEvent) => {
       if (!collapseAt) return false
-      return direction === 'right' ? event.clientX <= collapseAt : event.clientX >= window.innerWidth - collapseAt
+      return direction === 'right'
+        ? event.clientX <= collapseAt
+        : event.clientX >= window.innerWidth - collapseAt
     }
 
     const onMouseMove = (event: MouseEvent) => {

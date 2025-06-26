@@ -1,6 +1,6 @@
-import Layout from './components/Layout'
-import { lazy, LocationProvider, Router, Route } from 'preact-iso'
+import { LocationProvider, lazy, Route, Router } from 'preact-iso'
 import Canvas from './components/Canvas'
+import Layout from './components/Layout'
 
 export function App() {
   const Settings = lazy(() => import('./components/Settings'))

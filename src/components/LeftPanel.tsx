@@ -1,20 +1,30 @@
+import type { TemplateName } from 'energy-label'
 import { useEffect } from 'preact/hooks'
 import { useLocation } from 'preact-iso'
-import { TemplateName } from 'energy-label'
-import { getState } from '../lib/useSettingsStore'
 import { ENERGY_LABEL_DOCS_URL } from '../lib/constants'
-import { withResizableSidebar, type ResizableSidebarProps } from '../lib/resizable-sidebar'
+import {
+  type ResizableSidebarProps,
+  withResizableSidebar
+} from '../lib/resizable-sidebar'
 import { useEnergyLabelStore } from '../lib/useEnergyLabelStore'
-import Select from './Select'
-import Navigation from './Navigation'
+import { getState } from '../lib/useSettingsStore'
 import { updateAndApplySettings } from '../lib/utils'
+import Navigation from './Navigation'
+import Select from './Select'
 
 const FLAG_OPTIONS = [
   {
     value: 'EU',
     label: 'European Union',
     icon: (
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 56 56" class="size-6" fill="none">
+      <svg
+        role="img"
+        aria-label="EU Flag"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 56 56"
+        class="size-6"
+        fill="none"
+      >
         <path fill="#034EA2" d="M0 56h56V0H0v56Z" />
         <path
           fill="#FFF200"
@@ -27,7 +37,14 @@ const FLAG_OPTIONS = [
     value: 'UK',
     label: 'Great Britain',
     icon: (
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 56 56" class="size-6" fill="none">
+      <svg
+        role="img"
+        aria-label="UK Flag"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 56 56"
+        class="size-6"
+        fill="none"
+      >
         <g clipPath="url(#a)">
           <path fill="#034EA2" d="M-1.07.02v56h59v-56h-59Z" />
           <path
@@ -36,8 +53,19 @@ const FLAG_OPTIONS = [
             d="M21.51 28.02-3.07 4.682.592-4.98l27.836 26.43L56.266-4.98l3.663 9.662L35.35 28.02l24.58 23.338-3.663 9.662-27.837-26.43L.593 61.02l-3.664-9.662L21.51 28.02Z"
             clipRule="evenodd"
           />
-          <mask id="b" width="61" height="57" x="-2" y="0" maskUnits="userSpaceOnUse" style={{ maskType: 'luminance' }}>
-            <path fill="#fff" d="M28.358 28.04h29.735v27.972L28.358 28.04Zm0 0v27.972H-1.377L28.358 28.04Zm0 0H-1.377V.068L28.358 28.04Zm0 0V.068h29.735L28.358 28.04Z" />
+          <mask
+            id="b"
+            width="61"
+            height="57"
+            x="-2"
+            y="0"
+            maskUnits="userSpaceOnUse"
+            style={{ maskType: 'luminance' }}
+          >
+            <path
+              fill="#fff"
+              d="M28.358 28.04h29.735v27.972L28.358 28.04Zm0 0v27.972H-1.377L28.358 28.04Zm0 0H-1.377V.068L28.358 28.04Zm0 0V.068h29.735L28.358 28.04Z"
+            />
           </mask>
           <g mask="url(#b)">
             <path
@@ -47,7 +75,10 @@ const FLAG_OPTIONS = [
               clipRule="evenodd"
             />
           </g>
-          <path fill="#DA2E33" d="M-15.317 20.56h37.016V-1.816h13.46v22.378h37.017v14.918H35.158v22.378H21.7V35.479h-37.016V20.561Z" />
+          <path
+            fill="#DA2E33"
+            d="M-15.317 20.56h37.016V-1.816h13.46v22.378h37.017v14.918H35.158v22.378H21.7V35.479h-37.016V20.561Z"
+          />
           <path
             fill="#fff"
             fillRule="evenodd"
@@ -69,7 +100,10 @@ function LeftPanel({ isCollapsed }: ResizableSidebarProps) {
   const { template, setTemplate, setData, data } = useEnergyLabelStore()
   const { path, query } = useLocation()
 
-  useEffect(() => setTemplate((query.product as TemplateName) || template), [query])
+  useEffect(
+    () => setTemplate((query.product as TemplateName) || template),
+    [query]
+  )
 
   return (
     <div class="panel w-full flex flex-col items-start justify-between">
@@ -77,9 +111,24 @@ function LeftPanel({ isCollapsed }: ResizableSidebarProps) {
         <div class="px-2 pt-3 pb-4">
           <div class="flex justify-center items-center w-9 h-7">
             <div class="size-6 grid place-content-center">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 29 43" fill="none" class="size-full">
-                <path stroke="currentColor" stroke-width="2" d="M14.374 9.961 27.51 17.12 8.725 35.964l5.649-26.003Z" />
-                <path stroke="currentColor" stroke-width="2" d="m20.98 3.467-2.653 11.947a6.25 6.25 0 0 1-7.457 4.746l-5.483-1.218L9.394.895 20.98 3.467Z" />
+              <svg
+                role="img"
+                aria-label="Logo"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 29 43"
+                fill="none"
+                class="size-full"
+              >
+                <path
+                  stroke="currentColor"
+                  stroke-width="2"
+                  d="M14.374 9.961 27.51 17.12 8.725 35.964l5.649-26.003Z"
+                />
+                <path
+                  stroke="currentColor"
+                  stroke-width="2"
+                  d="m20.98 3.467-2.653 11.947a6.25 6.25 0 0 1-7.457 4.746l-5.483-1.218L9.394.895 20.98 3.467Z"
+                />
               </svg>
             </div>
           </div>
@@ -87,10 +136,16 @@ function LeftPanel({ isCollapsed }: ResizableSidebarProps) {
             <div class="px-2">
               <h1 class="mb-1 font-semibold truncate">EnergyLabel Studio</h1>
               <div class="flex items-center">
-                <small class="-ml-0.5 px-0.5 mr-2 font-bold text-[10px] bg-purple-200 dark:bg-purple-800 rounded-xs text-purple-500 dark:text-purple-200">BETA</small>
+                <small class="-ml-0.5 px-0.5 mr-2 font-bold text-[10px] bg-purple-200 dark:bg-purple-800 rounded-xs text-purple-500 dark:text-purple-200">
+                  BETA
+                </small>
                 <p class="text-xs text-neutral-500 dark:text-slate-600 truncate">
                   Powered by{' '}
-                  <a href={ENERGY_LABEL_DOCS_URL} target="_blank" class="hover:underline">
+                  <a
+                    href={ENERGY_LABEL_DOCS_URL}
+                    target="_blank"
+                    class="hover:underline"
+                  >
                     energy-label v1.0.0-beta.8
                   </a>
                 </p>
@@ -98,14 +153,16 @@ function LeftPanel({ isCollapsed }: ResizableSidebarProps) {
             </div>
           ) : (
             <div class="mt-2 flex justify-center">
-              <span class="px-0.5 font-bold text-[10px] bg-purple-200 dark:bg-purple-800 rounded-xs text-purple-500 dark:text-purple-200">BETA</span>
+              <span class="px-0.5 font-bold text-[10px] bg-purple-200 dark:bg-purple-800 rounded-xs text-purple-500 dark:text-purple-200">
+                BETA
+              </span>
             </div>
           )}
         </div>
         <div class="px-2">
           <Select
-            onChange={event => {
-              setData({ flagOrigin: event.currentTarget.value as any })
+            onChange={(event) => {
+              setData({ flagOrigin: event.currentTarget.value as 'EU' | 'UK' })
             }}
             //@ts-ignore
             value={data?.flagOrigin}
@@ -120,14 +177,30 @@ function LeftPanel({ isCollapsed }: ResizableSidebarProps) {
         </div>
       </div>
       <div class="p-2">
-        <a href={/settings/.test(path) ? '/' : '/settings'} class="block button text-xs">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
+        <a
+          href={/settings/.test(path) ? '/' : '/settings'}
+          class="block button text-xs"
+        >
+          <svg
+            role="img"
+            aria-label="Settings"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="size-5"
+          >
             <path
               stroke-linecap="round"
               stroke-linejoin="round"
               d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.325.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 0 1 1.37.49l1.296 2.247a1.125 1.125 0 0 1-.26 1.431l-1.003.827c-.293.241-.438.613-.43.992a7.723 7.723 0 0 1 0 .255c-.008.378.137.75.43.991l1.004.827c.424.35.534.955.26 1.43l-1.298 2.247a1.125 1.125 0 0 1-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.47 6.47 0 0 1-.22.128c-.331.183-.581.495-.644.869l-.213 1.281c-.09.543-.56.94-1.11.94h-2.594c-.55 0-1.019-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 0 1-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 0 1-1.369-.49l-1.297-2.247a1.125 1.125 0 0 1 .26-1.431l1.004-.827c.292-.24.437-.613.43-.991a6.932 6.932 0 0 1 0-.255c.007-.38-.138-.751-.43-.992l-1.004-.827a1.125 1.125 0 0 1-.26-1.43l1.297-2.247a1.125 1.125 0 0 1 1.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.086.22-.128.332-.183.582-.495.644-.869l.214-1.28Z"
             />
-            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+            />
           </svg>
         </a>
       </div>
@@ -141,8 +214,11 @@ export default withResizableSidebar(LeftPanel, {
   defaultWidth: getState().leftPanelWidth,
   collapseAt: 80,
   collapsedWidth: 54,
-  onResizeEnd: width => {
-    updateAndApplySettings({ leftPanelWidth: width, isLeftPanelCollapsed: width <= 54 })
+  onResizeEnd: (width) => {
+    updateAndApplySettings({
+      leftPanelWidth: width,
+      isLeftPanelCollapsed: width <= 54
+    })
   },
   initialState: {
     isCollapsed: getState().isLeftPanelCollapsed

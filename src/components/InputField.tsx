@@ -11,10 +11,23 @@ interface InputFieldProps {
   inputClassName?: string
 }
 
-export default function InputField({ label, type = 'text', placeholder = '', value, onChange, required = false, disabled = false, className = '', labelClassName = '', inputClassName = '' }: InputFieldProps) {
+export default function InputField({
+  label,
+  type = 'text',
+  placeholder = '',
+  value,
+  onChange,
+  required = false,
+  disabled = false,
+  className = '',
+  labelClassName = '',
+  inputClassName = ''
+}: InputFieldProps) {
   return (
     <label className={`flex-1 flex flex-col w-1/2 ${className}`}>
-      <span className={`mb-1 text-xs text-neutral-500 dark:text-slate-500 whitespace-nowrap truncate ${labelClassName}`}>
+      <span
+        className={`mb-1 text-xs text-neutral-500 dark:text-slate-500 whitespace-nowrap truncate ${labelClassName}`}
+      >
         {label}
         {required && <span className="text-red-500 ml-1">*</span>}
       </span>

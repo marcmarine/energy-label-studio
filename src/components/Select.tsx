@@ -21,11 +21,25 @@ interface ReusableSelectProps {
   selectedContent?: React.ReactNode
 }
 
-export default function Select({ label, options, value, onChange, required = false, isCollapsed = false, className = '', selectClassName = '', id, disabled = false, selectedContent }: ReusableSelectProps) {
+export default function Select({
+  label,
+  options,
+  value,
+  onChange,
+  required = false,
+  isCollapsed = false,
+  className = '',
+  selectClassName = '',
+  id,
+  disabled = false,
+  selectedContent
+}: ReusableSelectProps) {
   return (
     <label className={`flex flex-col ${className}`}>
       {label && (
-        <span className={`text-xs text-neutral-500 dark:text-slate-500 text-nowrap ${className ?? 'mb-1'}`}>
+        <span
+          className={`text-xs text-neutral-500 dark:text-slate-500 text-nowrap ${className ?? 'mb-1'}`}
+        >
           {label}
           {required && <span className="text-red-500 ml-1">*</span>}
         </span>
@@ -42,10 +56,10 @@ export default function Select({ label, options, value, onChange, required = fal
         disabled={disabled}
         required={required}
       >
-        <button>
+        <button type="button">
           <selectedcontent>{selectedContent}</selectedcontent>
         </button>
-        {options.map(option =>
+        {options.map((option) =>
           typeof option === 'string' ? (
             <option value={option}>{option}</option>
           ) : (

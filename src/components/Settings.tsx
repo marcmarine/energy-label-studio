@@ -1,4 +1,4 @@
-import { Theme, useSettingsStore } from '../lib/useSettingsStore'
+import { type Theme, useSettingsStore } from '../lib/useSettingsStore'
 import { updateAndApplySettings } from '../lib/utils'
 import Select from './Select'
 import ToggleSwitch from './ToggleSwitch'
@@ -16,8 +16,21 @@ export default function Settings() {
     <div class="panel !border-0 size-full">
       <div class="px-2 pt-2 flex gap-2 items-center justify-end">
         <a href="/" class="button">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+          <svg
+            role="img"
+            aria-label="Close"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="size-5"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M6 18 18 6M6 6l12 12"
+            />
           </svg>
         </a>
       </div>
@@ -30,20 +43,29 @@ export default function Settings() {
             className="flex-1 flex-row items-center"
             labelClassName="flex-1"
             value={theme}
-            onChange={event => updateAndApplySettings({ theme: event.currentTarget.value.toLocaleLowerCase() as Theme })}
+            onChange={(event) =>
+              updateAndApplySettings({
+                theme: event.currentTarget.value.toLocaleLowerCase() as Theme
+              })
+            }
             options={themeOptions}
           />
           <ToggleSwitch
             label="Layout spacing"
             checked={gaps}
-            onChange={checked => {
+            onChange={(checked) => {
               updateAndApplySettings({ gaps: checked })
               if (!checked && rounded) {
                 updateAndApplySettings({ rounded: false })
               }
             }}
           />
-          <ToggleSwitch label="Rounded corners" checked={gaps && rounded} onChange={checked => updateAndApplySettings({ rounded: checked })} disabled={!gaps} />
+          <ToggleSwitch
+            label="Rounded corners"
+            checked={gaps && rounded}
+            onChange={(checked) => updateAndApplySettings({ rounded: checked })}
+            disabled={!gaps}
+          />
         </div>
       </div>
     </div>

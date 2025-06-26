@@ -1,6 +1,12 @@
+import {
+  appendTo,
+  download,
+  EnergyLabel,
+  type TemplateName,
+  type TemplatesData
+} from 'energy-label'
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
-import { EnergyLabel, appendTo, download, type TemplateName, type TemplatesData } from 'energy-label'
 
 interface EnergyLabelState<T extends TemplateName = TemplateName> {
   svg: string
@@ -38,13 +44,13 @@ export const useEnergyLabelStore = create<EnergyLabelState>()(
         template: 'smartphones',
         data: {},
 
-        setTemplate: template => {
+        setTemplate: (template) => {
           set({ template })
           regenerate()
         },
 
-        setData: data => {
-          set(state => ({
+        setData: (data) => {
+          set((state) => ({
             data: {
               ...state.data,
               ...data
@@ -53,12 +59,12 @@ export const useEnergyLabelStore = create<EnergyLabelState>()(
           regenerate()
         },
 
-        renderTo: el => {
+        renderTo: (el) => {
           const { svg } = get()
           if (svg) appendTo(el, svg)
         },
 
-        download: filename => {
+        download: (filename) => {
           const { svg } = get()
           if (svg) download(svg, filename)
         }
