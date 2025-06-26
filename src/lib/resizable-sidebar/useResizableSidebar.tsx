@@ -1,8 +1,11 @@
 import { RefObject } from 'preact'
 import { useCallback, useEffect, useRef, useState } from 'preact/hooks'
-import { updateAndApplySettings } from '../utils'
 
 export type ResizeDirection = 'left' | 'right'
+
+interface State {
+  isCollapsed: boolean
+}
 
 export interface ResizableSidebarOptions {
   direction?: ResizeDirection
@@ -10,6 +13,8 @@ export interface ResizableSidebarOptions {
   maxWidth?: number
   defaultWidth?: number
   collapseAt?: number
+  onResizeEnd?: (width: number) => void
+  initialState?: State
 }
 
 interface UseSidebarResizeReturn {
@@ -19,102 +24,103 @@ interface UseSidebarResizeReturn {
   }
   isResizing: boolean
   isCollapsed: boolean
+  width: number
 }
 
-export default function useResizableSidebar({ direction = 'right', minWidth = 48, maxWidth = 500, defaultWidth, collapseAt }: ResizableSidebarOptions = {}): UseSidebarResizeReturn {
+export default function useResizableSidebar({ direction = 'right', minWidth = 48, maxWidth = 500, defaultWidth, collapseAt, onResizeEnd, initialState }: ResizableSidebarOptions = {}): UseSidebarResizeReturn {
   const initialWidth = defaultWidth ?? minWidth
-  const [isResizing, setIsResizing] = useState<boolean>(false)
-  const [isCollapsed, setCollapsed] = useState<boolean>(false)
+  const [isResizing, setIsResizing] = useState(false)
+  const [isCollapsed, setCollapsed] = useState(initialState?.isCollapsed || false)
+  const [width, setWidth] = useState(initialWidth)
 
   const sidebarRef = useRef<HTMLDivElement>(null)
   const resizerRef = useRef<HTMLDivElement>(null)
 
-  const resizeSidebar = useCallback(
-    (newWidth: number) => {
-      if (sidebarRef.current) {
-        sidebarRef.current.style.width = `${newWidth}px`
-      }
-    },
-    [minWidth, maxWidth]
-  )
+  const applyWidth = useCallback((newWidth: number) => {
+    const sidebar = sidebarRef.current
+    if (sidebar) {
+      sidebar.style.width = `${newWidth}px`
+      setWidth(newWidth)
+    }
+  }, [])
 
   useEffect(() => {
-    const panel = sidebarRef.current
+    const sidebar = sidebarRef.current
     const resizer = resizerRef.current
+    if (!sidebar || !resizer) return
 
-    if (!panel || !resizer) return
+    const getNewWidth = (event: MouseEvent) => {
+      const rect = sidebar.getBoundingClientRect()
+      return direction === 'right' ? event.clientX - rect.left : rect.right - event.clientX
+    }
 
-    const handleMouseMove = (mouseEvent: MouseEvent) => {
-      let width: number
+    const checkCollapse = (event: MouseEvent) => {
+      if (!collapseAt) return false
+      return direction === 'right' ? event.clientX <= collapseAt : event.clientX >= window.innerWidth - collapseAt
+    }
 
-      const rectangle = panel.getBoundingClientRect()
+    const onMouseMove = (event: MouseEvent) => {
+      const newWidth = getNewWidth(event)
+      const collapsed = checkCollapse(event)
 
-      if (direction === 'right') {
-        width = mouseEvent.clientX - rectangle.left
-      } else {
-        width = rectangle.right - mouseEvent.clientX
+      setCollapsed(collapsed)
+
+      if (collapsed) {
+        sidebar.style.transition = 'all 80ms'
+        return
       }
 
-      let shouldCollapse = false
-
-      if (collapseAt) {
-        if (direction === 'right') {
-          shouldCollapse = mouseEvent.clientX <= collapseAt
-        } else {
-          shouldCollapse = mouseEvent.clientX >= window.innerWidth - collapseAt
-        }
-      }
-
-      setCollapsed(!!shouldCollapse)
-
-      if (width > minWidth && width < maxWidth) {
-        resizeSidebar(width)
-        panel.style.transition = ''
-      } else if (shouldCollapse) {
-        panel.style.transition = 'all 400ms'
+      if (newWidth >= minWidth && newWidth <= maxWidth) {
+        sidebar.style.transition = ''
+        applyWidth(newWidth)
       }
     }
 
-    const handleMouseUp = () => {
+    const onMouseUp = () => {
       setIsResizing(false)
-      document.removeEventListener('mousemove', handleMouseMove)
-      document.removeEventListener('mouseup', handleMouseUp)
+      document.removeEventListener('mousemove', onMouseMove)
+      document.removeEventListener('mouseup', onMouseUp)
       document.body.style.cursor = ''
       document.body.style.userSelect = ''
 
-      if (direction === 'right') {
-        updateAndApplySettings({ leftPanelWidth: sidebarRef.current?.getBoundingClientRect().width })
-      } else {
-        updateAndApplySettings({ propsPanelWidth: sidebarRef.current?.getBoundingClientRect().width })
+      const finalWidth = sidebarRef.current?.getBoundingClientRect().width
+      if (finalWidth != null) {
+        setWidth(finalWidth)
+        onResizeEnd?.(finalWidth)
       }
     }
 
-    const handleMouseDown = () => {
+    const onMouseDown = () => {
       setIsResizing(true)
-      document.addEventListener('mousemove', handleMouseMove)
-      document.addEventListener('mouseup', handleMouseUp)
+      document.addEventListener('mousemove', onMouseMove)
+      document.addEventListener('mouseup', onMouseUp)
       document.body.style.cursor = 'grabbing'
       document.body.style.userSelect = 'none'
     }
 
-    resizer.addEventListener('mousedown', handleMouseDown)
+    resizer.addEventListener('mousedown', onMouseDown)
 
     return () => {
-      resizer.removeEventListener('mousedown', handleMouseDown)
-      document.removeEventListener('mousemove', handleMouseMove)
-      document.removeEventListener('mouseup', handleMouseUp)
+      resizer.removeEventListener('mousedown', onMouseDown)
+      document.removeEventListener('mousemove', onMouseMove)
+      document.removeEventListener('mouseup', onMouseUp)
     }
-  }, [direction, minWidth, maxWidth, collapseAt, resizeSidebar])
+  }, [direction, minWidth, maxWidth, collapseAt, applyWidth, onResizeEnd])
 
   useEffect(() => {
-    if (sidebarRef.current) {
-      sidebarRef.current.style.width = `${initialWidth}px`
-    }
+    const sidebar = sidebarRef.current
+    if (!sidebar) return
+
+    const current = sidebar.getBoundingClientRect().width
+    const widthToSet = current || initialWidth
+    sidebar.style.width = `${widthToSet}px`
+    setWidth(widthToSet)
   }, [])
 
   return {
     ref: { sidebar: sidebarRef, resizer: resizerRef },
     isResizing,
-    isCollapsed
+    isCollapsed,
+    width
   }
 }

@@ -94,7 +94,11 @@ select.collapsible {
   @apply p-2;
 
   &.collapsed {
-    @apply p-0 size-10 flex place-content-center;
+    @apply p-0 size-9;
+
+    .icon {
+      @apply relative left-[5px];
+    }
 
     &::picker-icon {
       @apply hidden;

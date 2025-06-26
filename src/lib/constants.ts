@@ -63,3 +63,24 @@ export const REGULATIONS = {
     ]
   }
 }
+
+export const TEMPLATE_ICONS: Record<TemplateName, string> = {
+  arrow: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 40 22" stroke="currentColor" stroke-width="2" >
+  <g clip-path="url(#a)">
+    <path stroke-linejoin="round" d="M30.4 1H11a1 1 0 0 0-.7.3l-8.6 9a1 1 0 0 0 0 1.3l8.6 9c.1.3.4.4.7.4h19.4m0-20H38c.6 0 1 .5 1 1v18c0 .6-.4 1-1 1h-7.6m0-20v20"/>
+  </g>
+  <defs>
+    <clipPath id="a">
+      <path fill="#fff" d="M0 0h40v22H0z"/>
+    </clipPath>
+  </defs>
+</svg>`,
+  smartphones: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 40 40" stroke="currentColor" stroke-width="2">
+  <path stroke-linecap="round" d="M16 10H4a2 2 0 0 0-2 1.9V36A2 2 0 0 0 4 38h12a2 2 0 0 0 2-1.9V11.9a2 2 0 0 0-2-2ZM8 12h4M23 4h6"/>
+  <path stroke-linecap="round" d="M14 9.7V4.3C14 3 15 2 16.4 2h19.2C37 2 38 3 38 4.3v29.4c0 1.3-1 2.3-2.4 2.3H18.4M10 36a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z"/>
+  <path stroke-linecap="round" d="M26 34a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z"/>
+</svg>`,
+  'refrigerating-appliances': `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 40 40" stroke="currentColor" stroke-width="2" >
+  <path stroke-linecap="round" d="M10 14.3h20M27.5 12h-1.3m1.3 5h-1.3M28.7 38H11.3c-.7 0-1.3-.6-1.3-1.4V3.4c0-.8.6-1.4 1.3-1.4h17.4c.7 0 1.3.6 1.3 1.4v33.2c0 .8-.6 1.4-1.3 1.4Z"/>
+</svg>`
+}

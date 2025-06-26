@@ -2,6 +2,7 @@ import { REGULATIONS } from '../lib/constants'
 import { withResizableSidebar, type ResizableSidebarProps } from '../lib/resizable-sidebar'
 import { useEnergyLabelStore } from '../lib/useEnergyLabelStore'
 import { getState } from '../lib/useSettingsStore'
+import { updateAndApplySettings } from '../lib/utils'
 import DynamicInputList from './InputList'
 
 function PropertiesPanel(_: ResizableSidebarProps) {
@@ -75,4 +76,12 @@ function PropertiesPanel(_: ResizableSidebarProps) {
   )
 }
 
-export default withResizableSidebar(PropertiesPanel, { direction: 'left', minWidth: 200, maxWidth: 520, defaultWidth: getState().propsPanelWidth })
+export default withResizableSidebar(PropertiesPanel, {
+  direction: 'left',
+  minWidth: 200,
+  maxWidth: 720,
+  defaultWidth: getState().propsPanelWidth,
+  onResizeEnd: width => {
+    updateAndApplySettings({ propsPanelWidth: width })
+  }
+})

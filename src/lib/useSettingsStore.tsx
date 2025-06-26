@@ -9,6 +9,7 @@ export interface SettingsState {
   rounded: boolean
   leftPanelWidth: number
   propsPanelWidth: number
+  isLeftPanelCollapsed: boolean
 }
 
 const INITIAL_STATE: SettingsState = {
@@ -16,7 +17,8 @@ const INITIAL_STATE: SettingsState = {
   gaps: true,
   rounded: true,
   leftPanelWidth: 200,
-  propsPanelWidth: 400
+  propsPanelWidth: 400,
+  isLeftPanelCollapsed: false
 }
 
 export const useSettingsStore = create<SettingsState>()(

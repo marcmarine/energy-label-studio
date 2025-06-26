@@ -35,7 +35,7 @@ export const useEnergyLabelStore = create<EnergyLabelState>()(
         svg: '',
         loading: false,
         error: null,
-        template: 'arrow',
+        template: 'smartphones',
         data: {},
 
         setTemplate: template => {
