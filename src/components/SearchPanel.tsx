@@ -236,10 +236,10 @@ export default function SearchPanel() {
             )}
           >
             <SearchInput ref={inputRef} />
-            <div className="absolute w-full left-0 px-2 bottom-1 flex items-center justify-between">
+            <div className="px-2 absolute w-full left-0 bottom-1 flex items-center justify-between">
               <p
                 className={cx(
-                  'text-[10px] text-neutral-500 dark:text-slate-500',
+                  'px-1 text-[10px] text-neutral-500 dark:text-slate-500',
                   searchState.error && '!text-red-500'
                 )}
               >

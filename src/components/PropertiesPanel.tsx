@@ -23,14 +23,14 @@ function PropertiesPanel(_: ResizableSidebarProps) {
       <PropertiesActions className="absolute top-3 right-3 z-30" />
       <div
         class={cx(
-          'px-1 py-2 sticky z-20 top-0 h-12 pointer-events-none',
+          'sticky z-20 top-0 h-12 pointer-events-none',
           !isSearchPanelActive &&
             ' bg-[var(--panel-background-color)]/90 backdrop-blur-lg'
         )}
       >
         <h2
           class={cx(
-            'px-2 w-[72%] absolute left-0.5 font-semibold truncate transition-all origin-left',
+            'w-[72%] absolute left-3 font-semibold truncate transition-all origin-left',
             isSearchPanelActive ? ' top-1 z-10 scale-70 ' : 'top-3.5'
           )}
         >
@@ -95,7 +95,6 @@ function PropertiesPanel(_: ResizableSidebarProps) {
           Generate test data
         </button>
       </div>
-
       <div class="px-3 pt-2 pb-4 bg-[var(--panel-background-color)]/80 border-t border-[var(--panel-border-color)] backdrop-blur-lg sticky bottom-0">
         <h2 class="mb-4 text-sm font-medium">Export</h2>
         <button
