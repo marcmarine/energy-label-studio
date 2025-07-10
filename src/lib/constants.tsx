@@ -4,7 +4,6 @@ import type { JSX } from 'preact'
 export const ENERGY_LABEL_DOCS_URL = 'https://docs.label.energy'
 
 export const TEMPLATES: { name: string; value: TemplateName }[] = [
-  { name: 'Arrow Label', value: 'arrow' },
   { name: 'Smartphones and Tablets', value: 'smartphones' },
   {
     name: 'Household Refrigeration Appliances',

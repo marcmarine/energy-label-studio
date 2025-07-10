@@ -13,7 +13,7 @@ const SearchInput = forwardRef<HTMLInputElement, InputHTMLAttributes>(
     const { query, route } = useLocation()
     const { q: searchQuery = '' } = query ?? {}
 
-    const handleSearch = useCallback((term: string) => {
+    function handleSearch(term: string) {
       const params = new URLSearchParams(query)
       if (term) {
         params.set('q', term)
@@ -21,7 +21,7 @@ const SearchInput = forwardRef<HTMLInputElement, InputHTMLAttributes>(
         params.delete('q')
       }
       route(`?${params.toString()}`)
-    }, [])
+    }
 
     return (
       <InputField
