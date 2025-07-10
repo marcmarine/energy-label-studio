@@ -4,97 +4,76 @@ import {
   withResizableSidebar
 } from '../lib/resizable-sidebar'
 import { useEnergyLabelStore } from '../lib/useEnergyLabelStore'
+import { useNavigationStore } from '../lib/useNavigationStore'
 import { getState } from '../lib/useSettingsStore'
-import { updateAndApplySettings } from '../lib/utils'
+import { cx, updateAndApplySettings } from '../lib/utils'
 import DynamicInputList from './InputList'
+import PropertiesActions from './PropiertiesActions'
+import SearchPanel from './SearchPanel'
 
 function PropertiesPanel(_: ResizableSidebarProps) {
   const { download, setData, template, data } = useEnergyLabelStore()
+  const { panel } = useNavigationStore()
 
+  const isSearchPanelActive = panel === 'search'
   const { name: templateTitle, regulationNumber } = REGULATIONS[template!]
 
   return (
     <div class="panel relative flex-1 w-full">
-      <div class="p-1 flex gap-2 items-center justify-between">
-        <h2 class="px-2 font-semibold truncate">{templateTitle}</h2>
-        <div class="p-1 flex gap-0.5 rounded">
-          <button
-            class="button bg-neutral-100 dark:bg-slate-700/40"
-            type="button"
-          >
-            <svg
-              role="img"
-              aria-label="Info"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width={1.5}
-              stroke="currentColor"
-              class="size-5"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"
-              />
-            </svg>
-          </button>
-          <button class="button opacity-40 pointer-events-none" type="button">
-            <svg
-              role="img"
-              aria-label="Code"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width={1.5}
-              stroke="currentColor"
-              class="size-5"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5"
-              />
-            </svg>
-          </button>
-        </div>
-      </div>
-      {regulationNumber && (
-        <a
-          href={`http://data.europa.eu/eli/reg_del/${regulationNumber}/oj`}
-          class="px-3 mb-2 w-fit text-xs text-neutral-500 dark:text-slate-500 hover:underline flex items-center gap-1"
-          target="_blank"
+      <PropertiesActions className="absolute top-3 right-3 z-30" />
+      <div
+        class={cx(
+          'px-1 py-2 sticky z-20 top-0 h-12 pointer-events-none',
+          !isSearchPanelActive &&
+            ' bg-[var(--panel-background-color)]/90 backdrop-blur-lg'
+        )}
+      >
+        <h2
+          class={cx(
+            'px-2 w-[72%] absolute left-0.5 font-semibold truncate transition-all origin-left',
+            isSearchPanelActive ? ' top-1 z-10 scale-70 ' : 'top-3.5'
+          )}
         >
-          Regulation (EU) {regulationNumber}
-          <svg
-            role="img"
-            aria-label="External"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 20 20"
-            fill="currentColor"
-            className="size-3"
+          {templateTitle}
+        </h2>
+      </div>
+      <SearchPanel />
+      <div class="p-3 overflow-auto">
+        {regulationNumber && (
+          <a
+            href={`http://data.europa.eu/eli/reg_del/${regulationNumber}/oj`}
+            class="-mx-2 mb-4 button text-xs text-neutral-500 dark:text-slate-500 hover:underline inline-flex items-center gap-1 self-start"
+            target="_blank"
           >
-            <path
-              fillRule="evenodd"
-              d="M4.25 5.5a.75.75 0 0 0-.75.75v8.5c0 .414.336.75.75.75h8.5a.75.75 0 0 0 .75-.75v-4a.75.75 0 0 1 1.5 0v4A2.25 2.25 0 0 1 12.75 17h-8.5A2.25 2.25 0 0 1 2 14.75v-8.5A2.25 2.25 0 0 1 4.25 4h5a.75.75 0 0 1 0 1.5h-5Z"
-              clipRule="evenodd"
-            />
-            <path
-              fillRule="evenodd"
-              d="M6.194 12.753a.75.75 0 0 0 1.06.053L16.5 4.44v2.81a.75.75 0 0 0 1.5 0v-4.5a.75.75 0 0 0-.75-.75h-4.5a.75.75 0 0 0 0 1.5h2.553l-9.056 8.194a.75.75 0 0 0-.053 1.06Z"
-              clipRule="evenodd"
-            />
-          </svg>
-        </a>
-      )}
-      <div class="px-3 py-2 overflow-auto">
+            Regulation (EU) {regulationNumber}
+            <svg
+              role="img"
+              aria-label="External"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              className="size-3"
+            >
+              <path
+                fillRule="evenodd"
+                d="M4.25 5.5a.75.75 0 0 0-.75.75v8.5c0 .414.336.75.75.75h8.5a.75.75 0 0 0 .75-.75v-4a.75.75 0 0 1 1.5 0v4A2.25 2.25 0 0 1 12.75 17h-8.5A2.25 2.25 0 0 1 2 14.75v-8.5A2.25 2.25 0 0 1 4.25 4h5a.75.75 0 0 1 0 1.5h-5Z"
+                clipRule="evenodd"
+              />
+              <path
+                fillRule="evenodd"
+                d="M6.194 12.753a.75.75 0 0 0 1.06.053L16.5 4.44v2.81a.75.75 0 0 0 1.5 0v-4.5a.75.75 0 0 0-.75-.75h-4.5a.75.75 0 0 0 0 1.5h2.553l-9.056 8.194a.75.75 0 0 0-.053 1.06Z"
+                clipRule="evenodd"
+              />
+            </svg>
+          </a>
+        )}
         <DynamicInputList
           template={template!}
           values={data!}
           setValues={setData}
         />
       </div>
-      <div class="px-1 py-2 flex justify-end">
+      <div class="p-2 flex items-center justify-end">
         <button
           type="button"
           class="button text-xs flex items-center gap-1 opacity-20 pointer-events-none"
@@ -116,7 +95,8 @@ function PropertiesPanel(_: ResizableSidebarProps) {
           Generate test data
         </button>
       </div>
-      <div class="px-3 pt-2 pb-4 bg-[var(--panel-background-color)] border-t border-[var(--panel-border-color)] backdrop-blur-lg sticky bottom-0">
+
+      <div class="px-3 pt-2 pb-4 bg-[var(--panel-background-color)]/80 border-t border-[var(--panel-border-color)] backdrop-blur-lg sticky bottom-0">
         <h2 class="mb-4 text-sm font-medium">Export</h2>
         <button
           type="button"

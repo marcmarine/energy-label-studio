@@ -24,8 +24,8 @@ export default function DynamicInputList({
 }: DynamicInputListProps) {
   const { inputs } = REGULATIONS[template]
   const productInformationKeys = [
-    'supplierName',
-    'modelName',
+    'supplierOrTrademark',
+    'modelIdentifier',
     'eprelRegistrationNumber'
   ]
   const [productInformationData, efficiencyData] = [

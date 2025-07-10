@@ -2,6 +2,9 @@ import { TEMPLATE_ICONS, TEMPLATES, TEMPLATES_DISABLED } from '../lib/constants'
 import { useEnergyLabelStore } from '../lib/useEnergyLabelStore'
 import { cx } from '../lib/utils'
 
+const generateLink = (product: string) =>
+  `?${new URLSearchParams({ product }).toString()}`
+
 export default function Navigation({ isCollapsed }: { isCollapsed: boolean }) {
   const { template: storedTemplate } = useEnergyLabelStore()
 
@@ -10,7 +13,7 @@ export default function Navigation({ isCollapsed }: { isCollapsed: boolean }) {
       <nav class="flex flex-col gap-1">
         {TEMPLATES.map((template) => (
           <a
-            href={`?product=${template.value}`}
+            href={generateLink(template.value)}
             class={cx(
               'button size-9 flex place-content-center',
               storedTemplate === template.value &&
@@ -31,7 +34,7 @@ export default function Navigation({ isCollapsed }: { isCollapsed: boolean }) {
       <nav class="flex flex-col">
         {TEMPLATES.map((template) => (
           <a
-            href={`?product=${template.value}`}
+            href={generateLink(template.value)}
             class={cx(
               'py-1 button text-sm w-full text-left font-medium truncate',
               storedTemplate === template.value &&
@@ -48,7 +51,7 @@ export default function Navigation({ isCollapsed }: { isCollapsed: boolean }) {
         </div>
         {TEMPLATES_DISABLED.map((template) => (
           <a
-            href={`?product=${template.value}`}
+            href={generateLink(template.value)}
             class={cx(
               'py-1 button text-sm w-full text-left font-medium truncate',
               storedTemplate === template.value &&

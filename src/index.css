@@ -45,6 +45,15 @@
   color-scheme: dark;
 }
 
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 body {
   @apply bg-neutral-50 dark:bg-slate-800 text-neutral-800 dark:text-slate-200;
 }
@@ -165,4 +174,33 @@ select:open::picker-icon {
     transparent
       calc(50% - var(--icon-stroke-width) / 2 + var(--icon-stroke-width))
   );
+}
+
+.icon-loading {
+  /* Spinner with stroke-dashoffset - https://codepen.io/anttili/pen/yLywvWy */
+  --radius: 50;
+  --PI: 3.14159265358979;
+  --circumference: calc(var(--PI) * var(--radius) * 2px);
+}
+
+.icon-loading circle {
+  stroke: red;
+  stroke-width: 15;
+  fill: transparent;
+  transform-origin: center;
+  stroke-dasharray: var(--circumference);
+  animation: spinner 2s ease-out infinite;
+}
+
+@keyframes spinner {
+  from {
+    stroke-dashoffset: var(--circumference);
+    stroke: red;
+    transform: rotateZ(0deg);
+  }
+  to {
+    stroke-dashoffset: calc(var(--circumference) * -1);
+    stroke: green;
+    transform: rotateZ(720deg);
+  }
 }

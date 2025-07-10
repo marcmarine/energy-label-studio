@@ -1,7 +1,7 @@
 import {
   appendTo,
+  createEnergyLabel,
   download,
-  EnergyLabel,
   type TemplateName,
   type TemplatesData
 } from 'energy-label'
@@ -30,7 +30,7 @@ export const useEnergyLabelStore = create<EnergyLabelState>()(
         set({ loading: true, error: null })
 
         try {
-          const svg = await EnergyLabel(template, data).generate()
+          const svg = await createEnergyLabel(template, data).toString()
           set({ svg, loading: false })
         } catch (error) {
           set({ error: error as Error, loading: false })

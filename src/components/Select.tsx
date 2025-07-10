@@ -1,12 +1,14 @@
+import { forwardRef, type JSX, type Ref } from 'preact/compat'
 import { cx } from '../lib/utils'
 
 export interface SelectOption {
   value: string
   label: string
   icon?: React.ReactNode
+  disabled?: boolean
 }
 
-interface ReusableSelectProps {
+interface SelectProps {
   label?: string
   options: SelectOption[] | string[]
   value?: string
@@ -21,19 +23,22 @@ interface ReusableSelectProps {
   selectedContent?: React.ReactNode
 }
 
-export default function Select({
-  label,
-  options,
-  value,
-  onChange,
-  required = false,
-  isCollapsed = false,
-  className = '',
-  selectClassName = '',
-  id,
-  disabled = false,
-  selectedContent
-}: ReusableSelectProps) {
+const Select = forwardRef<HTMLSelectElement, SelectProps>(function Select(
+  {
+    label,
+    options,
+    value,
+    onChange,
+    required = false,
+    isCollapsed = false,
+    className = '',
+    selectClassName = '',
+    id,
+    disabled = false,
+    selectedContent
+  },
+  ref
+) {
   return (
     <label className={`flex flex-col ${className}`}>
       {label && (
@@ -46,6 +51,7 @@ export default function Select({
       )}
       <select
         id={id}
+        ref={ref}
         className={cx(
           'px-2 py-1 rounded-[var(--border-radius)] border border-[var(--panel-border-color)] focus:outline-none open:ring-4 open:ring-blue-400/50 dark:open:ring-blue-900/50 open:border-blue-400 dark:open:border-slate-600',
           isCollapsed && 'collapsed',
@@ -63,7 +69,7 @@ export default function Select({
           typeof option === 'string' ? (
             <option value={option}>{option}</option>
           ) : (
-            <option value={option.value}>
+            <option value={option.value} disabled={option.disabled}>
               {option.icon && (
                 <span className="icon" aria-hidden="true">
                   {option.icon}
@@ -76,4 +82,6 @@ export default function Select({
       </select>
     </label>
   )
-}
+}) as (props: SelectProps & { ref?: Ref<HTMLSelectElement> }) => JSX.Element
+
+export default Select

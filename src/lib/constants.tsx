@@ -1,4 +1,4 @@
-import type { TemplateName } from 'energy-label'
+import { PRODUCT_GROUPS, type TemplateName } from 'energy-label'
 import type { JSX } from 'preact'
 
 export const ENERGY_LABEL_DOCS_URL = 'https://docs.label.energy'
@@ -37,31 +37,32 @@ export const TEMPLATES_DISABLED: {
 const PRODUCT_INFO_DATA = [
   {
     label: "Supplier's Name",
-    key: 'supplierName',
+    key: 'supplierOrTrademark',
     type: 'text',
     placeholder: "Supplier's Name"
   },
   {
     label: 'Model Identifier',
-    key: 'modelName',
+    key: 'modelIdentifier',
     type: 'text',
     placeholder: 'Model Identifier'
   },
-  { label: 'EPREL ID', key: 'eprelRegistrationNumber', type: 'text' }
+  { label: 'EPREL ID', key: 'eprelRegistrationNumber', type: 'text' },
+  {
+    label: 'Efficiency class',
+    key: 'energyClass',
+    type: 'select',
+    options: ['A', 'B', 'C', 'D', 'E', 'F', 'G']
+  }
 ]
 
 export const REGULATIONS = {
   arrow: {
-    name: TEMPLATES.find((t) => t.value === 'arrow')?.name,
+    name: 'Arrow Label',
     regulationNumber: null,
     inputs: [
       ...PRODUCT_INFO_DATA,
-      {
-        label: 'Efficiency class',
-        key: 'efficiencyRating',
-        type: 'select',
-        options: ['A', 'B', 'C', 'D', 'E', 'F', 'G']
-      },
+
       {
         label: 'Label orientation',
         key: 'labelOrientation',
@@ -71,31 +72,19 @@ export const REGULATIONS = {
     ]
   },
   smartphones: {
-    name: TEMPLATES.find((t) => t.value === 'smartphones')?.name,
-    regulationNumber: '2023/1669',
+    name: PRODUCT_GROUPS.smartphones.name,
+    regulationNumber: PRODUCT_GROUPS.smartphones.regulation,
     inputs: [
       ...PRODUCT_INFO_DATA,
       {
-        label: 'Efficiency class',
-        key: 'efficiencyRating',
-        type: 'select',
-        options: ['A', 'B', 'C', 'D', 'E', 'F', 'G']
-      },
-      {
-        label: 'Battery Endurance (Hours)',
-        key: 'batteryEnduranceHours',
+        label: 'Battery Endurance',
+        key: 'batteryEndurancePerCycle',
         type: 'number',
         placeholder: 'X'
       },
       {
-        label: 'Battery Endurance (Minutes)',
-        key: 'batteryEnduranceMinutes',
-        type: 'number',
-        placeholder: 'Y'
-      },
-      {
         label: 'Fall Reliability Class',
-        key: 'fallReliabilityClass',
+        key: 'repeatedFreeFallReliabilityClass',
         type: 'select',
         options: ['A', 'B', 'C', 'D', 'E']
       },
@@ -108,7 +97,7 @@ export const REGULATIONS = {
       {
         label: 'Battery Endurance (Cycles)',
         key: 'batteryEnduranceInCycles',
-        type: 'text',
+        type: 'number',
         placeholder: 'XY00'
       },
       {
@@ -120,48 +109,42 @@ export const REGULATIONS = {
     ]
   },
   'refrigerating-appliances': {
-    name: TEMPLATES.find((t) => t.value === 'refrigerating-appliances')?.name,
-    regulationNumber: '2019/2016',
+    name: PRODUCT_GROUPS['refrigerating-appliances'].name,
+    regulationNumber: PRODUCT_GROUPS['refrigerating-appliances'].regulation,
     inputs: [
       ...PRODUCT_INFO_DATA,
       {
-        label: 'Efficiency class',
-        key: 'efficiencyRating',
-        type: 'select',
-        options: ['A', 'B', 'C', 'D', 'E', 'F', 'G']
-      },
-      {
         label: 'Consumption',
-        key: 'annualEnergyConsumption',
+        key: 'consolidatedEnergyConsAnnual',
         type: 'number',
         placeholder: 'XYZ'
       },
       {
         label: 'Frozen Volume',
-        key: 'frozenVolume',
+        key: 'capFreezeNet',
         type: 'number',
         placeholder: 'XYZ'
       },
       {
         label: 'Chill Volume',
-        key: 'chillVolume',
+        key: 'capRefrNet',
         type: 'number',
         placeholder: 'XYZ'
       },
       {
         label: 'Number of wine bottles',
-        key: 'bottleCapacity',
+        key: 'capBottles',
         type: 'number'
       },
       {
         label: 'Airborne acoustical noise emissions',
-        key: 'noiseEmissions',
+        key: 'noise',
         type: 'number',
         placeholder: 'XY'
       },
       {
         label: 'Noise class',
-        key: 'noiseEmissionsClass',
+        key: 'noiseClass',
         type: 'select',
         options: ['A', 'B', 'C', 'D']
       }
