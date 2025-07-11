@@ -1,17 +1,18 @@
-import { PRODUCT_GROUPS, type TemplateName } from 'energy-label'
+import {
+  PRODUCT_GROUPS,
+  type ProductName,
+  type TemplateName
+} from 'energy-label'
 import type { JSX } from 'preact'
 
 export const ENERGY_LABEL_DOCS_URL = 'https://docs.label.energy'
 
-export const TEMPLATES: { name: string; value: TemplateName }[] = [
-  { name: 'Smartphones and Tablets', value: 'smartphones' },
-  {
-    name: 'Household Refrigeration Appliances',
-    value: 'refrigerating-appliances'
-  }
-]
+export const PRODUCTS = Object.keys(PRODUCT_GROUPS).map((key: string) => ({
+  ...PRODUCT_GROUPS[key as ProductName],
+  key
+}))
 
-export const TEMPLATES_DISABLED: {
+export const PRODUCTS_DISABLED: {
   name: string
   value: string
   disabled?: boolean
@@ -151,7 +152,7 @@ export const REGULATIONS = {
   }
 }
 
-export const TEMPLATE_ICONS: Record<TemplateName, JSX.Element> = {
+export const PRODUCT_ICONS: Record<TemplateName, JSX.Element> = {
   arrow: (
     <svg
       role="img"

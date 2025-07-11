@@ -92,7 +92,7 @@ export default function SearchPanel() {
 
   const { template, setData } = useEnergyLabelStore()
   const { panel } = useNavigationStore()
-  const { query, route } = useLocation()
+  const { query, route, path } = useLocation()
   const { q: searchQuery } = query ?? {}
 
   const [debouncedSearchQuery] = useDebounce(searchQuery, SEARCH_DEBOUNCE_MS)
@@ -169,12 +169,9 @@ export default function SearchPanel() {
     performSearch
   ])
 
-  const handleReset = useCallback(() => {
-    const params = new URLSearchParams(query)
-    params.delete('q')
-    route(`?${params.toString()}`)
-    inputRef.current?.focus()
-  }, [query, route])
+  const handleReset = () => {
+    route(`${path}`)
+  }
 
   const handleSearchFieldChange = useCallback(
     (value: string) => {

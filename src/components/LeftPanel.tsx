@@ -1,5 +1,3 @@
-import type { TemplateName } from 'energy-label'
-import { useEffect } from 'preact/hooks'
 import { useLocation } from 'preact-iso'
 import { ENERGY_LABEL_DOCS_URL } from '../lib/constants'
 import {
@@ -97,13 +95,8 @@ const FLAG_OPTIONS = [
 ]
 
 function LeftPanel({ isCollapsed }: ResizableSidebarProps) {
-  const { template, setTemplate, setData, data } = useEnergyLabelStore()
-  const { path, query } = useLocation()
-
-  useEffect(
-    () => setTemplate((query.product as TemplateName) || template),
-    [query]
-  )
+  const { setData, data } = useEnergyLabelStore()
+  const { path } = useLocation()
 
   return (
     <div class="panel w-full flex flex-col items-start justify-between">

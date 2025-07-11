@@ -10,7 +10,7 @@ import InputField from './InputField'
 
 const SearchInput = forwardRef<HTMLInputElement, InputHTMLAttributes>(
   function SearchInput(props, ref) {
-    const { query, route } = useLocation()
+    const { query, route, path } = useLocation()
     const { q: searchQuery = '' } = query ?? {}
 
     function handleSearch(term: string) {
@@ -20,7 +20,7 @@ const SearchInput = forwardRef<HTMLInputElement, InputHTMLAttributes>(
       } else {
         params.delete('q')
       }
-      route(`?${params.toString()}`)
+      route(`${path}?${params.toString()}`)
     }
 
     return (

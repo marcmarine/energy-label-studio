@@ -1,9 +1,7 @@
-import { TEMPLATE_ICONS, TEMPLATES, TEMPLATES_DISABLED } from '../lib/constants'
+import type { TemplateName } from 'energy-label'
+import { PRODUCT_ICONS, PRODUCTS, PRODUCTS_DISABLED } from '../lib/constants'
 import { useEnergyLabelStore } from '../lib/useEnergyLabelStore'
 import { cx } from '../lib/utils'
-
-const generateLink = (product: string) =>
-  `?${new URLSearchParams({ product }).toString()}`
 
 export default function Navigation({ isCollapsed }: { isCollapsed: boolean }) {
   const { template: storedTemplate } = useEnergyLabelStore()
@@ -11,16 +9,16 @@ export default function Navigation({ isCollapsed }: { isCollapsed: boolean }) {
   if (isCollapsed)
     return (
       <nav class="flex flex-col gap-1">
-        {TEMPLATES.map((template) => (
+        {PRODUCTS.map((product) => (
           <a
-            href={generateLink(template.value)}
+            href={`/${product.key}`}
             class={cx(
               'button size-9 flex place-content-center',
-              storedTemplate === template.value &&
+              storedTemplate === product.key &&
                 'bg-neutral-200/50 dark:bg-slate-700/20'
             )}
           >
-            {TEMPLATE_ICONS[template.value]}
+            {PRODUCT_ICONS[product.key as TemplateName]}
           </a>
         ))}
       </nav>
@@ -32,16 +30,16 @@ export default function Navigation({ isCollapsed }: { isCollapsed: boolean }) {
         Products
       </h2>
       <nav class="flex flex-col">
-        {TEMPLATES.map((template) => (
+        {PRODUCTS.map((product) => (
           <a
-            href={generateLink(template.value)}
+            href={`/${product.key}`}
             class={cx(
               'py-1 button text-sm w-full text-left font-medium truncate',
-              storedTemplate === template.value &&
+              storedTemplate === product.key &&
                 'bg-neutral-200/50 dark:bg-slate-700/20'
             )}
           >
-            {template.name}
+            {product.name}
           </a>
         ))}
         <div class="mb-1 px-2 py-1">
@@ -49,18 +47,18 @@ export default function Navigation({ isCollapsed }: { isCollapsed: boolean }) {
             Coming soon
           </span>
         </div>
-        {TEMPLATES_DISABLED.map((template) => (
+        {PRODUCTS_DISABLED.map((product) => (
           <a
-            href={generateLink(template.value)}
+            href={`/${product.value}`}
             class={cx(
               'py-1 button text-sm w-full text-left font-medium truncate',
-              storedTemplate === template.value &&
+              storedTemplate === product.value &&
                 'bg-neutral-200/50 dark:bg-slate-700/20',
-              template.disabled &&
+              product.disabled &&
                 'pointer-events-none text-neutral-400 dark:text-slate-600'
             )}
           >
-            {template.name}
+            {product.name}
           </a>
         ))}
       </nav>

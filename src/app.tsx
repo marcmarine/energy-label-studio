@@ -9,9 +9,8 @@ export function App() {
     <LocationProvider>
       <Layout>
         <Router>
-          <Route path="/" component={Canvas} />
           <Route path="/settings" component={Settings} />
-          <Route path="/:id" component={Canvas} />
+          <Route path="/:id*" component={Canvas} />
         </Router>
       </Layout>
     </LocationProvider>
