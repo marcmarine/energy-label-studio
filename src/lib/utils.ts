@@ -13,6 +13,13 @@ export function cx(...args: unknown[]) {
     .trim()
 }
 
+export function navigateWithParams(to: string) {
+  const currentUrl = new URL(window.location.href)
+  const params = currentUrl.search
+
+  return `${to}${params}`
+}
+
 function getTheme(theme: Theme): string {
   if (theme === 'system') {
     return window.matchMedia('(prefers-color-scheme: dark)').matches

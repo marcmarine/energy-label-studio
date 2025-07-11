@@ -268,30 +268,32 @@ export default function SearchPanel() {
           </div>
         </div>
 
-        {showResults && (
-          <div
-            className={cx(
-              'px-2 pt-23 pb-2 w-full h-full overflow-x-auto bg-[var(--panel-background-color)]/90 backdrop-blur-lg no-scrollbar transition-opacity',
-              !isActive && 'opacity-0 pointer-events-none'
-            )}
-          >
-            <SearchResults
-              results={searchState.results.hits}
-              onClick={setData}
-              onDblClick={setIsActive}
-            />
-            {hasNextPage && (
-              <button
-                onClick={handleFetchMore}
-                className="mt-2 button w-full text-xs"
-                type="button"
-                disabled={searchState.isLoading}
-              >
-                {searchState.isLoading ? 'Fetching...' : 'View more'}
-              </button>
-            )}
-          </div>
-        )}
+        <div
+          className={cx(
+            'px-2 pt-23 pb-2 w-full h-full overflow-x-auto bg-[var(--panel-background-color)]/90 backdrop-blur-lg no-scrollbar transition-opacity',
+            !isActive && 'opacity-0 pointer-events-none'
+          )}
+        >
+          {showResults && (
+            <>
+              <SearchResults
+                results={searchState.results.hits}
+                onClick={setData}
+                onDblClick={setIsActive}
+              />
+              {hasNextPage && (
+                <button
+                  onClick={handleFetchMore}
+                  className="mt-2 button w-full text-xs"
+                  type="button"
+                  disabled={searchState.isLoading}
+                >
+                  {searchState.isLoading ? 'Fetching...' : 'View more'}
+                </button>
+              )}
+            </>
+          )}
+        </div>
       </div>
     </div>
   )

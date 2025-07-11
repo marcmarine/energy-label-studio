@@ -1,7 +1,7 @@
 import type { TemplateName } from 'energy-label'
 import { PRODUCT_ICONS, PRODUCTS, PRODUCTS_DISABLED } from '../lib/constants'
 import { useEnergyLabelStore } from '../lib/useEnergyLabelStore'
-import { cx } from '../lib/utils'
+import { cx, navigateWithParams } from '../lib/utils'
 
 export default function Navigation({ isCollapsed }: { isCollapsed: boolean }) {
   const { template: storedTemplate } = useEnergyLabelStore()
@@ -11,7 +11,7 @@ export default function Navigation({ isCollapsed }: { isCollapsed: boolean }) {
       <nav class="flex flex-col gap-1">
         {PRODUCTS.map((product) => (
           <a
-            href={`/${product.key}`}
+            href={navigateWithParams(`/${product.key}`)}
             class={cx(
               'button size-9 flex place-content-center',
               storedTemplate === product.key &&
@@ -32,7 +32,7 @@ export default function Navigation({ isCollapsed }: { isCollapsed: boolean }) {
       <nav class="flex flex-col">
         {PRODUCTS.map((product) => (
           <a
-            href={`/${product.key}`}
+            href={navigateWithParams(`/${product.key}`)}
             class={cx(
               'py-1 button text-sm w-full text-left font-medium truncate',
               storedTemplate === product.key &&
@@ -49,7 +49,7 @@ export default function Navigation({ isCollapsed }: { isCollapsed: boolean }) {
         </div>
         {PRODUCTS_DISABLED.map((product) => (
           <a
-            href={`/${product.value}`}
+            href={navigateWithParams(`/${product.value}`)}
             class={cx(
               'py-1 button text-sm w-full text-left font-medium truncate',
               storedTemplate === product.value &&
