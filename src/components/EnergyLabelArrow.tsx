@@ -1,33 +1,20 @@
-import { appendTo, createEnergyLabel } from 'energy-label'
-import { useEffect, useRef } from 'preact/hooks'
+import { createEnergyLabel, type EnergyClass } from 'energy-label'
 
 export default function EnergyLabelArrow({
-  energyClass,
-  orientation = 'LEFT'
+  energyClass
 }: {
-  energyClass: string
-  orientation?: 'LEFT' | 'RIGHT'
+  energyClass: EnergyClass
 }) {
-  const containerRef = useRef<HTMLDivElement>(null)
+  const label = createEnergyLabel('arrow', {
+    energyClass
+  })
 
-  useEffect(() => {
-    ;(async () => {
-      if (!containerRef.current) return
-      containerRef.current.innerHTML = ''
+  const svgString = label.toString()
 
-      try {
-        const label = createEnergyLabel('arrow', {
-          energyClass,
-          labelOrientation: orientation
-        })
-
-        const svgString = await label.toString()
-        appendTo(containerRef.current, svgString)
-      } catch (error) {
-        console.error('Error generando energy label:', error)
-      }
-    })()
-  }, [energyClass])
-
-  return <div ref={containerRef} class="w-8 [&_svg]:w-full [&_svg]:h-full" />
+  return (
+    <div
+      class="w-8 [&_svg]:w-full [&_svg]:h-full"
+      dangerouslySetInnerHTML={{ __html: svgString }}
+    />
+  )
 }

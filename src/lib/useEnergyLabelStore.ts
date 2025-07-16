@@ -10,8 +10,6 @@ import { persist } from 'zustand/middleware'
 
 interface EnergyLabelState<T extends TemplateName = TemplateName> {
   svg: string
-  loading: boolean
-  error: Error | null
   template?: T
   data?: Partial<TemplatesData[T]>
 
@@ -24,23 +22,17 @@ interface EnergyLabelState<T extends TemplateName = TemplateName> {
 export const useEnergyLabelStore = create<EnergyLabelState>()(
   persist(
     (set, get) => {
-      const regenerate = async () => {
+      const regenerate = () => {
         const { template, data } = get()
 
-        set({ loading: true, error: null })
+        const label = createEnergyLabel(template, data)
+        const svg = label.toString()
 
-        try {
-          const svg = await createEnergyLabel(template, data).toString()
-          set({ svg, loading: false })
-        } catch (error) {
-          set({ error: error as Error, loading: false })
-        }
+        set({ svg })
       }
 
       return {
         svg: '',
-        loading: false,
-        error: null,
         template: 'smartphones',
         data: {},
 

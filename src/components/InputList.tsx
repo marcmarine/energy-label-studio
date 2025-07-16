@@ -1,4 +1,4 @@
-import type { TemplateName, TemplatesData } from 'energy-label'
+import type { EnergyClass, TemplateName, TemplatesData } from 'energy-label'
 import { REGULATIONS } from '../lib/constants'
 import InputField from './InputField'
 import Select from './Select'
@@ -41,7 +41,9 @@ export default function DynamicInputList({
           <InputField
             label={item.label}
             value={values[item.key]}
-            onChange={(e) => setValues({ [item.key]: e.currentTarget.value })}
+            onChange={(event) =>
+              setValues({ [item.key as string]: event.currentTarget.value })
+            }
             placeholder={item.placeholder}
           />
         ))}
@@ -54,7 +56,9 @@ export default function DynamicInputList({
               <Select
                 label={label}
                 value={values[key]}
-                onChange={(e) => setValues({ [key]: e.currentTarget.value })}
+                onChange={(e) =>
+                  setValues({ [key as string]: e.currentTarget.value })
+                }
                 options={selectOptions as string[]}
                 className="flex-1"
               />

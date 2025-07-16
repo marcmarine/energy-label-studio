@@ -2,8 +2,7 @@ import {
   forwardRef,
   type InputHTMLAttributes,
   type JSX,
-  type Ref,
-  useCallback
+  type Ref
 } from 'preact/compat'
 import { useLocation } from 'preact-iso'
 import InputField from './InputField'
