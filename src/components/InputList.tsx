@@ -40,7 +40,7 @@ export default function DynamicInputList({
         {productInformationData.map((item) => (
           <InputField
             label={item.label}
-            value={values[item.key]}
+            value={values[item.key] || ''}
             onChange={(event) =>
               setValues({ [item.key as string]: event.currentTarget.value })
             }
