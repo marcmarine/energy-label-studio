@@ -2,24 +2,21 @@ import {
   appendTo,
   createEnergyLabel,
   download,
-  type TemplateName,
+  type ProductName,
   type TemplatesData
 } from 'energy-label'
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 
-type LabelDataRecord = Record<
-  TemplateName,
-  Partial<TemplatesData[TemplateName]>
->
+type LabelDataRecord = Record<ProductName, Partial<TemplatesData[ProductName]>>
 
 interface EnergyLabelState {
   svg: string
-  template?: TemplateName
+  template: ProductName
   data?: LabelDataRecord
 
-  setTemplate: (template: TemplateName) => void
-  setData: (data: Partial<TemplatesData[TemplateName]>) => void
+  setTemplate: (template: ProductName) => void
+  setData: (data: Partial<TemplatesData[ProductName]>) => void
   renderTo: (el: HTMLElement) => void
   download: (filename?: string) => void
 }
@@ -49,7 +46,7 @@ export const useEnergyLabelStore = create<EnergyLabelState>()(
         },
 
         setData: (newData) => {
-          const template = get().template as TemplateName
+          const template = get().template as ProductName
 
           set((state) => ({
             data: {

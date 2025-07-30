@@ -1,4 +1,4 @@
-import { PRODUCT_GROUPS, type TemplateName } from 'energy-label'
+import { PRODUCT_GROUPS, type ProductName } from 'energy-label'
 import type { ComponentChildren } from 'preact'
 import { useEffect } from 'preact/hooks'
 import { useLocation } from 'preact-iso'
@@ -15,7 +15,7 @@ export default function Layout({ children }: { children: ComponentChildren }) {
       path.includes(key)
     )
 
-    setTemplate((product as TemplateName) || template)
+    setTemplate((product as ProductName) || template)
   }, [path])
 
   return (
