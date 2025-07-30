@@ -1,3 +1,4 @@
+import type { TemplateName } from 'energy-label'
 import { REGULATIONS } from '../lib/constants'
 import {
   type ResizableSidebarProps,
@@ -69,7 +70,7 @@ function PropertiesPanel(_: ResizableSidebarProps) {
         )}
         <DynamicInputList
           template={template!}
-          values={data!}
+          values={data![template as TemplateName]}
           setValues={setData}
         />
       </div>

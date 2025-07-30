@@ -8,13 +8,18 @@ import {
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 
-interface EnergyLabelState<T extends TemplateName = TemplateName> {
-  svg: string
-  template?: T
-  data?: Partial<TemplatesData[T]>
+type LabelDataRecord = Record<
+  TemplateName,
+  Partial<TemplatesData[TemplateName]>
+>
 
-  setTemplate: (template: T) => void
-  setData: (data: Partial<TemplatesData[T]>) => void
+interface EnergyLabelState {
+  svg: string
+  template?: TemplateName
+  data?: LabelDataRecord
+
+  setTemplate: (template: TemplateName) => void
+  setData: (data: Partial<TemplatesData[TemplateName]>) => void
   renderTo: (el: HTMLElement) => void
   download: (filename?: string) => void
 }
@@ -24,8 +29,10 @@ export const useEnergyLabelStore = create<EnergyLabelState>()(
     (set, get) => {
       const regenerate = () => {
         const { template, data } = get()
+        if (!template) return
 
-        const label = createEnergyLabel(template, data)
+        const labelData = data?.[template] ?? {}
+        const label = createEnergyLabel(template, labelData)
         const svg = label.toString()
 
         set({ svg })
@@ -34,19 +41,24 @@ export const useEnergyLabelStore = create<EnergyLabelState>()(
       return {
         svg: '',
         template: 'smartphones',
-        data: {},
+        data: {} as LabelDataRecord,
 
         setTemplate: (template) => {
           set({ template })
           regenerate()
         },
 
-        setData: (data) => {
+        setData: (newData) => {
+          const template = get().template as TemplateName
+
           set((state) => ({
             data: {
               ...state.data,
-              ...data
-            }
+              [template]: {
+                ...state.data?.[template],
+                ...newData
+              }
+            } as LabelDataRecord
           }))
           regenerate()
         },
