@@ -70,7 +70,7 @@ function PropertiesPanel(_: ResizableSidebarProps) {
         )}
         <DynamicInputList
           template={template!}
-          values={data![template as TemplateName]}
+          values={data?.[template as TemplateName] ?? {}}
           setValues={setData}
         />
       </div>
