@@ -79,10 +79,10 @@ export default function SearchResults({
               <div class="flex gap-2 justify-between">
                 <div class="text-left truncate">
                   <h2 class="inline-block text-sm font-medium ">
-                    {item.supplierOrTrademark}
+                    {item?.supplierOrTrademark}
                   </h2>{' '}
                   <h4 class="inline-block text-xs text-neutral-500 dark:text-slate-500">
-                    {item.modelIdentifier}
+                    {item?.modelIdentifier}
                   </h4>
                 </div>
                 <div class="flex items-center justify-between">
