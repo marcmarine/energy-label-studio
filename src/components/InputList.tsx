@@ -1,4 +1,4 @@
-import type { EnergyClass, TemplateName, TemplatesData } from 'energy-label'
+import type { TemplateName, TemplatesData } from 'energy-label'
 import { REGULATIONS } from '../lib/constants'
 import InputField from './InputField'
 import Select from './Select'
@@ -35,7 +35,7 @@ export default function DynamicInputList({
 
   return (
     <>
-      <h3 class="mb-4 text-sm font-medium">Product information</h3>
+      <h3 class="px-1 mb-4 text-sm font-medium">Product information</h3>
       <div class="mb-6 flex gap-2 flex-wrap">
         {productInformationData.map((item) => (
           <InputField
@@ -48,7 +48,7 @@ export default function DynamicInputList({
           />
         ))}
       </div>
-      <h3 class="mb-4 text-sm font-medium">Efficiency details</h3>
+      <h3 class="px-1 mb-4 text-sm font-medium">Efficiency details</h3>
       <div className="mb-2 flex gap-2 flex-wrap">
         {efficiencyData.map(
           ({ label, key, type, options: selectOptions, placeholder }) =>

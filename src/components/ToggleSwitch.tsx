@@ -25,7 +25,7 @@ export default function ToggleSwitch({
     <label
       className={`w-full inline-flex items-center ${disabled ? 'opacity-50' : 'cursor-pointer'} ${className}`}
     >
-      <span className="flex-1 me-2 text-xs text-nowrap text-neutral-500 dark:text-slate-500">
+      <span className="px-1 flex-1 me-2 text-xs text-nowrap text-neutral-500 dark:text-slate-500">
         {label}
       </span>
       <input

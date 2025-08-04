@@ -13,7 +13,7 @@ export default function Settings() {
   ]
 
   return (
-    <div class="panel !border-0 size-full">
+    <div class="panel !border-0 size-full !bg-[var(--panel-background-color)] backdrop-blur-lg">
       <div class="px-2 pt-2 flex gap-2 items-center justify-end">
         <a href="/" class="button">
           <svg
@@ -34,9 +34,9 @@ export default function Settings() {
           </svg>
         </a>
       </div>
-      <h2 class="px-3 mb-2 text-2xl font-semibold truncate">Settings</h2>
+      <h2 class="px-4 mb-2 text-2xl font-semibold truncate">Settings</h2>
       <div class="p-3">
-        <h3 class="mb-4 text-sm font-medium">Appearance</h3>
+        <h3 class="px-1 mb-4 text-sm font-medium">Appearance</h3>
         <div class="flex flex-col gap-2">
           <Select
             label="Theme"

@@ -43,7 +43,7 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(function Select(
     <label className={`flex flex-col ${className}`}>
       {label && (
         <span
-          className={`text-xs text-neutral-500 dark:text-slate-500 text-nowrap ${className ?? 'mb-1'}`}
+          className={`px-1 text-xs text-neutral-500 dark:text-slate-500 text-nowrap ${className ?? 'mb-1'}`}
         >
           {label}
           {required && <span className="text-red-500 ml-1">*</span>}

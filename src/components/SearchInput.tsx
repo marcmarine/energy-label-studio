@@ -30,7 +30,7 @@ const SearchInput = forwardRef<HTMLInputElement, InputHTMLAttributes>(
         value={searchQuery}
         onChange={(event) => handleSearch(event.currentTarget.value)}
         className="w-full"
-        inputClassName="h-20 px-3 border-0 border-b rounded-none"
+        inputClassName=""
         {...props}
       />
     )

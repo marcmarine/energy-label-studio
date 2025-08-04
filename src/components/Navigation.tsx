@@ -29,12 +29,12 @@ export default function Navigation({ isCollapsed }: { isCollapsed: boolean }) {
       <h2 class="mb-1 px-2 text-xs text-neutral-500 dark:text-slate-500">
         Products
       </h2>
-      <nav class="flex flex-col">
+      <nav class="flex flex-col -mx-2">
         {PRODUCTS.map((product) => (
           <a
             href={navigateWithParams(`/${product.key}`)}
             class={cx(
-              'py-1 button text-sm w-full text-left font-medium truncate',
+              'button !px-4 !py-2 !rounded-none text-sm w-full text-left font-medium truncate',
               storedTemplate === product.key &&
                 'bg-neutral-200/50 dark:bg-slate-700/20'
             )}
@@ -42,7 +42,7 @@ export default function Navigation({ isCollapsed }: { isCollapsed: boolean }) {
             {product.name}
           </a>
         ))}
-        <div class="mb-1 px-2 py-1">
+        <div class="mb-1 px-4 py-1">
           <span class="p-0.5 font-bold text-[10px] bg-neutral-200 dark:bg-slate-700/80 rounded-xs text-neutral-400/80 dark:text-slate-40 whitespace-nowrap">
             Coming soon
           </span>
@@ -51,7 +51,7 @@ export default function Navigation({ isCollapsed }: { isCollapsed: boolean }) {
           <a
             href={navigateWithParams(`/${product.value}`)}
             class={cx(
-              'py-1 button text-sm w-full text-left font-medium truncate',
+              '!px-4 button text-sm w-full text-left font-medium truncate',
               storedTemplate === product.value &&
                 'bg-neutral-200/50 dark:bg-slate-700/20',
               product.disabled &&

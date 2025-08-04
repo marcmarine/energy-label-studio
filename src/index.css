@@ -79,7 +79,7 @@ body {
 }
 
 .button {
-  @apply px-2 py-1 hover:bg-neutral-100/50 dark:hover:bg-slate-700/40 active:bg-neutral-200/60 dark:active:bg-slate-600/40 rounded-[var(--border-radius)] cursor-pointer;
+  @apply px-2 py-1 hover:bg-neutral-100/40 dark:hover:bg-slate-700/20 active:bg-neutral-200/60 dark:active:bg-slate-600/40 rounded-[var(--border-radius)] cursor-pointer;
 }
 
 .bg-checkered {

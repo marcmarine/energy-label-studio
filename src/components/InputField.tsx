@@ -30,7 +30,7 @@ const InputField = forwardRef<HTMLInputElement, InputFieldProps>(
       >
         {label && (
           <span
-            className={`mb-1 text-xs text-neutral-500 dark:text-slate-500 whitespace-nowrap truncate ${labelClassName}`}
+            className={`px-1 mb-1 text-xs text-neutral-500 dark:text-slate-500 whitespace-nowrap truncate ${labelClassName}`}
           >
             {label}
             {required && <span className="text-red-500 ml-1">*</span>}

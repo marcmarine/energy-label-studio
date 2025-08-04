@@ -4,6 +4,7 @@ import type {
   TemplateName,
   WineStorageAppliancesData
 } from 'energy-label'
+import { PRODUCT_GROUPS } from 'energy-label'
 import { useCallback, useEffect, useRef, useState } from 'preact/hooks'
 import { useLocation } from 'preact-iso'
 import { useDebounce } from 'use-debounce'
@@ -190,50 +191,51 @@ export default function SearchPanel() {
   return (
     <div
       className={cx(
-        'absolute left-0 top-0 w-full z-10',
-        !isActive && 'pointer-events-none'
+        'absolute left-0 top-0 w-full z-10 transition-opacity',
+        !isActive && 'opacity-0 pointer-events-none'
       )}
     >
-      <div className="relative h-[calc(100vh-(var(--layout-gap)*2)-2px)]">
-        <div className="relative">
-          <button
-            onClick={handleReset}
-            className={cx(
-              'button absolute text-neutral-500 dark:text-slate-500 z-40 top-3 right-21 transition-transform duration-500',
-              !isSearchActive && 'scale-0'
-            )}
-            type="button"
-          >
-            {searchState.isLoading ? (
-              <SpinnerIcon />
-            ) : (
-              <svg
-                role="img"
-                aria-label="Close"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth="1.5"
-                stroke="currentColor"
-                className="size-5"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M6 18 18 6M6 6l12 12"
-                />
-              </svg>
-            )}
-          </button>
-
+      <div className="panel !border-0 w-full h-full overflow-x-auto !bg-[var(--panel-background-color)]/98 backdrop-blur-xl no-scrollbar">
+        <div class="relative">
           <div
-            className={cx(
-              'absolute top-0 z-10 opacity-0 -translate-y-1 transition-all w-full bg-[var(--panel-background-color)]/90 backdrop-blur-lg',
+            class={cx(
+              'p-2 sticky top-0 opacity-0 -translate-y-1 transition-all border-b border-[var(--panel-border-color)] bg-[var(--panel-background-color)]/90 backdrop-blur-sm',
               isActive && 'opacity-100 translate-y-0'
             )}
           >
-            <SearchInput ref={inputRef} />
-            <div className="px-2 absolute w-full left-0 bottom-1 flex items-center justify-between">
+            <div class="relative">
+              <button
+                onClick={handleReset}
+                class={cx(
+                  'button absolute text-neutral-500 dark:text-slate-500 z-40 top-1/2 -translate-y-1/2 right-1 transition-transform duration-500',
+                  !isSearchActive && 'scale-0'
+                )}
+                type="button"
+              >
+                {searchState.isLoading ? (
+                  <SpinnerIcon />
+                ) : (
+                  <svg
+                    role="img"
+                    aria-label="Close"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth="1.5"
+                    stroke="currentColor"
+                    className="size-5"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M6 18 18 6M6 6l12 12"
+                    />
+                  </svg>
+                )}
+              </button>
+              <SearchInput ref={inputRef} />
+            </div>
+            <div className="mt-2 w-full flex items-center justify-between">
               <p
                 className={cx(
                   'px-1 text-[10px] text-neutral-500 dark:text-slate-500',
@@ -244,11 +246,11 @@ export default function SearchPanel() {
                   ? 'Loading...'
                   : searchState.error
                     ? searchState.error
-                    : `${searchState.results.size} results`}
+                    : `${searchState.results.size} results in ${PRODUCT_GROUPS[template].name.toLowerCase()}`}
               </p>
               <Select
                 className="text-[10px] text-neutral-500 dark:text-slate-500"
-                selectClassName="pl-0 border-0"
+                selectClassName=" border-0"
                 value={searchField}
                 onChange={(event) =>
                   handleSearchFieldChange(event.currentTarget.value)
@@ -266,33 +268,27 @@ export default function SearchPanel() {
               />
             </div>
           </div>
-        </div>
-
-        <div
-          className={cx(
-            'px-2 pt-23 pb-2 w-full h-full overflow-x-auto bg-[var(--panel-background-color)]/90 backdrop-blur-lg no-scrollbar transition-opacity',
-            !isActive && 'opacity-0 pointer-events-none'
-          )}
-        >
-          {showResults && (
-            <>
-              <SearchResults
-                results={searchState.results.hits}
-                onClick={setData}
-                onDblClick={setIsActive}
-              />
-              {hasNextPage && (
-                <button
-                  onClick={handleFetchMore}
-                  className="mt-2 button w-full text-xs"
-                  type="button"
-                  disabled={searchState.isLoading}
-                >
-                  {searchState.isLoading ? 'Fetching...' : 'View more'}
-                </button>
-              )}
-            </>
-          )}
+          <div class="p-2">
+            {showResults && (
+              <>
+                <SearchResults
+                  results={searchState.results.hits}
+                  onClick={setData}
+                  onDblClick={setIsActive}
+                />
+                {hasNextPage && (
+                  <button
+                    onClick={handleFetchMore}
+                    className="mt-2 button w-full text-xs"
+                    type="button"
+                    disabled={searchState.isLoading}
+                  >
+                    {searchState.isLoading ? 'Fetching...' : 'View more'}
+                  </button>
+                )}
+              </>
+            )}
+          </div>
         </div>
       </div>
     </div>

@@ -4,45 +4,28 @@ import {
   withResizableSidebar
 } from '../lib/resizable-sidebar'
 import { useEnergyLabelStore } from '../lib/useEnergyLabelStore'
-import { useNavigationStore } from '../lib/useNavigationStore'
 import { getState } from '../lib/useSettingsStore'
-import { cx, updateAndApplySettings } from '../lib/utils'
+import { updateAndApplySettings } from '../lib/utils'
 import DynamicInputList from './InputList'
 import PropertiesActions from './PropiertiesActions'
-import SearchPanel from './SearchPanel'
 
 function PropertiesPanel(_: ResizableSidebarProps) {
   const { download, setData, template, data } = useEnergyLabelStore()
-  const { panel } = useNavigationStore()
 
-  const isSearchPanelActive = panel === 'search'
   const { name: templateTitle, regulationNumber } = REGULATIONS[template!]
 
   return (
     <div class="panel relative flex-1 w-full">
-      <PropertiesActions className="absolute top-3 right-3 z-30" />
-      <div
-        class={cx(
-          'sticky z-20 top-0 h-12 pointer-events-none',
-          !isSearchPanelActive &&
-            ' bg-[var(--panel-background-color)]/90 backdrop-blur-lg'
-        )}
-      >
-        <h2
-          class={cx(
-            'w-[72%] absolute left-3 font-semibold truncate transition-all origin-left',
-            isSearchPanelActive ? ' top-1 z-10 scale-70 ' : 'top-3.5'
-          )}
-        >
-          {templateTitle}
-        </h2>
+      <div class="p-2 flex justify-between">
+        <h2 class="px-1 font-semibold truncate">{templateTitle}</h2>
+        <PropertiesActions />
       </div>
-      <SearchPanel />
-      <div class="p-3 overflow-auto">
+
+      <div class="px-2 overflow-auto">
         {regulationNumber && (
           <a
             href={`http://data.europa.eu/eli/reg_del/${regulationNumber}/oj`}
-            class="-mx-2 mb-4 button text-xs text-neutral-500 dark:text-slate-500 hover:underline inline-flex items-center gap-1 self-start"
+            class="-mx-1 mb-4 button text-xs text-neutral-500 dark:text-slate-500 hover:underline inline-flex items-center gap-1 self-start"
             target="_blank"
           >
             Regulation (EU) {regulationNumber}
@@ -95,8 +78,8 @@ function PropertiesPanel(_: ResizableSidebarProps) {
           Generate test data
         </button>
       </div>
-      <div class="px-3 pt-2 pb-4 bg-[var(--panel-background-color)]/80 border-t border-[var(--panel-border-color)] backdrop-blur-lg sticky bottom-0">
-        <h2 class="mb-4 text-sm font-medium">Export</h2>
+      <div class="px-2 pt-2 pb-4 bg-[var(--panel-background-color)]/80 border-t border-[var(--panel-border-color)] backdrop-blur-lg sticky bottom-0">
+        <h2 class="px-1 mb-4 text-sm font-medium">Export</h2>
         <button
           type="button"
           onClick={() => download()}

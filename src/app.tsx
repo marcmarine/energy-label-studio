@@ -1,6 +1,6 @@
 import { LocationProvider, lazy, Route, Router } from 'preact-iso'
-import Canvas from './components/Canvas'
 import Layout from './components/Layout'
+import Main from './components/Main'
 
 export function App() {
   const Settings = lazy(() => import('./components/Settings'))
@@ -10,7 +10,7 @@ export function App() {
       <Layout>
         <Router>
           <Route path="/settings" component={Settings} />
-          <Route path="/:id*" component={Canvas} />
+          <Route path="/:id*" component={Main} />
         </Router>
       </Layout>
     </LocationProvider>
