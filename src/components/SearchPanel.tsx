@@ -106,6 +106,15 @@ export default function SearchPanel() {
     []
   )
 
+  const handleKeyDown = (event: KeyboardEvent) => {
+    if (event.key === 'Escape') {
+      setIsActive(false)
+    }
+    if ((event.metaKey || event.ctrlKey) && event.key === 'k') {
+      setIsActive(true)
+    }
+  }
+
   const performSearch = useCallback(
     async (query: string, page: number = 1, isLoadMore: boolean = false) => {
       if (!query.trim()) return
@@ -138,6 +147,13 @@ export default function SearchPanel() {
     },
     [template, searchField]
   )
+
+  useEffect(() => {
+    document.addEventListener('keydown', handleKeyDown)
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [])
 
   useEffect(() => {
     if (isSearchActive) {
@@ -195,7 +211,7 @@ export default function SearchPanel() {
         !isActive && 'opacity-0 pointer-events-none'
       )}
     >
-      <div className="panel !border-0 w-full h-full overflow-x-auto !bg-[var(--panel-background-color)]/98 backdrop-blur-xl no-scrollbar">
+      <div className="panel w-full h-full overflow-x-auto !bg-[var(--panel-background-color)]/90 backdrop-blur-xl no-scrollbar">
         <div class="relative">
           <div
             class={cx(
@@ -204,6 +220,16 @@ export default function SearchPanel() {
             )}
           >
             <div class="relative">
+              <button
+                onClick={() => setIsActive(false)}
+                type="button"
+                class={cx(
+                  isSearchActive && 'right-11 delay-[0ms]',
+                  'px-1 absolute top-1/2 -translate-y-1/2 right-2 text-[10px] rounded-xs font-mono bg-neutral-200/40 dark:bg-slate-700/20 text-neutral-500 dark:text-slate-600 transition-all duration-200 delay-150'
+                )}
+              >
+                Esc
+              </button>
               <button
                 onClick={handleReset}
                 class={cx(

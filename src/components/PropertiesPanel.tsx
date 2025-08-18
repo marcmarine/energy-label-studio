@@ -16,7 +16,7 @@ function PropertiesPanel(_: ResizableSidebarProps) {
 
   return (
     <div class="panel relative flex-1 w-full">
-      <div class="p-2 flex justify-between">
+      <div class="p-2 flex items-center justify-between">
         <h2 class="px-1 font-semibold truncate">{templateTitle}</h2>
         <PropertiesActions />
       </div>
