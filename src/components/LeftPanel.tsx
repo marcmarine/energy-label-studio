@@ -157,7 +157,7 @@ function LeftPanel({ isCollapsed }: ResizableSidebarProps) {
             onChange={(event) => {
               setData({ flagOrigin: event.currentTarget.value as 'EU' | 'UK' })
             }}
-            value={data?.[template].flagOrigin ?? 'EU'}
+            value={data?.[template]?.flagOrigin ?? 'EU'}
             selectClassName="collapsible"
             options={FLAG_OPTIONS}
             isCollapsed={isCollapsed}
