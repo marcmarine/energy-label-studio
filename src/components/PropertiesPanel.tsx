@@ -78,7 +78,7 @@ function PropertiesPanel(_: ResizableSidebarProps) {
           Generate test data
         </button>
       </div>
-      <div class="px-2 pt-2 pb-4 bg-[var(--panel-background-color)]/80 border-t border-[var(--panel-border-color)] backdrop-blur-lg sticky bottom-0">
+      <div class="px-2 pt-2 pb-4 bg-[var(--panel-background-color)]/80 border-t backdrop-blur-lg sticky bottom-0">
         <h2 class="px-1 mb-4 text-sm font-medium">Export</h2>
         <button
           type="button"

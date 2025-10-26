@@ -37,6 +37,16 @@
   );
 }
 
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--border-color);
+  }
+}
+
 [data-theme="light"] {
   color-scheme: light;
 }
@@ -65,9 +75,8 @@ body {
 
 .panel {
   --panel-background-color: var(--background-color);
-  --panel-border-color: var(--border-color);
 
-  @apply bg-[var(--panel-background-color)] border border-[var(--panel-border-color)] rounded-[var(--layout-border-radius)] h-[calc(100vh-(var(--layout-gap)*2))] overflow-auto;
+  @apply bg-[var(--panel-background-color)] rounded-[var(--layout-border-radius)] h-[calc(100vh-(var(--layout-gap)*2))] overflow-auto;
 }
 
 .canvas {

@@ -53,7 +53,7 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(function Select(
         id={id}
         ref={ref}
         className={cx(
-          'px-2 py-1 rounded-[var(--border-radius)] border border-[var(--panel-border-color)] focus:outline-none open:ring-4 open:ring-blue-400/50 dark:open:ring-blue-900/50 open:border-blue-400 dark:open:border-slate-600',
+          'px-2 py-1 rounded-[var(--border-radius)] border focus:outline-none open:ring-4 open:ring-blue-400/50 dark:open:ring-blue-900/50 open:border-blue-400 dark:open:border-slate-600',
           isCollapsed && 'collapsed',
           selectClassName
         )}

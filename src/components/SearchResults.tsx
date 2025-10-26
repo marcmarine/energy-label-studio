@@ -29,7 +29,7 @@ export default function SearchResults({
   onDblClick
 }: SearchResultsProps) {
   return (
-    <ul class="border border-[var(--border-color)] divide-y divide-[var(--border-color)] rounded-[var(--border-radius)]">
+    <ul class="border divide-y rounded-[var(--border-radius)]">
       {results.map((item) => {
         const {
           batteryEnduranceInCycles,

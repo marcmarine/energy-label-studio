@@ -39,7 +39,7 @@ const InputField = forwardRef<HTMLInputElement, InputFieldProps>(
         <input
           ref={ref}
           required={required}
-          className={`px-2 py-1 rounded-[var(--border-radius)] border border-[var(--panel-border-color)] focus:outline-none focus:ring-4 focus:ring-blue-400/50 dark:focus:ring-blue-900/50 focus:border-neutral-400 dark:focus:border-slate-600 placeholder:text-neutral-400 dark:placeholder:text-slate-600 ${inputClassName}`}
+          className={`px-2 py-1 rounded-[var(--border-radius)] border focus:outline-none focus:ring-4 focus:ring-blue-400/50 dark:focus:ring-blue-900/50 focus:border-neutral-400 dark:focus:border-slate-600 placeholder:text-neutral-400 dark:placeholder:text-slate-600 ${inputClassName}`}
           {...restProps}
         />
       </label>

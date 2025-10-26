@@ -215,7 +215,7 @@ export default function SearchPanel() {
         <div class="relative">
           <div
             class={cx(
-              'p-2 sticky top-0 opacity-0 -translate-y-1 transition-all border-b border-[var(--panel-border-color)] bg-[var(--panel-background-color)]/90 backdrop-blur-sm',
+              'p-2 sticky top-0 opacity-0 -translate-y-1 transition-all border-b bg-[var(--panel-background-color)]/90 backdrop-blur-sm',
               isActive && 'opacity-100 translate-y-0'
             )}
           >
