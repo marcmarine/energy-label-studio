@@ -46,18 +46,29 @@ export default function useResizableSidebar({
   const sidebarRef = useRef<HTMLDivElement>(null)
   const resizerRef = useRef<HTMLDivElement>(null)
 
+  const widthRef = useRef(width)
+  const collapsedRef = useRef(isCollapsed)
+
+  useEffect(() => {
+    widthRef.current = width
+  }, [width])
+
+  useEffect(() => {
+    collapsedRef.current = isCollapsed
+  }, [isCollapsed])
+
   const applyWidth = useCallback((newWidth: number) => {
     const sidebar = sidebarRef.current
-    if (sidebar) {
-      sidebar.style.width = `${newWidth}px`
-      setWidth(newWidth)
-    }
+    if (sidebar) sidebar.style.width = `${newWidth}px`
+    widthRef.current = newWidth
   }, [])
 
   useEffect(() => {
     const sidebar = sidebarRef.current
     const resizer = resizerRef.current
     if (!sidebar || !resizer) return
+
+    let frameId: number | null = null
 
     const getNewWidth = (event: MouseEvent) => {
       const rect = sidebar.getBoundingClientRect()
@@ -73,11 +84,14 @@ export default function useResizableSidebar({
         : event.clientX >= window.innerWidth - collapseAt
     }
 
-    const onMouseMove = (event: MouseEvent) => {
+    const handleResize = (event: MouseEvent) => {
       const newWidth = getNewWidth(event)
       const collapsed = checkCollapse(event)
 
-      setCollapsed(collapsed)
+      if (collapsedRef.current !== collapsed) {
+        collapsedRef.current = collapsed
+        setCollapsed(collapsed)
+      }
 
       if (collapsed) {
         sidebar.style.transition = 'all 80ms'
@@ -90,18 +104,24 @@ export default function useResizableSidebar({
       }
     }
 
+    const onMouseMove = (event: MouseEvent) => {
+      if (frameId) cancelAnimationFrame(frameId)
+      frameId = requestAnimationFrame(() => handleResize(event))
+    }
+
     const onMouseUp = () => {
       setIsResizing(false)
+      if (frameId) cancelAnimationFrame(frameId)
+      frameId = null
+
       document.removeEventListener('mousemove', onMouseMove)
       document.removeEventListener('mouseup', onMouseUp)
       document.body.style.cursor = ''
       document.body.style.userSelect = ''
 
-      const finalWidth = sidebarRef.current?.getBoundingClientRect().width
-      if (finalWidth != null) {
-        setWidth(finalWidth)
-        onResizeEnd?.(finalWidth)
-      }
+      const finalWidth = widthRef.current
+      setWidth(finalWidth)
+      onResizeEnd?.(finalWidth)
     }
 
     const onMouseDown = () => {
@@ -115,6 +135,7 @@ export default function useResizableSidebar({
     resizer.addEventListener('mousedown', onMouseDown)
 
     return () => {
+      if (frameId) cancelAnimationFrame(frameId)
       resizer.removeEventListener('mousedown', onMouseDown)
       document.removeEventListener('mousemove', onMouseMove)
       document.removeEventListener('mouseup', onMouseUp)
