@@ -139,7 +139,7 @@ function LeftPanel({ isCollapsed }: ResizableSidebarProps) {
                     target="_blank"
                     class="hover:underline"
                   >
-                    energy-label v1.0.0-beta.8
+                    energy-label v1.0.0-beta.11
                   </a>
                 </p>
               </div>
