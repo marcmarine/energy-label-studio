@@ -2,11 +2,11 @@ import {
   appendTo,
   createEnergyLabel,
   download,
-  type ProductName,
   type TemplatesData
 } from 'energy-label'
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
+import type { ProductName } from './types'
 
 type LabelDataRecord = Record<ProductName, Partial<TemplatesData[ProductName]>>
 

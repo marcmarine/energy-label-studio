@@ -1,9 +1,6 @@
-import {
-  PRODUCT_GROUPS,
-  type ProductName,
-  type TemplateName
-} from 'energy-label'
+import { PRODUCT_GROUPS, type TemplateName } from 'energy-label'
 import type { JSX } from 'preact'
+import type { ProductName } from './types'
 
 export const ENERGY_LABEL_DOCS_URL = 'https://docs.label.energy'
 
