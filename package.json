@@ -22,7 +22,7 @@
     "@tailwindcss/postcss": "^4.1.8",
     "postcss": "^8.5.4",
     "tailwindcss": "^4.1.8",
-    "typescript": "^4.6.4",
+    "typescript": "^7.0.2",
     "vite": "^3.2.3"
   }
 }
