@@ -5,7 +5,7 @@
     "": {
       "name": "labelshop",
       "dependencies": {
-        "energy-label": "^1.0.0-beta.13",
+        "energy-label": "^1.0.0",
         "preact": "^10.11.2",
         "preact-iso": "^2.9.2",
         "use-debounce": "^10.0.5",
@@ -213,7 +213,7 @@
 
     "electron-to-chromium": ["electron-to-chromium@1.5.182", "", {}, "sha512-Lv65Btwv9W4J9pyODI6EWpdnhfvrve/us5h1WspW8B2Fb0366REPtY3hX7ounk1CkV/TBjWCEvCBBbYbmV0qCA=="],
 
-    "energy-label": ["energy-label@1.0.0-beta.13", "", {}, "sha512-4I/pgecLZlW/cHTkaGOZJGcAx04rcwHMZRKNQzhdng+LOl8WH2wBTiOCZidUF0PkPgWhRP6ugIcErjEuP+8eTA=="],
+    "energy-label": ["energy-label@1.0.0", "", {}, "sha512-VDHcoeJqmEXP0m5zTL0JxxtafpIT7wGPHvhVwb7UbnU8/4hhQKAirRkH4VdUl1c7v0UUsVcL9SgCh7QdXdI/nA=="],
 
     "enhanced-resolve": ["enhanced-resolve@5.18.2", "", { "dependencies": { "graceful-fs": "^4.2.4", "tapable": "^2.2.0" } }, "sha512-6Jw4sE1maoRJo3q8MsSIn2onJFbLTOjY9hlx4DZXmOKvLRd1Ok2kXmAGXaafL2+ijsJZ1ClYbl/pmqr9+k4iUQ=="],
 
