@@ -13,6 +13,7 @@ import { getState, useSettingsStore } from '../lib/useSettingsStore'
 import { getLabelName, updateAndApplySettings } from '../lib/utils'
 import CodePanel from './CodePanel'
 import DynamicInputList from './InputList'
+import PanelTabs from './PanelTabs'
 import PropertiesActions from './PropiertiesActions'
 import Select from './Select'
 
@@ -35,10 +36,14 @@ function PropertiesPanel(_: ResizableSidebarProps) {
   const { name: templateTitle, regulationNumber } = REGULATIONS[template!]
 
   return (
-    <div class="panel relative flex-1 w-full">
-      <div class="p-2 flex items-center justify-between">
-        <h2 class="px-1 font-semibold truncate">{templateTitle}</h2>
-        <PropertiesActions />
+    // isolate keeps the sticky header's z-index below the search overlay
+    <div class="panel relative isolate flex-1 w-full">
+      <div class="sticky top-0 z-10 mb-2 bg-[var(--panel-background-color)]/80 border-b backdrop-blur-lg">
+        <div class="p-2 flex items-center justify-between">
+          <h2 class="px-1 font-semibold truncate">{templateTitle}</h2>
+          <PropertiesActions />
+        </div>
+        <PanelTabs />
       </div>
 
       {panel === 'code' ? (
