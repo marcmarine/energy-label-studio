@@ -14,6 +14,7 @@
     "preact": "^10.11.2",
     "preact-iso": "^2.9.2",
     "use-debounce": "^10.0.5",
+    "va-code-block": "^0.3.0",
     "zustand": "^5.0.5"
   },
   "devDependencies": {

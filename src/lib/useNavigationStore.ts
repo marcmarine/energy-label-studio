@@ -2,7 +2,7 @@ import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 
 export interface NavigationState {
-  panel?: 'search' | 'edit' | 'settings'
+  panel?: 'search' | 'edit' | 'code' | 'settings'
 }
 
 const INITIAL_STATE: NavigationState = {

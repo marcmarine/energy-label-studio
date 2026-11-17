@@ -114,6 +114,20 @@ body {
   background-attachment: fixed;
 }
 
+/* Match the app's borders and type scale (corners are forced square inside) */
+va-code-block {
+  --va-border-color: var(--border-color);
+  --va-card-border-color: var(--border-color);
+  --va-button-border-color: var(--border-color);
+  --va-select-border-color: var(--border-color);
+  --va-font-size-0: var(--text-xs);
+  --va-font-size-1: var(--text-xs);
+  --va-button-font-size: var(--text-xs);
+  --va-select-font-size: var(--text-xs);
+
+  font-size: var(--text-xs);
+}
+
 select {
   @apply relative;
 
