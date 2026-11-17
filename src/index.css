@@ -120,8 +120,9 @@ select {
   appearance: base-select;
 }
 
+/* Room for the picker icon (w-4 at right-2) plus a gap */
 select selectedcontent {
-  @apply pr-4.5;
+  @apply pr-6;
 }
 
 select.collapsible {
@@ -160,7 +161,7 @@ select::picker-icon {
   content: "";
   position: absolute;
   top: 50%;
-  right: 0;
+  right: --spacing(2);
   transform: translateY(-50%);
   background-image: linear-gradient(
     to bottom,
