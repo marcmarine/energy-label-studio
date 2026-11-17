@@ -7,6 +7,11 @@
   --font-display:
     "Plus Jakarta Sans Variable", ui-sans-serif, system-ui, sans-serif;
 
+  /* The blue of the "ENERGY" logo on the labels */
+  --color-energy: #034ea2;
+  --color-energy-hover: color-mix(in srgb, #034ea2, black 15%);
+  --color-energy-active: color-mix(in srgb, #034ea2, white 15%);
+
   --color-slate-50: #eff2f5;
   --color-slate-100: #e0e4eb;
   --color-slate-200: #c2c9d6;

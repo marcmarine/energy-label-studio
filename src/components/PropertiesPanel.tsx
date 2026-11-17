@@ -129,7 +129,7 @@ function PropertiesPanel(_: ResizableSidebarProps) {
             type="button"
             onClick={() => download(exportFormat).catch(console.error)}
             title={labelName}
-            class="flex-1 min-w-0 p-2 rounded-[var(--border-radius)] rounded-r-none bg-blue-500 dark:bg-blue-800 hover:bg-blue-600 hover:dark:bg-blue-900 active:bg-blue-400 active:dark:bg-blue-700 font-semibold text-neutral-50 dark:text-neutral-200 cursor-pointer truncate"
+            class="flex-1 min-w-0 p-2 rounded-[var(--border-radius)] rounded-r-none bg-energy hover:bg-energy-hover active:bg-energy-active font-semibold text-neutral-50 dark:text-neutral-200 cursor-pointer truncate"
           >
             Download {labelName}
           </button>
@@ -141,7 +141,7 @@ function PropertiesPanel(_: ResizableSidebarProps) {
               })
             }
             options={EXPORT_FORMAT_OPTIONS}
-            selectClassName="h-full !py-2 !px-3 rounded-l-none border-transparent border-l-blue-300/60 dark:border-l-blue-950 bg-blue-500 dark:bg-blue-800 hover:bg-blue-600 hover:dark:bg-blue-900 font-semibold cursor-pointer [&_selectedcontent]:text-neutral-50 dark:[&_selectedcontent]:text-neutral-200 [&::picker-icon]:[--icon-color:var(--color-neutral-50)]! dark:[&::picker-icon]:[--icon-color:var(--color-neutral-200)]!"
+            selectClassName="h-full !py-2 !px-3 rounded-l-none border-transparent border-l-blue-300/60 dark:border-l-blue-950 bg-energy hover:bg-energy-hover font-semibold cursor-pointer [&_selectedcontent]:text-neutral-50 dark:[&_selectedcontent]:text-neutral-200 [&::picker-icon]:[--icon-color:var(--color-neutral-50)]! dark:[&::picker-icon]:[--icon-color:var(--color-neutral-200)]!"
           />
         </div>
       </div>
