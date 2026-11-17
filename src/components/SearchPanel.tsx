@@ -91,6 +91,7 @@ export default function SearchPanel() {
     'supplierOrTrademark'
   )
   const inputRef = useRef<HTMLInputElement>(null)
+  const abortControllerRef = useRef<AbortController | null>(null)
 
   const { template, setData } = useEnergyLabelStore()
   const { panel } = useNavigationStore()

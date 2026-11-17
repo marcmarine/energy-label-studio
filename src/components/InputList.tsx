@@ -55,11 +55,20 @@ export default function DynamicInputList({
             type === 'select' ? (
               <Select
                 label={label}
-                value={values[key]}
+                value={values[key] ?? ''}
                 onChange={(e) =>
-                  setValues({ [key as string]: e.currentTarget.value })
+                  setValues({
+                    [key as string]: e.currentTarget.value || undefined
+                  })
                 }
-                options={selectOptions as string[]}
+                options={[
+                  // Empty option so an unset value isn't shown as the first class
+                  { value: '', label: '—' },
+                  ...(selectOptions as string[]).map((option) => ({
+                    value: option,
+                    label: option
+                  }))
+                ]}
                 className="flex-1"
               />
             ) : (
@@ -70,10 +79,13 @@ export default function DynamicInputList({
                 placeholder={placeholder}
                 onChange={(e) =>
                   setValues({
+                    // An empty field is unset rather than 0 or ''
                     [key as string]:
-                      type === 'number'
-                        ? Number(e.currentTarget.value)
-                        : e.currentTarget.value
+                      e.currentTarget.value === ''
+                        ? undefined
+                        : type === 'number'
+                          ? e.currentTarget.valueAsNumber
+                          : e.currentTarget.value
                   })
                 }
               />
