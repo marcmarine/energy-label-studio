@@ -39,19 +39,30 @@ export function getLabelSnippet(
   const fields = keys
     .filter((key) => values[key] != null && values[key] !== '')
     .map((key) => `  ${key}: ${formatValue(values[key])}`)
-  const options = fields.length ? `, {\n${fields.join(',\n')}\n}` : ''
-  const label = `const label = createEnergyLabel('${template}'${options})`
+  const object = `{\n${fields.join(',\n')}\n}`
 
   if (variant === 'TypeScript') {
+    const options = fields.length ? `, ${object}` : ''
+
     return `import { createEnergyLabel } from 'energy-label'
 
-${label}
+const label = createEnergyLabel('${template}'${options})
 
 const svg = label.toString()`
   }
 
-  const energyClass = values.energyClass
-  const alt = `Energy label${energyClass ? `, class ${energyClass}` : ''}`
+  // The data lives in a constant so the alt text can read from it; `as const`
+  // keeps literal types like 'B' assignable to the label's options
+  const label = fields.length
+    ? `const data = ${object} as const
+
+const label = createEnergyLabel('${template}', data)`
+    : `const label = createEnergyLabel('${template}')`
+  const alt =
+    values.energyClass != null && values.energyClass !== ''
+      ? // biome-ignore lint/suspicious/noTemplateCurlyInString: it's the snippet's own template literal
+        '{`Energy label, class ${data.energyClass}`}'
+      : '"Energy label"'
 
   return `import { createEnergyLabel, toDataURL } from 'energy-label'
 
@@ -61,7 +72,7 @@ export function EnergyLabel() {
   return (
     <img
       src={toDataURL(label.toString())}
-      alt="${alt}"
+      alt=${alt}
     />
   )
 }`
