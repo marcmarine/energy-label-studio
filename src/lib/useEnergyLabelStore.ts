@@ -72,7 +72,13 @@ export const useEnergyLabelStore = create<EnergyLabelState>()(
       }
     },
     {
-      name: 'energy_label_storage'
+      name: 'energy_label_storage',
+      // The SVG is not persisted: it's regenerated on load so it always
+      // reflects the installed energy-label version
+      partialize: ({ template, data }) => ({ template, data }),
+      onRehydrateStorage: () => (state) => {
+        state?.setTemplate(state.template)
+      }
     }
   )
 )
