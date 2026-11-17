@@ -49,7 +49,8 @@ async function search(
   query: string,
   product: TemplateName = 'smartphones',
   page: number = 1,
-  searchField: SearchField = 'supplierOrTrademark'
+  searchField: SearchField = 'supplierOrTrademark',
+  signal?: AbortSignal
 ): Promise<SearchAPIResponse> {
   try {
     const url = new URL(`/search/${product}`, import.meta.env.VITE_API_URL)
@@ -57,7 +58,7 @@ async function search(
     url.searchParams.set('_page', String(page))
     url.searchParams.set('_limit', String(SEARCH_LIMIT))
 
-    const response = await fetch(url.toString())
+    const response = await fetch(url.toString(), { signal })
 
     if (!response.ok) {
       throw new Error(
@@ -67,7 +68,7 @@ async function search(
 
     return await response.json()
   } catch (error) {
-    console.error('Search error:', error)
+    if (!signal?.aborted) console.error('Search error:', error)
     throw error
   }
 }
@@ -119,6 +120,11 @@ export default function SearchPanel() {
     async (query: string, page: number = 1, isLoadMore: boolean = false) => {
       if (!query.trim()) return
 
+      // Cancel the previous request so a late response can't overwrite newer results
+      abortControllerRef.current?.abort()
+      const controller = new AbortController()
+      abortControllerRef.current = controller
+
       setSearchState((prev) => ({
         ...prev,
         isLoading: true,
@@ -127,7 +133,14 @@ export default function SearchPanel() {
       }))
 
       try {
-        const results = await search(query, template, page, searchField)
+        const results = await search(
+          query,
+          template,
+          page,
+          searchField,
+          controller.signal
+        )
+        if (controller.signal.aborted) return
 
         setSearchState((prev) => ({
           ...prev,
@@ -138,6 +151,8 @@ export default function SearchPanel() {
           isLoading: false
         }))
       } catch (_) {
+        if (controller.signal.aborted) return
+
         setSearchState((prev) => ({
           ...prev,
           isLoading: false,
@@ -159,8 +174,10 @@ export default function SearchPanel() {
     if (isSearchActive) {
       performSearch(debouncedSearchQuery)
     } else {
+      abortControllerRef.current?.abort()
       setSearchState((prev) => ({
         ...prev,
+        isLoading: false,
         results: initialResultsState,
         currentPage: 1,
         error: null
@@ -190,15 +207,10 @@ export default function SearchPanel() {
     route(`${path}`)
   }
 
-  const handleSearchFieldChange = useCallback(
-    (value: string) => {
-      setSearchField(value as SearchField)
-      if (debouncedSearchQuery) {
-        performSearch(debouncedSearchQuery)
-      }
-    },
-    [debouncedSearchQuery, performSearch]
-  )
+  // The search effect re-runs when the field changes, since performSearch depends on it
+  const handleSearchFieldChange = useCallback((value: string) => {
+    setSearchField(value as SearchField)
+  }, [])
 
   const hasNextPage =
     searchState.results.size > searchState.currentPage * SEARCH_LIMIT
