@@ -1,10 +1,12 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
+import type { ExportFormat } from './useEnergyLabelStore'
 
 export type Theme = 'system' | 'light' | 'dark'
 
 export interface SettingsState {
   theme: Theme
+  exportFormat: ExportFormat
   gaps: boolean
   rounded: boolean
   leftPanelWidth: number
@@ -14,6 +16,7 @@ export interface SettingsState {
 
 const INITIAL_STATE: SettingsState = {
   theme: 'system',
+  exportFormat: 'svg',
   gaps: true,
   rounded: true,
   leftPanelWidth: 200,
