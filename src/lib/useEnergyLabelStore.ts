@@ -1,10 +1,13 @@
 import { createEnergyLabel, download, type TemplatesData } from 'energy-label'
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
+import { downloadBlob, svgToPngBlob } from './export'
 import type { ProductName } from './types'
 import { getLabelFilename } from './utils'
 
 type LabelDataRecord = Record<ProductName, Partial<TemplatesData[ProductName]>>
+
+export type ExportFormat = 'svg' | 'png'
 
 interface EnergyLabelState {
   svg: string
@@ -13,7 +16,7 @@ interface EnergyLabelState {
 
   setTemplate: (template: ProductName) => void
   setData: (data: Partial<TemplatesData[ProductName]>) => void
-  download: (filename?: string) => void
+  download: (format?: ExportFormat) => Promise<void>
 }
 
 export const useEnergyLabelStore = create<EnergyLabelState>()(
@@ -55,14 +58,21 @@ export const useEnergyLabelStore = create<EnergyLabelState>()(
           regenerate()
         },
 
-        download: (filename) => {
+        download: async (format = 'svg') => {
           const { svg, template, data } = get()
-          if (svg)
-            download(
-              svg,
-              filename ??
-                getLabelFilename(template, data?.[template] ?? {}, 'svg')
-            )
+          if (!svg) return
+
+          const filename = getLabelFilename(
+            template,
+            data?.[template] ?? {},
+            format
+          )
+
+          if (format === 'png') {
+            downloadBlob(await svgToPngBlob(svg), filename)
+          } else {
+            download(svg, filename)
+          }
         }
       }
     },

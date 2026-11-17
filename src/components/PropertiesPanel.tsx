@@ -85,13 +85,18 @@ function PropertiesPanel(_: ResizableSidebarProps) {
       </div>
       <div class="px-2 pt-2 pb-4 bg-[var(--panel-background-color)]/80 border-t backdrop-blur-lg sticky bottom-0">
         <h2 class="px-1 mb-4 text-sm font-medium">Export</h2>
-        <button
-          type="button"
-          onClick={() => download()}
-          class="p-2 w-full rounded-[var(--border-radius)] bg-blue-500 dark:bg-blue-800 hover:bg-blue-600 hover:dark:bg-blue-900 active:bg-blue-400 active:dark:bg-blue-700 font-semibold text-neutral-50 dark:text-neutral-200 cursor-pointer truncate"
-        >
-          Download the label in SVG
-        </button>
+        <div class="grid grid-cols-2 gap-2">
+          {(['svg', 'png'] as const).map((format) => (
+            <button
+              key={format}
+              type="button"
+              onClick={() => download(format).catch(console.error)}
+              class="p-2 w-full rounded-[var(--border-radius)] bg-blue-500 dark:bg-blue-800 hover:bg-blue-600 hover:dark:bg-blue-900 active:bg-blue-400 active:dark:bg-blue-700 font-semibold text-neutral-50 dark:text-neutral-200 cursor-pointer truncate"
+            >
+              Download {format.toUpperCase()}
+            </button>
+          ))}
+        </div>
       </div>
     </div>
   )
