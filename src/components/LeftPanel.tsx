@@ -131,9 +131,9 @@ function LeftPanel({ isCollapsed }: ResizableSidebarProps) {
           {!isCollapsed ? (
             <div class="px-2">
               <h1 class="mb-1 font-display font-black text-3xl">
-                Energy
+                Studio —
                 <br />
-                Label Studio
+                Energy Label
               </h1>
               <div class="flex items-center">
                 <small class="-ml-0.5 px-0.5 mr-2 font-bold text-[10px] bg-purple-200 dark:bg-purple-800 rounded-xs text-purple-500 dark:text-purple-200">
