@@ -22,25 +22,30 @@ function slugify(value: string) {
     .replace(/^-+|-+$/g, '')
 }
 
-// e.g. "acme-x1-eu.svg", or "smartphones-eu.svg" without supplier or model
-export function getLabelFilename(
-  template: string,
-  data: {
-    supplierOrTrademark?: string
-    modelIdentifier?: string
-    flagOrigin?: string
-  },
-  extension: string
-) {
+interface LabelNameData {
+  supplierOrTrademark?: string
+  modelIdentifier?: string
+  flagOrigin?: string
+}
+
+// e.g. "acme-x1-eu", or "smartphones-eu" without supplier or model
+export function getLabelName(template: string, data: LabelNameData) {
   const { supplierOrTrademark, modelIdentifier, flagOrigin = 'EU' } = data
   const product = [supplierOrTrademark, modelIdentifier]
     .map((part) => slugify(part ?? ''))
     .filter(Boolean)
-  const name = [...(product.length ? product : [template]), flagOrigin]
+
+  return [...(product.length ? product : [template]), flagOrigin]
     .map(slugify)
     .join('-')
+}
 
-  return `${name}.${extension}`
+export function getLabelFilename(
+  template: string,
+  data: LabelNameData,
+  extension: string
+) {
+  return `${getLabelName(template, data)}.${extension}`
 }
 
 export function navigateWithParams(to: string) {

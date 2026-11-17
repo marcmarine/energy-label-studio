@@ -8,7 +8,7 @@ import {
   useEnergyLabelStore
 } from '../lib/useEnergyLabelStore'
 import { getState, useSettingsStore } from '../lib/useSettingsStore'
-import { updateAndApplySettings } from '../lib/utils'
+import { getLabelName, updateAndApplySettings } from '../lib/utils'
 import DynamicInputList from './InputList'
 import PropertiesActions from './PropiertiesActions'
 import Select from './Select'
@@ -26,6 +26,7 @@ function PropertiesPanel(_: ResizableSidebarProps) {
   const setData = useEnergyLabelStore((state) => state.setData)
   const download = useEnergyLabelStore((state) => state.download)
   const exportFormat = useSettingsStore((state) => state.exportFormat)
+  const labelName = getLabelName(template, templateData ?? {})
 
   const { name: templateTitle, regulationNumber } = REGULATIONS[template!]
 
@@ -99,9 +100,10 @@ function PropertiesPanel(_: ResizableSidebarProps) {
           <button
             type="button"
             onClick={() => download(exportFormat).catch(console.error)}
-            class="flex-1 p-2 rounded-[var(--border-radius)] rounded-r-none bg-blue-500 dark:bg-blue-800 hover:bg-blue-600 hover:dark:bg-blue-900 active:bg-blue-400 active:dark:bg-blue-700 font-semibold text-neutral-50 dark:text-neutral-200 cursor-pointer truncate"
+            title={labelName}
+            class="flex-1 min-w-0 p-2 rounded-[var(--border-radius)] rounded-r-none bg-blue-500 dark:bg-blue-800 hover:bg-blue-600 hover:dark:bg-blue-900 active:bg-blue-400 active:dark:bg-blue-700 font-semibold text-neutral-50 dark:text-neutral-200 cursor-pointer truncate"
           >
-            Download
+            Download {labelName}
           </button>
           <Select
             value={exportFormat}
@@ -111,7 +113,7 @@ function PropertiesPanel(_: ResizableSidebarProps) {
               })
             }
             options={EXPORT_FORMAT_OPTIONS}
-            selectClassName="h-full !py-2 !px-3 rounded-l-none [&::picker-icon]:right-2! border-transparent border-l-blue-300/60 dark:border-l-blue-950 bg-blue-500 dark:bg-blue-800 hover:bg-blue-600 hover:dark:bg-blue-900 font-semibold cursor-pointer [&_selectedcontent]:text-neutral-50 dark:[&_selectedcontent]:text-neutral-200 [&::picker-icon]:[--icon-color:var(--color-neutral-50)]! dark:[&::picker-icon]:[--icon-color:var(--color-neutral-200)]!"
+            selectClassName="h-full !py-2 !pl-3 !pr-4 rounded-l-none [&::picker-icon]:right-2! border-transparent border-l-blue-300/60 dark:border-l-blue-950 bg-blue-500 dark:bg-blue-800 hover:bg-blue-600 hover:dark:bg-blue-900 font-semibold cursor-pointer [&_selectedcontent]:text-neutral-50 dark:[&_selectedcontent]:text-neutral-200 [&::picker-icon]:[--icon-color:var(--color-neutral-50)]! dark:[&::picker-icon]:[--icon-color:var(--color-neutral-200)]!"
           />
         </div>
       </div>
