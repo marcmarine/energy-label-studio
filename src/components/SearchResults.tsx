@@ -81,7 +81,7 @@ export default function SearchResults({
                   <h2 class="inline-block text-sm font-medium ">
                     {item?.supplierOrTrademark}
                   </h2>{' '}
-                  <h4 class="inline-block text-xs text-neutral-500 dark:text-slate-500">
+                  <h4 class="inline-block text-xs text-neutral-600 dark:text-slate-400">
                     {item?.modelIdentifier}
                   </h4>
                 </div>

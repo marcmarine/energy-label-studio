@@ -60,7 +60,7 @@ export default function CodePanel() {
       <a
         href={ENERGY_LABEL_DOCS_URL}
         target="_blank"
-        class="-mx-1 button text-xs text-neutral-500 dark:text-slate-500 hover:underline"
+        class="-mx-1 button text-xs text-neutral-600 dark:text-slate-400 hover:underline"
       >
         Read the energy-label documentation
       </a>

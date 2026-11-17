@@ -240,7 +240,7 @@ export default function SearchPanel() {
                 type="button"
                 class={cx(
                   isSearchActive && 'right-11 delay-[0ms]',
-                  'px-1 absolute top-1/2 -translate-y-1/2 right-2 text-[10px] rounded-xs font-mono bg-neutral-200/40 dark:bg-slate-700/20 text-neutral-500 dark:text-slate-600 transition-all duration-200 delay-150'
+                  'px-1 absolute top-1/2 -translate-y-1/2 right-2 text-[10px] rounded-xs font-mono bg-neutral-200/40 dark:bg-slate-700/20 text-neutral-600 dark:text-slate-500 transition-all duration-200 delay-150'
                 )}
               >
                 Esc
@@ -248,7 +248,7 @@ export default function SearchPanel() {
               <button
                 onClick={handleReset}
                 class={cx(
-                  'button absolute text-neutral-500 dark:text-slate-500 z-40 top-1/2 -translate-y-1/2 right-1 transition-transform duration-500',
+                  'button absolute text-neutral-600 dark:text-slate-400 z-40 top-1/2 -translate-y-1/2 right-1 transition-transform duration-500',
                   !isSearchActive && 'scale-0'
                 )}
                 type="button"
@@ -279,7 +279,7 @@ export default function SearchPanel() {
             <div className="mt-2 w-full flex items-center justify-between">
               <p
                 className={cx(
-                  'px-1 text-[10px] text-neutral-500 dark:text-slate-500',
+                  'px-1 text-[10px] text-neutral-600 dark:text-slate-400',
                   searchState.error && '!text-red-500'
                 )}
               >
@@ -290,7 +290,7 @@ export default function SearchPanel() {
                     : `${searchState.results.size} results in ${PRODUCT_GROUPS[template].name.toLowerCase()}`}
               </p>
               <Select
-                className="text-[10px] text-neutral-500 dark:text-slate-500"
+                className="text-[10px] text-neutral-600 dark:text-slate-400"
                 selectClassName=" border-0"
                 value={searchField}
                 onChange={(event) =>

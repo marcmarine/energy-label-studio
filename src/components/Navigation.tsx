@@ -26,7 +26,7 @@ export default function Navigation({ isCollapsed }: { isCollapsed: boolean }) {
 
   return (
     <>
-      <h2 class="mb-1 px-2 text-xs text-neutral-500 dark:text-slate-500">
+      <h2 class="mb-1 px-2 text-xs text-neutral-600 dark:text-slate-400">
         Products
       </h2>
       <nav class="flex flex-col -mx-2">

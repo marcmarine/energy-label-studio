@@ -45,7 +45,7 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(function Select(
       {label && (
         <span
           className={cx(
-            'px-1 text-xs text-neutral-500 dark:text-slate-500 text-nowrap',
+            'px-1 text-xs text-neutral-600 dark:text-slate-400 text-nowrap',
             labelClassName ?? 'mb-1'
           )}
         >

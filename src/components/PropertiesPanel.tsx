@@ -66,7 +66,7 @@ function PropertiesPanel(_: ResizableSidebarProps) {
             {regulationNumber && (
               <a
                 href={`http://data.europa.eu/eli/reg_del/${regulationNumber}/oj`}
-                class="-mx-1 mb-4 button text-xs text-neutral-500 dark:text-slate-500 hover:underline inline-flex items-center gap-1 self-start"
+                class="-mx-1 mb-4 button text-xs text-neutral-600 dark:text-slate-400 hover:underline inline-flex items-center gap-1 self-start"
                 target="_blank"
               >
                 Regulation (EU) {regulationNumber}

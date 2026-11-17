@@ -135,7 +135,7 @@ select {
   appearance: base-select;
 }
 
-/* Room for the picker icon (w-4 at right-2) plus a gap */
+/* Room for the picker icon (w-2.5 at right-2) plus a gap */
 select selectedcontent {
   @apply pr-6;
 }
@@ -169,10 +169,10 @@ select.collapsible {
 }
 
 select::picker-icon {
-  @apply w-4 h-1.5;
+  @apply w-2.5 h-1.5;
 
-  --icon-stroke-width: 1px;
-  --icon-color: var(--color-slate-600);
+  --icon-stroke-width: 1.5px;
+  --icon-color: light-dark(var(--color-neutral-900), var(--color-slate-300));
   content: "";
   position: absolute;
   top: 50%;

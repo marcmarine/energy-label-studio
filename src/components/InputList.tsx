@@ -3,6 +3,10 @@ import { REGULATIONS } from '../lib/constants'
 import InputField from './InputField'
 import Select from './Select'
 
+// Filled, borderless fields; the ring and border still show on focus
+const FIELD_CLASS_NAME =
+  'text-sm font-semibold placeholder:font-normal bg-neutral-100 dark:bg-slate-700/50 border-transparent'
+
 type InputConfig = {
   label: string
   key: keyof TemplatesData[TemplateName]
@@ -45,7 +49,7 @@ export default function DynamicInputList({
               setValues({ [item.key as string]: event.currentTarget.value })
             }
             placeholder={item.placeholder}
-            inputClassName="text-sm"
+            inputClassName={FIELD_CLASS_NAME}
           />
         ))}
       </div>
@@ -71,7 +75,7 @@ export default function DynamicInputList({
                   }))
                 ]}
                 className="flex-1"
-                selectClassName="text-sm"
+                selectClassName={FIELD_CLASS_NAME}
               />
             ) : (
               <InputField
@@ -79,7 +83,7 @@ export default function DynamicInputList({
                 type={type}
                 value={values[key]}
                 placeholder={placeholder}
-                inputClassName="text-sm"
+                inputClassName={FIELD_CLASS_NAME}
                 onChange={(e) =>
                   setValues({
                     // An empty field is unset rather than 0 or ''

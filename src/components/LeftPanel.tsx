@@ -135,7 +135,7 @@ function LeftPanel({ isCollapsed }: ResizableSidebarProps) {
                 <small class="-ml-0.5 px-0.5 mr-2 font-bold text-[10px] bg-purple-200 dark:bg-purple-800 rounded-xs text-purple-500 dark:text-purple-200">
                   BETA
                 </small>
-                <p class="text-xs text-neutral-500 dark:text-slate-600 truncate">
+                <p class="text-xs text-neutral-600 dark:text-slate-500 truncate">
                   Powered by{' '}
                   <a
                     href={ENERGY_LABEL_DOCS_URL}
@@ -164,7 +164,7 @@ function LeftPanel({ isCollapsed }: ResizableSidebarProps) {
             selectClassName="collapsible"
             options={FLAG_OPTIONS}
             isCollapsed={isCollapsed}
-            className="bg-[var(--panel-background-color)] text-sm font-medium"
+            className="bg-[var(--panel-background-color)] text-sm font-semibold"
           />
           <div class="py-4">
             <Navigation isCollapsed={isCollapsed} />

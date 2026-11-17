@@ -29,7 +29,7 @@ export default function PanelTabs() {
               'button text-sm font-medium',
               isActive
                 ? 'bg-neutral-100 dark:bg-slate-700/40'
-                : 'text-neutral-500 dark:text-slate-500'
+                : 'text-neutral-600 dark:text-slate-400'
             )}
           >
             {tab.label}
