@@ -16,6 +16,10 @@ interface EnergyLabelState {
 
   setTemplate: (template: ProductName) => void
   setData: (data: Partial<TemplatesData[ProductName]>) => void
+  replaceData: (
+    template: ProductName,
+    data: Partial<TemplatesData[ProductName]>
+  ) => void
   download: (format?: ExportFormat) => Promise<void>
 }
 
@@ -54,6 +58,14 @@ export const useEnergyLabelStore = create<EnergyLabelState>()(
                 ...newData
               }
             } as LabelDataRecord
+          }))
+          regenerate()
+        },
+
+        replaceData: (template, newData) => {
+          set((state) => ({
+            template,
+            data: { ...state.data, [template]: newData } as LabelDataRecord
           }))
           regenerate()
         },

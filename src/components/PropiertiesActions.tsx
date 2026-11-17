@@ -1,4 +1,7 @@
+import { useState } from 'preact/hooks'
 import { useLocation } from 'preact-iso'
+import { getShareUrl } from '../lib/share'
+import { useEnergyLabelStore } from '../lib/useEnergyLabelStore'
 import { setState, useNavigationStore } from '../lib/useNavigationStore'
 import { cx } from '../lib/utils'
 
@@ -12,12 +15,55 @@ export default function PropertiesActions({
   const isSearchPanelActive = panel === 'search'
   const isSearchActive = Boolean(query.q)
 
+  const [isCopied, setIsCopied] = useState(false)
+
   function handleSearchClick() {
     setState({ panel: isSearchPanelActive ? 'edit' : 'search' })
   }
 
+  async function handleShareClick() {
+    const { template, data } = useEnergyLabelStore.getState()
+
+    try {
+      await navigator.clipboard.writeText(
+        getShareUrl(template, data?.[template] ?? {})
+      )
+      setIsCopied(true)
+      setTimeout(() => setIsCopied(false), 1500)
+    } catch (error) {
+      console.error('Could not copy the share link:', error)
+    }
+  }
+
   return (
     <div class={cx('flex rounded', className)}>
+      <button
+        onClick={handleShareClick}
+        class="button"
+        type="button"
+        title={isCopied ? 'Link copied' : 'Copy share link'}
+      >
+        <svg
+          role="img"
+          aria-label={isCopied ? 'Link copied' : 'Copy share link'}
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="size-5"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d={
+              isCopied
+                ? 'm4.5 12.75 6 6 9-13.5'
+                : 'M13.19 8.688a4.5 4.5 0 0 1 1.242 7.244l-4.5 4.5a4.5 4.5 0 0 1-6.364-6.364l1.757-1.757m13.35-.622 1.757-1.757a4.5 4.5 0 0 0-6.364-6.364l-4.5 4.5a4.5 4.5 0 0 0 1.242 7.244'
+            }
+          />
+        </svg>
+      </button>
       <button
         onClick={handleSearchClick}
         class={cx(
