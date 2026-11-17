@@ -32,6 +32,7 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(function Select(
     required = false,
     isCollapsed = false,
     className = '',
+    labelClassName,
     selectClassName = '',
     id,
     disabled = false,
@@ -43,7 +44,10 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(function Select(
     <label className={`flex flex-col ${className}`}>
       {label && (
         <span
-          className={`px-1 text-xs text-neutral-500 dark:text-slate-500 text-nowrap ${className ?? 'mb-1'}`}
+          className={cx(
+            'px-1 text-xs text-neutral-500 dark:text-slate-500 text-nowrap',
+            labelClassName ?? 'mb-1'
+          )}
         >
           {label}
           {required && <span className="text-red-500 ml-1">*</span>}
