@@ -13,6 +13,36 @@ export function cx(...args: unknown[]) {
     .trim()
 }
 
+function slugify(value: string) {
+  return value
+    .normalize('NFD')
+    .replace(/[̀-ͯ]/g, '')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+}
+
+// e.g. "acme-x1-eu.svg", or "smartphones-eu.svg" without supplier or model
+export function getLabelFilename(
+  template: string,
+  data: {
+    supplierOrTrademark?: string
+    modelIdentifier?: string
+    flagOrigin?: string
+  },
+  extension: string
+) {
+  const { supplierOrTrademark, modelIdentifier, flagOrigin = 'EU' } = data
+  const product = [supplierOrTrademark, modelIdentifier]
+    .map((part) => slugify(part ?? ''))
+    .filter(Boolean)
+  const name = [...(product.length ? product : [template]), flagOrigin]
+    .map(slugify)
+    .join('-')
+
+  return `${name}.${extension}`
+}
+
 export function navigateWithParams(to: string) {
   const currentUrl = new URL(window.location.href)
   const params = currentUrl.search

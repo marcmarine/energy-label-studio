@@ -2,6 +2,7 @@ import { createEnergyLabel, download, type TemplatesData } from 'energy-label'
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 import type { ProductName } from './types'
+import { getLabelFilename } from './utils'
 
 type LabelDataRecord = Record<ProductName, Partial<TemplatesData[ProductName]>>
 
@@ -55,8 +56,13 @@ export const useEnergyLabelStore = create<EnergyLabelState>()(
         },
 
         download: (filename) => {
-          const { svg } = get()
-          if (svg) download(svg, filename)
+          const { svg, template, data } = get()
+          if (svg)
+            download(
+              svg,
+              filename ??
+                getLabelFilename(template, data?.[template] ?? {}, 'svg')
+            )
         }
       }
     },
