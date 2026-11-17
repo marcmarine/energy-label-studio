@@ -106,7 +106,7 @@ function LeftPanel({ isCollapsed }: ResizableSidebarProps) {
       <div class="w-full flex flex-col">
         <div class="px-2 pt-3 pb-4">
           <div class="flex justify-center items-center w-9 h-7">
-            <div class="size-6 grid place-content-center">
+            <div class="size-8 grid place-content-center">
               <svg
                 role="img"
                 aria-label="Logo"
@@ -130,12 +130,16 @@ function LeftPanel({ isCollapsed }: ResizableSidebarProps) {
           </div>
           {!isCollapsed ? (
             <div class="px-2">
-              <h1 class="mb-1 font-semibold truncate">EnergyLabel Studio</h1>
+              <h1 class="mb-1 font-display font-black text-3xl">
+                Energy
+                <br />
+                Label Studio
+              </h1>
               <div class="flex items-center">
                 <small class="-ml-0.5 px-0.5 mr-2 font-bold text-[10px] bg-purple-200 dark:bg-purple-800 rounded-xs text-purple-500 dark:text-purple-200">
                   BETA
                 </small>
-                <p class="text-xs text-neutral-600 dark:text-slate-500 truncate">
+                <p class="text-[10px] text-neutral-600 dark:text-slate-500 truncate">
                   Powered by{' '}
                   <a
                     href={ENERGY_LABEL_DOCS_URL}
@@ -204,7 +208,7 @@ function LeftPanel({ isCollapsed }: ResizableSidebarProps) {
 }
 
 export default withResizableSidebar(LeftPanel, {
-  minWidth: 200,
+  minWidth: 220,
   maxWidth: 320,
   defaultWidth: getState().leftPanelWidth,
   collapseAt: 80,

@@ -4,6 +4,8 @@
 
 @theme {
   --font-sans: "Geist Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-display:
+    "Plus Jakarta Sans Variable", ui-sans-serif, system-ui, sans-serif;
 
   --color-slate-50: #eff2f5;
   --color-slate-100: #e0e4eb;
@@ -159,8 +161,14 @@ select.collapsible {
     @apply flex items-center gap-2 whitespace-nowrap;
   }
 
-  &.collapsed selectedcontent .option-label {
-    @apply hidden;
+  /* No picker icon to make room for, so drop the padding that would push
+     the flag past the panel's edge */
+  &.collapsed selectedcontent {
+    @apply pr-0;
+
+    .option-label {
+      @apply hidden;
+    }
   }
 
   .icon {
