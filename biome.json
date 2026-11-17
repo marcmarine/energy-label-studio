@@ -25,6 +25,19 @@
       }
     }
   },
+  "overrides": [
+    {
+      "includes": ["src/index.css"],
+      "linter": {
+        "rules": {
+          "correctness": {
+            "noUnknownTypeSelector": "off",
+            "noUnknownPseudoElement": "off"
+          }
+        }
+      }
+    }
+  ],
   "javascript": {
     "formatter": {
       "quoteStyle": "single",
