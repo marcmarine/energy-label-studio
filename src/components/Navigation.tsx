@@ -4,7 +4,7 @@ import { useEnergyLabelStore } from '../lib/useEnergyLabelStore'
 import { cx, navigateWithParams } from '../lib/utils'
 
 export default function Navigation({ isCollapsed }: { isCollapsed: boolean }) {
-  const { template: storedTemplate } = useEnergyLabelStore()
+  const storedTemplate = useEnergyLabelStore((state) => state.template)
 
   if (isCollapsed)
     return (

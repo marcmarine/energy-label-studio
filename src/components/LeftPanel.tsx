@@ -95,7 +95,10 @@ const FLAG_OPTIONS = [
 ]
 
 function LeftPanel({ isCollapsed }: ResizableSidebarProps) {
-  const { setData, data, template } = useEnergyLabelStore()
+  const flagOrigin = useEnergyLabelStore(
+    (state) => state.data?.[state.template]?.flagOrigin
+  )
+  const setData = useEnergyLabelStore((state) => state.setData)
   const { path } = useLocation()
 
   return (
@@ -157,7 +160,7 @@ function LeftPanel({ isCollapsed }: ResizableSidebarProps) {
             onChange={(event) => {
               setData({ flagOrigin: event.currentTarget.value as 'EU' | 'UK' })
             }}
-            value={data?.[template]?.flagOrigin ?? 'EU'}
+            value={flagOrigin ?? 'EU'}
             selectClassName="collapsible"
             options={FLAG_OPTIONS}
             isCollapsed={isCollapsed}

@@ -4,7 +4,9 @@ import Select from './Select'
 import ToggleSwitch from './ToggleSwitch'
 
 export default function Settings() {
-  const { theme, gaps, rounded } = useSettingsStore()
+  const theme = useSettingsStore((state) => state.theme)
+  const gaps = useSettingsStore((state) => state.gaps)
+  const rounded = useSettingsStore((state) => state.rounded)
 
   const themeOptions = [
     { label: 'System', value: 'system' },

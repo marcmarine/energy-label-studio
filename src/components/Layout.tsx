@@ -9,7 +9,7 @@ import PropertiesPanel from './PropertiesPanel'
 import SearchPanel from './SearchPanel'
 
 export default function Layout({ children }: { children: ComponentChildren }) {
-  const { template, setTemplate } = useEnergyLabelStore()
+  const setTemplate = useEnergyLabelStore((state) => state.setTemplate)
   const { path } = useLocation()
 
   useEffect(() => {
@@ -17,7 +17,11 @@ export default function Layout({ children }: { children: ComponentChildren }) {
       path.includes(key)
     )
 
-    setTemplate((product as ProductName) || template)
+    // Read the current template without subscribing, so label edits don't
+    // re-render the whole layout
+    setTemplate(
+      (product as ProductName) || useEnergyLabelStore.getState().template
+    )
   }, [path])
 
   return (

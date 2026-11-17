@@ -10,7 +10,12 @@ import DynamicInputList from './InputList'
 import PropertiesActions from './PropiertiesActions'
 
 function PropertiesPanel(_: ResizableSidebarProps) {
-  const { download, setData, template, data } = useEnergyLabelStore()
+  const template = useEnergyLabelStore((state) => state.template)
+  const templateData = useEnergyLabelStore(
+    (state) => state.data?.[state.template]
+  )
+  const setData = useEnergyLabelStore((state) => state.setData)
+  const download = useEnergyLabelStore((state) => state.download)
 
   const { name: templateTitle, regulationNumber } = REGULATIONS[template!]
 
@@ -52,7 +57,7 @@ function PropertiesPanel(_: ResizableSidebarProps) {
         )}
         <DynamicInputList
           template={template!}
-          values={data?.[template] ?? {}}
+          values={templateData ?? {}}
           setValues={setData}
         />
       </div>

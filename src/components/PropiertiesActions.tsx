@@ -8,7 +8,7 @@ export default function PropertiesActions({
   className?: string
 }) {
   const { query } = useLocation()
-  const { panel } = useNavigationStore()
+  const panel = useNavigationStore((state) => state.panel)
   const isSearchPanelActive = panel === 'search'
   const isSearchActive = Boolean(query.q)
 

@@ -93,8 +93,9 @@ export default function SearchPanel() {
   const inputRef = useRef<HTMLInputElement>(null)
   const abortControllerRef = useRef<AbortController | null>(null)
 
-  const { template, setData } = useEnergyLabelStore()
-  const { panel } = useNavigationStore()
+  const template = useEnergyLabelStore((state) => state.template)
+  const setData = useEnergyLabelStore((state) => state.setData)
+  const panel = useNavigationStore((state) => state.panel)
   const { query, route, path } = useLocation()
   const { q: searchQuery } = query ?? {}
 
