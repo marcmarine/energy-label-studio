@@ -3,6 +3,7 @@ import {
   type ResizableSidebarProps,
   withResizableSidebar
 } from '../lib/resizable-sidebar'
+import { generateTestData } from '../lib/testData'
 import {
   type ExportFormat,
   useEnergyLabelStore
@@ -75,7 +76,8 @@ function PropertiesPanel(_: ResizableSidebarProps) {
       <div class="p-2 flex items-center justify-end">
         <button
           type="button"
-          class="button text-xs flex items-center gap-1 opacity-20 pointer-events-none"
+          onClick={() => setData(generateTestData(template))}
+          class="button text-xs flex items-center gap-1"
         >
           <svg
             role="img"
