@@ -5,26 +5,26 @@ import {
 } from '../lib/useNavigationStore'
 import { cx } from '../lib/utils'
 
-const TABS: { panel: NavigationState['panel']; label: string }[] = [
-  { panel: 'edit', label: 'Properties' },
-  { panel: 'code', label: 'Code' }
+const TABS: { tab: NavigationState['tab']; label: string }[] = [
+  { tab: 'edit', label: 'Properties' },
+  { tab: 'code', label: 'Code' }
 ]
 
 export default function PanelTabs() {
-  const panel = useNavigationStore((state) => state.panel)
+  const activeTab = useNavigationStore((state) => state.tab)
 
   return (
     <div role="tablist" class="px-2 pb-2 flex gap-1">
       {TABS.map((tab) => {
-        const isActive = panel === tab.panel
+        const isActive = activeTab === tab.tab
 
         return (
           <button
-            key={tab.panel}
+            key={tab.tab}
             type="button"
             role="tab"
             aria-selected={isActive}
-            onClick={() => setState({ panel: tab.panel })}
+            onClick={() => setState({ tab: tab.tab })}
             class={cx(
               'button text-sm font-medium',
               isActive

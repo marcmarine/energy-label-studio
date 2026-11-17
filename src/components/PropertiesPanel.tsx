@@ -10,11 +10,12 @@ import {
 } from '../lib/useEnergyLabelStore'
 import { useNavigationStore } from '../lib/useNavigationStore'
 import { getState, useSettingsStore } from '../lib/useSettingsStore'
-import { getLabelName, updateAndApplySettings } from '../lib/utils'
+import { cx, getLabelName, updateAndApplySettings } from '../lib/utils'
 import CodePanel from './CodePanel'
 import DynamicInputList from './InputList'
 import PanelTabs from './PanelTabs'
 import PropertiesActions from './PropiertiesActions'
+import SearchPanel from './SearchPanel'
 import Select from './Select'
 
 const EXPORT_FORMAT_OPTIONS = [
@@ -30,23 +31,34 @@ function PropertiesPanel(_: ResizableSidebarProps) {
   const setData = useEnergyLabelStore((state) => state.setData)
   const download = useEnergyLabelStore((state) => state.download)
   const exportFormat = useSettingsStore((state) => state.exportFormat)
-  const panel = useNavigationStore((state) => state.panel)
+  const tab = useNavigationStore((state) => state.tab)
+  const isSearchOpen = useNavigationStore((state) => state.isSearchOpen)
   const labelName = getLabelName(template, templateData ?? {})
 
   const { name: templateTitle, regulationNumber } = REGULATIONS[template!]
 
   return (
-    // isolate keeps the sticky header's z-index below the search overlay
-    <div class="panel relative isolate flex-1 w-full">
-      <div class="sticky top-0 z-10 mb-2 bg-[var(--panel-background-color)]/80 border-b backdrop-blur-lg">
-        <div class="p-2 flex items-center justify-between">
-          <h2 class="px-1 font-semibold truncate">{templateTitle}</h2>
-          <PropertiesActions />
+    <div class="panel relative flex-1 w-full">
+      <div
+        class={cx(
+          'sticky top-0 z-10 mb-2 bg-[var(--panel-background-color)]/80 border-b',
+          // A backdrop-filter here would stop the search's own blur from
+          // reaching the content behind it
+          !isSearchOpen && 'backdrop-blur-lg'
+        )}
+      >
+        {/* The search opens below this row, keeping the title and actions visible */}
+        <div class="relative">
+          <div class="p-2 flex items-center justify-between">
+            <h2 class="px-1 font-semibold truncate">{templateTitle}</h2>
+            <PropertiesActions />
+          </div>
+          <SearchPanel />
         </div>
         <PanelTabs />
       </div>
 
-      {panel === 'code' ? (
+      {tab === 'code' ? (
         <CodePanel />
       ) : (
         <>

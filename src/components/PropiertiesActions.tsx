@@ -11,14 +11,13 @@ export default function PropertiesActions({
   className?: string
 }) {
   const { query } = useLocation()
-  const panel = useNavigationStore((state) => state.panel)
-  const isSearchPanelActive = panel === 'search'
+  const isSearchPanelActive = useNavigationStore((state) => state.isSearchOpen)
   const isSearchActive = Boolean(query.q)
 
   const [isCopied, setIsCopied] = useState(false)
 
   function handleSearchClick() {
-    setState({ panel: isSearchPanelActive ? 'edit' : 'search' })
+    setState({ isSearchOpen: !isSearchPanelActive })
   }
 
   async function handleShareClick() {

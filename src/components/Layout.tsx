@@ -7,7 +7,6 @@ import type { ProductName } from '../lib/types'
 import { useEnergyLabelStore } from '../lib/useEnergyLabelStore'
 import LeftPanel from './LeftPanel'
 import PropertiesPanel from './PropertiesPanel'
-import SearchPanel from './SearchPanel'
 
 export default function Layout({ children }: { children: ComponentChildren }) {
   const setTemplate = useEnergyLabelStore((state) => state.setTemplate)
@@ -47,10 +46,7 @@ export default function Layout({ children }: { children: ComponentChildren }) {
       <div class="relative flex justify-center items-center overflow-hidden rounded-[var(--layout-border-radius)] h-[calc(100vh-(var(--layout-gap)*2))] border">
         {children}
       </div>
-      <div class="relative">
-        <SearchPanel />
-        <PropertiesPanel />
-      </div>
+      <PropertiesPanel />
     </div>
   )
 }

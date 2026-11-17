@@ -95,17 +95,16 @@ export default function SearchPanel() {
 
   const template = useEnergyLabelStore((state) => state.template)
   const setData = useEnergyLabelStore((state) => state.setData)
-  const panel = useNavigationStore((state) => state.panel)
+  const isActive = useNavigationStore((state) => state.isSearchOpen)
   const { query, route, path } = useLocation()
   const { q: searchQuery } = query ?? {}
 
   const [debouncedSearchQuery] = useDebounce(searchQuery, SEARCH_DEBOUNCE_MS)
   const isSearchActive = Boolean(debouncedSearchQuery)
-  const isActive = panel === 'search'
 
   const setIsActive = useCallback(
     (isSearchActive: boolean) =>
-      setNavigationState({ panel: isSearchActive ? 'search' : 'edit' }),
+      setNavigationState({ isSearchOpen: isSearchActive }),
     []
   )
 
@@ -221,15 +220,17 @@ export default function SearchPanel() {
   return (
     <div
       className={cx(
-        'absolute left-0 top-0 w-full z-10 transition-opacity',
+        // Below the panel's title row, filling the rest of the panel (100% is
+        // the row's height)
+        'absolute left-0 top-full w-full z-10 h-[calc(100vh-(var(--layout-gap)*2)-100%)] transition-opacity',
         !isActive && 'opacity-0 pointer-events-none'
       )}
     >
-      <div className="panel w-full h-full overflow-x-auto !bg-[var(--panel-background-color)]/90 backdrop-blur-xl no-scrollbar">
+      <div className="panel w-full !h-full rounded-t-none overflow-x-auto !bg-[var(--panel-background-color)]/90 backdrop-blur-xl no-scrollbar">
         <div class="relative">
           <div
             class={cx(
-              'p-2 sticky top-0 opacity-0 -translate-y-1 transition-all border-b bg-[var(--panel-background-color)]/90 backdrop-blur-sm',
+              'px-2 pb-2 pt-1 sticky top-0 opacity-0 -translate-y-1 transition-all border-b bg-[var(--panel-background-color)]/90 backdrop-blur-sm',
               isActive && 'opacity-100 translate-y-0'
             )}
           >
