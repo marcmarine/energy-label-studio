@@ -45,6 +45,7 @@ export default function DynamicInputList({
               setValues({ [item.key as string]: event.currentTarget.value })
             }
             placeholder={item.placeholder}
+            inputClassName="text-sm"
           />
         ))}
       </div>
@@ -70,6 +71,7 @@ export default function DynamicInputList({
                   }))
                 ]}
                 className="flex-1"
+                selectClassName="text-sm"
               />
             ) : (
               <InputField
@@ -77,6 +79,7 @@ export default function DynamicInputList({
                 type={type}
                 value={values[key]}
                 placeholder={placeholder}
+                inputClassName="text-sm"
                 onChange={(e) =>
                   setValues({
                     // An empty field is unset rather than 0 or ''
