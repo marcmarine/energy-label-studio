@@ -208,7 +208,7 @@ function LeftPanel({ isCollapsed }: ResizableSidebarProps) {
 }
 
 export default withResizableSidebar(LeftPanel, {
-  minWidth: 220,
+  minWidth: 225,
   maxWidth: 320,
   defaultWidth: getState().leftPanelWidth,
   collapseAt: 80,
