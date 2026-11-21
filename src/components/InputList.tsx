@@ -63,6 +63,7 @@ export default function DynamicInputList({
             placeholder={item.placeholder}
             inputClassName={FIELD_CLASS_NAME}
             {...((item.key as string) === 'eprelRegistrationNumber' && {
+              className: 'basis-full',
               suffix: <EprelStatusIcon status={eprelStatus} />,
               hint: <EprelLink url={getEprelUrl(product, eprelId)} />
             })}
