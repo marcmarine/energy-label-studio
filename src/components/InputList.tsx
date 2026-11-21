@@ -1,7 +1,9 @@
 import type { TemplateName, TemplatesData } from 'energy-label'
 import { REGULATIONS } from '../lib/constants'
+import { useEprelStatus } from '../lib/eprel'
 import type { ProductName } from '../lib/types'
 import { getEprelUrl } from '../lib/utils'
+import EprelStatusIcon from './EprelStatusIcon'
 import ExternalLinkIcon from './ExternalLinkIcon'
 import InputField from './InputField'
 import Select from './Select'
@@ -30,6 +32,13 @@ export default function DynamicInputList({
   setValues
 }: DynamicInputListProps) {
   const { inputs } = REGULATIONS[template]
+  const product = template as ProductName
+  const { eprelRegistrationNumber, modelIdentifier } = values as {
+    eprelRegistrationNumber?: string
+    modelIdentifier?: string
+  }
+  const eprelId = eprelRegistrationNumber || undefined
+  const eprelStatus = useEprelStatus(product, eprelId, modelIdentifier)
   const productInformationKeys = [
     'supplierOrTrademark',
     'modelIdentifier',
@@ -53,16 +62,10 @@ export default function DynamicInputList({
             }
             placeholder={item.placeholder}
             inputClassName={FIELD_CLASS_NAME}
-            hint={
-              (item.key as string) === 'eprelRegistrationNumber' && (
-                <EprelLink
-                  url={getEprelUrl(
-                    template as ProductName,
-                    (values[item.key] as string | undefined) || undefined
-                  )}
-                />
-              )
-            }
+            {...((item.key as string) === 'eprelRegistrationNumber' && {
+              suffix: <EprelStatusIcon status={eprelStatus} />,
+              hint: <EprelLink url={getEprelUrl(product, eprelId)} />
+            })}
           />
         ))}
       </div>
