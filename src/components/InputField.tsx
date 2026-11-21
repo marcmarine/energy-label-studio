@@ -1,3 +1,4 @@
+import type { ComponentChildren } from 'preact'
 import {
   forwardRef,
   type InputHTMLAttributes,
@@ -10,6 +11,7 @@ interface InputFieldProps extends InputHTMLAttributes {
   type?: string
   labelClassName?: string
   inputClassName?: string
+  hint?: ComponentChildren
 }
 
 const InputField = forwardRef<HTMLInputElement, InputFieldProps>(
@@ -20,6 +22,7 @@ const InputField = forwardRef<HTMLInputElement, InputFieldProps>(
       className = '',
       labelClassName = '',
       inputClassName = '',
+      hint,
       ...restProps
     },
     ref
@@ -42,6 +45,7 @@ const InputField = forwardRef<HTMLInputElement, InputFieldProps>(
           className={`px-2 py-1 rounded-[var(--border-radius)] border focus:outline-none focus:ring-4 focus:ring-blue-400/50 dark:focus:ring-blue-900/50 focus:border-neutral-400 dark:focus:border-slate-600 placeholder:text-neutral-400 dark:placeholder:text-slate-600 ${inputClassName}`}
           {...restProps}
         />
+        {hint}
       </label>
     )
   }

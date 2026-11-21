@@ -1,3 +1,5 @@
+import { PRODUCT_GROUPS } from 'energy-label'
+import type { ProductName } from './types'
 import {
   getState as getSettingsState,
   type SettingsState,
@@ -88,4 +90,14 @@ export const initializeSettings = () => {
   const state = getSettingsState()
 
   applySettingsToDOM(state)
+}
+
+const EPREL_BASE_URL = 'https://eprel.ec.europa.eu'
+
+// Mirrors energy-label's internal eprelUrl() so the link matches the label's
+// QR code: the product's short URL, or the product group page without an ID
+export function getEprelUrl(product: ProductName, registrationNumber?: string) {
+  return registrationNumber
+    ? `${EPREL_BASE_URL}/qr/${encodeURIComponent(registrationNumber)}`
+    : `${EPREL_BASE_URL}/screen/product/${PRODUCT_GROUPS[product].urlCode}`
 }

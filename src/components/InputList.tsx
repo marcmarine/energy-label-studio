@@ -1,5 +1,8 @@
 import type { TemplateName, TemplatesData } from 'energy-label'
 import { REGULATIONS } from '../lib/constants'
+import type { ProductName } from '../lib/types'
+import { getEprelUrl } from '../lib/utils'
+import ExternalLinkIcon from './ExternalLinkIcon'
 import InputField from './InputField'
 import Select from './Select'
 
@@ -50,6 +53,16 @@ export default function DynamicInputList({
             }
             placeholder={item.placeholder}
             inputClassName={FIELD_CLASS_NAME}
+            hint={
+              (item.key as string) === 'eprelRegistrationNumber' && (
+                <EprelLink
+                  url={getEprelUrl(
+                    template as ProductName,
+                    (values[item.key] as string | undefined) || undefined
+                  )}
+                />
+              )
+            }
           />
         ))}
       </div>
@@ -100,5 +113,21 @@ export default function DynamicInputList({
         )}
       </div>
     </>
+  )
+}
+
+// The URL the label's QR code points to, so it can be checked before printing
+function EprelLink({ url }: { url: string }) {
+  return (
+    <a
+      href={url}
+      target="_blank"
+      rel="noopener noreferrer"
+      title={url}
+      class="mt-1 px-1 min-w-0 inline-flex items-center gap-1 self-start max-w-full text-xs text-neutral-600 dark:text-slate-400 hover:underline"
+    >
+      <span class="truncate">{url.replace(/^https:\/\//, '')}</span>
+      <ExternalLinkIcon className="size-3 shrink-0" />
+    </a>
   )
 }
