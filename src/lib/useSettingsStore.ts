@@ -4,10 +4,12 @@ import type { CodeVariant, PackageManager } from './codeSnippet'
 import type { ExportFormat } from './useEnergyLabelStore'
 
 export type Theme = 'system' | 'light' | 'dark'
+export type ArrowOrientation = 'LEFT' | 'RIGHT'
 
 export interface SettingsState {
   theme: Theme
   exportFormat: ExportFormat
+  arrowOrientation: ArrowOrientation
   codeVariant: CodeVariant
   packageManager: PackageManager
   gaps: boolean
@@ -20,6 +22,7 @@ export interface SettingsState {
 const INITIAL_STATE: SettingsState = {
   theme: 'system',
   exportFormat: 'svg',
+  arrowOrientation: 'RIGHT',
   codeVariant: 'React',
   packageManager: 'npm',
   gaps: true,

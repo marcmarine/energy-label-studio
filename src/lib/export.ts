@@ -28,6 +28,13 @@ export async function svgToPngBlob(
   )
 }
 
+// energy-label's download() appends its link to document.body, so preact-iso's
+// document-level click handler treats it as navigation and tries to pushState
+// the blob: URL. A detached link's click doesn't bubble to the router
+export function downloadSvg(svgString: string, filename: string) {
+  downloadBlob(new Blob([svgString], { type: 'image/svg+xml' }), filename)
+}
+
 export function downloadBlob(blob: Blob, filename: string) {
   const url = URL.createObjectURL(blob)
   const link = document.createElement('a')

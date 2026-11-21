@@ -1,7 +1,7 @@
-import { createEnergyLabel, download, type TemplatesData } from 'energy-label'
+import { createEnergyLabel, type TemplatesData } from 'energy-label'
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
-import { downloadBlob, svgToPngBlob } from './export'
+import { downloadBlob, downloadSvg, svgToPngBlob } from './export'
 import type { ProductName } from './types'
 import { getLabelFilename } from './utils'
 
@@ -83,7 +83,7 @@ export const useEnergyLabelStore = create<EnergyLabelState>()(
           if (format === 'png') {
             downloadBlob(await svgToPngBlob(svg), filename)
           } else {
-            download(svg, filename)
+            downloadSvg(svg, filename)
           }
         }
       }

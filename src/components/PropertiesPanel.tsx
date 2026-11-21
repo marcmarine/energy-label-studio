@@ -11,6 +11,7 @@ import {
 import { useNavigationStore } from '../lib/useNavigationStore'
 import { getState, useSettingsStore } from '../lib/useSettingsStore'
 import { cx, getLabelName, updateAndApplySettings } from '../lib/utils'
+import ArrowExport from './ArrowExport'
 import CodePanel from './CodePanel'
 import DynamicInputList from './InputList'
 import PanelTabs from './PanelTabs'
@@ -144,6 +145,7 @@ function PropertiesPanel(_: ResizableSidebarProps) {
             selectClassName="h-full !py-2 !px-3 rounded-l-none border-transparent border-l-blue-300/60 dark:border-l-blue-950 bg-energy hover:bg-energy-hover font-semibold cursor-pointer [&_selectedcontent]:text-neutral-50 dark:[&_selectedcontent]:text-neutral-200 [&::picker-icon]:[--icon-color:var(--color-neutral-50)]! dark:[&::picker-icon]:[--icon-color:var(--color-neutral-200)]!"
           />
         </div>
+        <ArrowExport />
       </div>
     </div>
   )
